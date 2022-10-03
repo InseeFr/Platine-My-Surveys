@@ -18,6 +18,10 @@ export const useAPI = () => {
     API.getContactAddress(apiUrl)(id)(oidcClient.accessToken),
   );
 
+  const putContact = useConstCallback((id, newContact) =>
+    API.putContact(apiUrl)(id)(newContact)(oidcClient.accessToken),
+  );
+
   const putAddress = useConstCallback((id, newAddress) =>
     API.putAddress(apiUrl)(id)(newAddress)(oidcClient.accessToken),
   );
@@ -26,6 +30,7 @@ export const useAPI = () => {
     getFirstContacts,
     getMySurveys,
     getContact,
+    putContact,
     getContactAddress,
     putAddress,
   };

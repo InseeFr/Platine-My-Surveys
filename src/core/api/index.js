@@ -28,6 +28,10 @@ const getContact = apiUrl => id => async token => {
   return getRequest(`${apiUrl}/api/contacts/${id}`)(null)(token);
 };
 
+const putContact = apiUrl => id => body => async token => {
+  return putRequest(`${apiUrl}/api/contacts/${id}`)(body)(token);
+};
+
 const getContactAddress = apiUrl => id => async token => {
   return getRequest(`${apiUrl}/api/contacts/${id}/address`)(null)(token);
 };
@@ -43,4 +47,5 @@ export const API = {
   getContacts,
   getContactAddress,
   putAddress,
+  putContact,
 };
