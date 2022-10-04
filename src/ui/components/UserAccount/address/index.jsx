@@ -22,6 +22,7 @@ export const AddressBlock = () => {
         p: 2,
       }}
     >
+    
       <AddressDisplay address={address} />
       <Button onClick={() => setAddressEdit(true)} variant="contained">
         {buttonDictionary.edit}

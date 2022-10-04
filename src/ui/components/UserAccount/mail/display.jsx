@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { formDictionary } from "i18n";
 
 export const MailDisplay = ({ user }) => {
   const { email } = user;
@@ -6,9 +7,8 @@ export const MailDisplay = ({ user }) => {
   return (
     <div className="mail-display">
     <TextField
-                    disabled
-                    id="outlined-name"
-                    label="Adresse de messagerie"
+                    id="outlined-read-only-input"
+                    label={formDictionary.email}
                     fullWidth
                     value={`${email}`}
                   />

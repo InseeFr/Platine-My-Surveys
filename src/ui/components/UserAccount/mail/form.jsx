@@ -7,20 +7,28 @@ import {
   DialogTitle,
   IconButton,
   TextField,
+  Alert,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { UserAccountContext } from "../../../context/UserAccount";
 import { MailDisplay } from "./display";
 import { buttonDictionary } from "i18n";
+import { formDictionary } from "i18n";
 
 export const MailForm = ({ open, close, user }) => {
   const { updateContact } = useContext(UserAccountContext);
   const [confirmation, setConfirmation] = useState(false);
-
   const [formValues, setFormValues] = useState({ ...user });
+
+  const mailValidation = (email) => {
+    return email.trim().length === 0 || /\S+@\S+\.\S+/.test(email);
+  }
+
+  const [isValid, setIsValid] = useState(mailValidation(user.email));
 
   const onChange = name => e => {
     setFormValues({ ...formValues, [name]: e.target.value });
+    setIsValid(mailValidation(e.target.value));
   };
 
   const validateForm = () => {
@@ -33,6 +41,11 @@ export const MailForm = ({ open, close, user }) => {
     const modifiedContact = { ...formValues };
     updateContact(modifiedContact);
   };
+  const onClose = () => {
+    setFormValues(user);
+    setIsValid(mailValidation(user.email));
+    close();
+  }
 
   return (
     <>
@@ -57,18 +70,20 @@ export const MailForm = ({ open, close, user }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Adresse de messagerie"}
+              label={formDictionary.email}
               fullWidth
               variant="standard"
               value={formValues.email}
               onChange={onChange("email")}
             />
           </DialogContent>
+          {isValid && <Alert severity="success">{formDictionary.emailValid}</Alert>}
+          {!isValid && <Alert severity="error">{formDictionary.emailInvalid}</Alert>}
           <DialogActions>
-            <Button variant="contained" onClick={close}>
+            <Button variant="contained" onClick={onClose}>
               {buttonDictionary.cancel}
             </Button>
-            <Button variant="contained" onClick={validateForm}>
+            <Button variant="contained" onClick={validateForm} disabled={!isValid}>
               {buttonDictionary.save}
             </Button>
           </DialogActions>

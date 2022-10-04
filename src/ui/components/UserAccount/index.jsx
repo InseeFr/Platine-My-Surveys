@@ -5,6 +5,10 @@ import { AddressBlock } from "./address";
 import { PersonalDataBlock } from "./personalData";
 import { MailBlock } from "./mail";
 import { menuDictionary } from "i18n";
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 export const UserAccount = () => {
 
@@ -20,9 +24,9 @@ export const UserAccount = () => {
         <Grid container spacing={3}>
           <Grid item container xs={12} spacing={3}>
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={400}>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>                
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
-                  Mon compte - Accès
+                <AlternateEmailIcon /> {menuDictionary.myEmail}
                 </Typography>
                 <MailBlock />
               </Grid>
@@ -30,7 +34,7 @@ export const UserAccount = () => {
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={800}>
               <Grid item xs={12} sm={8}>
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
-                  Gérer mes identifiants de connexion
+                  <ManageAccountsIcon /> {menuDictionary.myCredentials}
                 </Typography>
                 <Card
                   sx={{
@@ -51,7 +55,7 @@ export const UserAccount = () => {
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={1000}>
               <Grid item xs={12} sm={5}>
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
-                  {menuDictionary.myAddress}
+                  <ContactMailIcon /> {menuDictionary.myAddress}
                 </Typography>
                 <AddressBlock />
               </Grid>
@@ -59,7 +63,7 @@ export const UserAccount = () => {
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={1200}>
               <Grid item xs={12} sm={7}>
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
-                  {menuDictionary.myPersonalData}
+                  <AccountCircleIcon /> {menuDictionary.myPersonalData}
                 </Typography>
                 <PersonalDataBlock />
               </Grid>

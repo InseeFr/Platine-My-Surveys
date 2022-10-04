@@ -11,7 +11,7 @@ import {
 import { useContext, useState } from "react";
 import { UserAccountContext } from "../../../context/UserAccount";
 import { PersonalDataDisplay } from "./display";
-import { buttonDictionary } from "i18n";
+import { buttonDictionary, formDictionary } from "i18n";
 
 export const PersonalDataForm = ({ open, close, user }) => {
   const { updateContact } = useContext(UserAccountContext);
@@ -33,6 +33,10 @@ export const PersonalDataForm = ({ open, close, user }) => {
     const modifiedContact = { ...formValues };
     updateContact(modifiedContact);
   };
+  const onClose = () => {
+    setFormValues(user);
+    close();
+  }
 
   return (
     <>
@@ -57,7 +61,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Nom"}
+              label={formDictionary.personalDataLastname}
               fullWidth
               variant="standard"
               value={formValues.lastName}
@@ -66,7 +70,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Prénom"}
+              label={formDictionary.personalDataFirstname}
               fullWidth
               variant="standard"
               value={formValues.firstName}
@@ -75,7 +79,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"fonction"}
+              label={formDictionary.personalDataFunction}
               fullWidth
               variant="standard"
               value={formValues.function}
@@ -84,7 +88,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Téléphone"}
+              label={formDictionary.personalDataPhone}
               fullWidth
               variant="standard"
               value={formValues.phone}
@@ -93,7 +97,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
 
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={close}>
+            <Button variant="contained" onClick={onClose}>
               {buttonDictionary.cancel}
             </Button>
             <Button variant="contained" onClick={validateForm}>

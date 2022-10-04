@@ -11,7 +11,7 @@ import {
 import { useContext, useState } from "react";
 import { UserAccountContext } from "../../../context/UserAccount";
 import { AddressDisplay } from "./display";
-import { buttonDictionary } from "i18n";
+import { buttonDictionary, formDictionary } from "i18n";
 
 export const AddressForm = ({ open, close, address }) => {
   const { updateAddress } = useContext(UserAccountContext);
@@ -33,6 +33,10 @@ export const AddressForm = ({ open, close, address }) => {
     const newAdress = { ...formValues };
     updateAddress(newAdress);
   };
+  const onClose = () => {
+    setFormValues(address);
+    close();
+  }
 
   return (
     <>
@@ -57,7 +61,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"N°"}
+              label={formDictionary.addressStreetNumber}
               fullWidth
               variant="standard"
               value={formValues.streetNumber}
@@ -66,7 +70,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Rue"}
+              label={formDictionary.addressStreetName}
               fullWidth
               variant="standard"
               value={formValues.streetName}
@@ -75,7 +79,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Code postal"}
+              label={formDictionary.addressZipCode}
               fullWidth
               variant="standard"
               value={formValues.zipCode}
@@ -84,7 +88,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Ville"}
+              label={formDictionary.addressCity}
               fullWidth
               variant="standard"
               value={formValues.city}
@@ -93,7 +97,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={"Pays"}
+              label={formDictionary.addressCountry}
               fullWidth
               variant="standard"
               value={formValues.countryName}
@@ -101,7 +105,7 @@ export const AddressForm = ({ open, close, address }) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={close}>
+            <Button variant="contained" onClick={onClose}>
               {buttonDictionary.cancel}
             </Button>
             <Button variant="contained" onClick={validateForm}>
