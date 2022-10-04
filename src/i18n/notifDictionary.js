@@ -15,6 +15,14 @@ const dictionary = {
     fr: "Une erreur est survenue lors du changement d'adresse.",
     en: "An error occurred when changing the address.",
   },
+  personalDataChangeConfirmation: {
+    fr: "La modification de vos informations personnelles a bien été prise en compte",
+    en: "The change of your personal datas has been taken into account.",
+  },
+  personalDataChangeError: {
+    fr: "Une erreur est survenue lors de la modification de vos informations.",
+    en: "An error occurred when modifying your personal datas.",
+  },
 };
 
 export default dictionary;

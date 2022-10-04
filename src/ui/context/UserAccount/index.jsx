@@ -12,7 +12,7 @@ export const UserAccountProvider = ({ children }) => {
   const { oidcUser } = useContext(AuthContext);
   const [user, setUser] = useState(null);
 
-  const { getMySurveys, getContact, putAddress } = useAPI();
+  const { getMySurveys, getContact, putAddress, putContact } = useAPI();
 
   const loadUserData = useConstCallback(async id => {
     setLoading(true);
@@ -46,6 +46,24 @@ export const UserAccountProvider = ({ children }) => {
     setLoading(false);
   };
 
+  const updateContact = async modifiedContact => {
+    setLoading(true);
+    const { error } = await putContact(user.id, modifiedContact);
+    if (!error) {
+      openNotif({
+        severity: SUCCESS_SEVERITY,
+        message: notifDictionary.personalDataChangeConfirmation,
+      });
+      setUser(modifiedContact);
+    } else {
+      openNotif({
+        severity: ERROR_SEVERITY,
+        message: notifDictionary.personalDataChangeError,
+      });
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     /**
      * For Keyloack : check if the id is "id" or something like : "preferred_username"
@@ -58,7 +76,7 @@ export const UserAccountProvider = ({ children }) => {
   return (
     <>
       {user && (
-        <UserAccountContext.Provider value={{ user, setUser, updateAddress }}>
+        <UserAccountContext.Provider value={{ user, setUser, updateAddress, updateContact }}>
           {children}
         </UserAccountContext.Provider>
       )}

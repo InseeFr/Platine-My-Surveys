@@ -1,17 +1,12 @@
-import { useContext } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Card, Grid, Grow, Typography } from "@mui/material";
-import { UserAccountContext } from "../../context/UserAccount";
 import { AddressBlock } from "./address";
-import { menuDictionary, buttonDictionary } from "i18n";
+import { PersonalDataBlock } from "./personalData";
+import { MailBlock } from "./mail";
+import { menuDictionary } from "i18n";
 
 export const UserAccount = () => {
-  const {
-    user,
-    // updateAccount,
-  } = useContext(UserAccountContext);
 
   return (
     <>
@@ -29,20 +24,7 @@ export const UserAccount = () => {
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
                   Mon compte - Accès
                 </Typography>
-                <Card
-                  sx={{
-                    p: 2,
-                  }}
-                >
-                  <TextField
-                    disabled
-                    id="outlined-name"
-                    label="Adresse de messagerie"
-                    fullWidth
-                    value={user?.email}
-                  />
-                  <Button>{buttonDictionary.edit}</Button>
-                </Card>
+                <MailBlock />
               </Grid>
             </Grow>
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={800}>
@@ -79,17 +61,7 @@ export const UserAccount = () => {
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
                   {menuDictionary.myPersonalData}
                 </Typography>
-                <Card
-                  sx={{
-                    p: 2,
-                  }}
-                >
-                  <TextField id="outlined-name" label="Nom" disabled value={user.lastName} />
-                  <TextField id="outlined-name" label="Prénom" disabled value={user.firstName} />
-                  <TextField id="outlined-name" label="Fonction" disabled value={user.function} />
-                  <TextField id="outlined-name" label="Téléphone" disabled value={user.phone} />
-                  <Button>{buttonDictionary.edit}</Button>
-                </Card>
+                <PersonalDataBlock />
               </Grid>
             </Grow>
           </Grid>
