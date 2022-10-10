@@ -9,7 +9,8 @@ export const UserAccountContext = createContext();
 
 export const UserAccountProvider = ({ children }) => {
   const { setLoading, openNotif } = useContext(AppContext);
-  const { oidcUser } = useContext(AuthContext);
+  const oidcClient = useContext(AuthContext);
+  const oidcUser = oidcClient?.oidcUser;
   const [user, setUser] = useState(null);
 
   const { getMySurveys, getContact, putAddress, putContact } = useAPI();

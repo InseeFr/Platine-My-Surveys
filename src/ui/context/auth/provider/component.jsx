@@ -4,6 +4,7 @@ import { getOidc } from "core/configuration";
 import { createKeycloakOidcClient } from "core/keycloak";
 import { listenActivity } from "core/events";
 import { NoAuthLogin } from "./noAuth";
+import { LoaderSimple } from "ui/shared/loader";
 
 export const AuthContext = React.createContext();
 
@@ -44,10 +45,9 @@ const AuthProvider = ({ authType, children }) => {
 
   if (authType === NONE && !oidcClient?.isUserLoggedIn)
     return <NoAuthLogin setOidcClient={setOidcClient} />;
-  if (oidcClient === null || !oidcClient?.isUserLoggedIn) oidcClient.login();
-  if (oidcClient && oidcClient.isUserLoggedIn)
-    return <AuthContext.Provider value={oidcClient}>{children}</AuthContext.Provider>;
-  return null;
+  if (oidcClient === null) return <LoaderSimple />;
+  if (oidcClient && !oidcClient?.isUserLoggedIn) oidcClient.login();
+  return <AuthContext.Provider value={oidcClient}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
