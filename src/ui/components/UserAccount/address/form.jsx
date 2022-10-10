@@ -43,7 +43,7 @@ export const AddressForm = ({ open, close, address }) => {
       {!confirmation && (
         <Dialog open={open} onClose={close} maxWidth="xl" fullWidth>
           <DialogTitle>
-            {`Modification de l'adresse`}
+            {formDictionary.updateAddress}
             <IconButton
               aria-label="close"
               onClick={close}

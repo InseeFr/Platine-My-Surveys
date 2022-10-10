@@ -43,7 +43,7 @@ export const PersonalDataForm = ({ open, close, user }) => {
       {!confirmation && (
         <Dialog open={open} onClose={close} maxWidth="xl" fullWidth>
           <DialogTitle>
-            {`Modification des informations personnelles`}
+            {formDictionary.updatePersonalData}
             <IconButton
               aria-label="close"
               onClick={close}

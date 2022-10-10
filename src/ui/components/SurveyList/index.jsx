@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import { useAPI } from "../../../core/hooks";
 import { SmartList } from "./smartList";
 import { UserAccountContext } from "ui/context/UserAccount";
+import { menuDictionary} from "../../../i18n";
 
 export const SurveyList = () => {
   const { user, setUser } = useContext(UserAccountContext);
@@ -21,7 +22,7 @@ export const SurveyList = () => {
   return (
     <>
       <Welcome />
-      <Typography variant="h4">Mes enquêtes</Typography>
+      <Typography variant="h4">{menuDictionary.mySurveys}</Typography>
       <div style={{ width: "90%", margin: "auto" }}>
         {user.mySurveys && user.mySurveys.length > 0 && <SmartList mySurveys={user.mySurveys} />}
 

@@ -52,7 +52,7 @@ export const MailForm = ({ open, close, user }) => {
       {!confirmation && (
         <Dialog open={open} onClose={close} maxWidth="xl" fullWidth>
           <DialogTitle>
-            {`Modification de l'adresse de messagerie`}
+            {formDictionary.updateEmail}
             <IconButton
               aria-label="close"
               onClick={close}

@@ -50,7 +50,18 @@ const dictionary = {
         fr: "Téléphone",
         en: "Phone Number",
       },
-
+      updateEmail:{
+        fr: "Actualiser mon adresse de messagerie",
+        en: "Update my Email",
+      },
+      updatePersonalData:{
+        fr: "Actualiser mes données personnelles",
+        en: "Update my personal datas",
+      },
+      updateAddress:{
+        fr: "Actualiser mon adresse",
+        en: "Update my address",
+      },
 
 
 

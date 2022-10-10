@@ -15,10 +15,7 @@ export const UserAccount = () => {
   return (
     <>
       <div className="welcomeUser">
-        Pour bénéficier pleinement des services proposés sur ce portail, pensez à renseigner ou à mettre
-        à jour régulièrement vos données personnelles. Si vous choisissez par exemple de renseigner votre
-        adresse de messagerie, vous pourrez recevoir votre nouveau mot de passe par courriel dans les
-        minutes qui suivent votre demande de réinitialisation.
+        {menuDictionary.welcomeUser}
       </div>
       <Box sx={{ m: 2 }}>
         <Grid container spacing={3}>
