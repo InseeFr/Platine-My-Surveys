@@ -5,29 +5,27 @@ import { Footer } from "../shared/Footer";
 import { Menu } from "../shared/Menu";
 import { SurveyList } from "../components/SurveyList";
 import { UserAccount } from "../components/UserAccount";
+import { secure } from "ui/context/auth";
+
+const MainContentSecured = secure(() => (
+  <div className="main-content">
+    <Header />
+    <Menu />
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <div className="main-body">
+        <Outlet />
+      </div>
+      <Footer />
+    </Box>
+  </div>
+));
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
-        <Route
-          path="/portail"
-          element={
-            <>
-              <div className="main-content">
-                <Header />
-                <Menu />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <div className="main-body">
-                    <Outlet />
-                  </div>
-                  <Footer />
-                </Box>
-              </div>
-            </>
-          }
-        >
+        <Route path="/portail" element={<MainContentSecured />}>
           <Route path="mes-enquetes" element={<SurveyList />} />
           <Route path="mon-compte" element={<UserAccount />} />
           <Route path="*" element={<Navigate to="/portail/mes-enquetes" />} />

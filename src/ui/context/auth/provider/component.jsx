@@ -8,11 +8,11 @@ import { LoaderSimple } from "ui/shared/loader";
 
 export const AuthContext = React.createContext();
 
-const AuthProvider = ({ authType, children }) => {
-  const dummyOidcClient = {
-    isUserLoggedIn: false,
-  };
+const dummyOidcClient = {
+  isUserLoggedIn: false,
+};
 
+const AuthProvider = ({ authType, children }) => {
   const [oidcClient, setOidcClient] = useState(() => {
     switch (authType) {
       case OIDC:
@@ -43,10 +43,9 @@ const AuthProvider = ({ authType, children }) => {
     })();
   }, [authType]);
 
+  if (oidcClient === null) return <LoaderSimple />;
   if (authType === NONE && !oidcClient?.isUserLoggedIn)
     return <NoAuthLogin setOidcClient={setOidcClient} />;
-  if (oidcClient === null) return <LoaderSimple />;
-  if (oidcClient && !oidcClient?.isUserLoggedIn) oidcClient.login();
   return <AuthContext.Provider value={oidcClient}>{children}</AuthContext.Provider>;
 };
 

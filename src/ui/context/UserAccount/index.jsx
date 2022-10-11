@@ -7,13 +7,15 @@ import { AuthContext } from "../auth/provider";
 
 export const UserAccountContext = createContext();
 
-export const UserAccountProvider = ({ children }) => {
+const UserAccountProviderUnSecured = ({ children }) => {
   const { setLoading, openNotif } = useContext(AppContext);
   const oidcClient = useContext(AuthContext);
   const oidcUser = oidcClient?.oidcUser;
   const [user, setUser] = useState(null);
 
   const { getMySurveys, getContact, putAddress, putContact } = useAPI();
+
+  console.log("oidcClient", oidcClient);
 
   const loadUserData = useConstCallback(async id => {
     setLoading(true);
@@ -81,6 +83,15 @@ export const UserAccountProvider = ({ children }) => {
           {children}
         </UserAccountContext.Provider>
       )}
+      {!user && (
+        <>
+          <div>{JSON.stringify(oidcUser)}</div>
+          {oidcClient?.login && <button onClick={oidcClient?.login}>Login</button>}
+          {oidcClient?.logout && <button onClick={oidcClient?.logout}>Logout</button>}
+        </>
+      )}
     </>
   );
 };
+
+export const UserAccountProvider = UserAccountProviderUnSecured;
