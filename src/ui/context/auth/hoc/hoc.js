@@ -1,21 +1,17 @@
 import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { LoaderSimple } from "ui/shared/loader";
 import { AuthContext } from "../provider";
 
-const secure = WrappedComponent => {
-  const Component = props => {
-    const { isUserLoggedIn, login } = useContext(AuthContext);
-
-    const ReturnedComponent = <WrappedComponent {...props} />;
-
-    if (isUserLoggedIn) {
-      return ReturnedComponent;
-    }
-
+export const ProtectedRoute = ({ children, redirect, isAllowed = true }) => {
+  const { isUserLoggedIn, login } = useContext(AuthContext);
+  if (!isUserLoggedIn && login) {
     login();
-    return null;
-  };
+    return <LoaderSimple />;
+  }
+  if (!isAllowed) {
+    return <Navigate to={redirect} />;
+  }
 
-  return Component;
+  return children ? children : <Outlet />;
 };
-
-export default secure;

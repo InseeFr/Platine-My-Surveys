@@ -1,1 +1,1 @@
-export { default } from "./hoc";
+export { ProtectedRoute } from "./hoc";
