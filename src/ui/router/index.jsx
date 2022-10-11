@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { Header } from "../shared/Header";
-import { Footer } from "../shared/Footer";
-import { Menu } from "../shared/Menu";
-import { SurveyList } from "../components/SurveyList";
-import { UserAccount } from "../components/UserAccount";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { SurveyList } from "ui/components/SurveyList";
+import { UserAccount } from "ui/components/UserAccount";
+import { ProtectedRoute } from "ui/context/auth";
+import { UserAccountProvider } from "ui/context/UserAccount";
+import { Footer } from "ui/shared/Footer";
+import { Header } from "ui/shared/Header";
+import { Menu } from "ui/shared/Menu";
 
 export const Router = () => {
   return (
@@ -14,18 +16,20 @@ export const Router = () => {
         <Route
           path="/portail"
           element={
-            <>
-              <div className="main-content">
-                <Header />
-                <Menu />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <div className="main-body">
-                    <Outlet />
-                  </div>
-                  <Footer />
-                </Box>
-              </div>
-            </>
+            <ProtectedRoute>
+              <UserAccountProvider>
+                <div className="main-content">
+                  <Header />
+                  <Menu />
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <div className="main-body">
+                      <Outlet />
+                    </div>
+                    <Footer />
+                  </Box>
+                </div>
+              </UserAccountProvider>
+            </ProtectedRoute>
           }
         >
           <Route path="mes-enquetes" element={<SurveyList />} />

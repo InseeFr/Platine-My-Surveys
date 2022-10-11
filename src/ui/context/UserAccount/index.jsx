@@ -1,16 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { notifDictionary } from "i18n";
+import { Typography } from "@mui/material";
+import { AppContext } from "App";
 import { ERROR_SEVERITY, SUCCESS_SEVERITY } from "core/constants";
 import { useAPI, useConstCallback } from "core/hooks";
-import { AppContext } from "App";
+import { errorDictionary, notifDictionary } from "i18n";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/provider";
 
 export const UserAccountContext = createContext();
 
 export const UserAccountProvider = ({ children }) => {
   const { setLoading, openNotif } = useContext(AppContext);
-  const { oidcUser } = useContext(AuthContext);
+  const oidcClient = useContext(AuthContext);
+  const oidcUser = oidcClient?.oidcUser;
   const [user, setUser] = useState(null);
+  const [userError, setUserError] = useState(null);
 
   const { getMySurveys, getContact, putAddress, putContact } = useAPI();
 
@@ -24,6 +27,9 @@ export const UserAccountProvider = ({ children }) => {
       openNotif({
         severity: ERROR_SEVERITY,
         message: notifDictionary.contactsLoadingError(id),
+      });
+      setUserError({
+        message: errorDictionary.errorUser(oidcUser?.id),
       });
     }
   });
@@ -70,16 +76,14 @@ export const UserAccountProvider = ({ children }) => {
      * If it's not "id" but "preferred_username", change "oidcUser?.id" to "oidcUser?.preferred_username"
      * Please change in ui/context/auth/provider/NoAuth.jsx, "oidcUser: { id: id }," to "`oidcUser: { preferred_username: id },"
      */
+
     if (oidcUser?.id) loadUserData(oidcUser?.id);
   }, [oidcUser?.id]);
 
   return (
-    <>
-      {user && (
-        <UserAccountContext.Provider value={{ user, setUser, updateAddress, updateContact }}>
-          {children}
-        </UserAccountContext.Provider>
-      )}
-    </>
+    <UserAccountContext.Provider value={{ user, setUser, updateAddress, updateContact }}>
+      {user && children}
+      {userError && <Typography>{userError.message}</Typography>}
+    </UserAccountContext.Provider>
   );
 };

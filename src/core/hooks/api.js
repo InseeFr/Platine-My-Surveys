@@ -8,22 +8,22 @@ export const useAPI = () => {
   const oidcClient = useContext(AuthContext);
   const { apiUrl } = useContext(AppContext);
 
-  const getFirstContacts = useConstCallback(() => API.getContacts(apiUrl)(oidcClient.accessToken));
+  const getFirstContacts = useConstCallback(() => API.getContacts(apiUrl)(oidcClient?.accessToken));
 
-  const getContact = useConstCallback(id => API.getContact(apiUrl)(id)(oidcClient.accessToken));
+  const getContact = useConstCallback(id => API.getContact(apiUrl)(id)(oidcClient?.accessToken));
 
-  const getMySurveys = useConstCallback(id => API.getMySurveys(apiUrl)(id)(oidcClient.accessToken));
+  const getMySurveys = useConstCallback(id => API.getMySurveys(apiUrl)(id)(oidcClient?.accessToken));
 
   const getContactAddress = useConstCallback(id =>
-    API.getContactAddress(apiUrl)(id)(oidcClient.accessToken),
+    API.getContactAddress(apiUrl)(id)(oidcClient?.accessToken),
   );
 
   const putContact = useConstCallback((id, newContact) =>
-    API.putContact(apiUrl)(id)(newContact)(oidcClient.accessToken),
+    API.putContact(apiUrl)(id)(newContact)(oidcClient?.accessToken),
   );
 
   const putAddress = useConstCallback((id, newAddress) =>
-    API.putAddress(apiUrl)(id)(newAddress)(oidcClient.accessToken),
+    API.putAddress(apiUrl)(id)(newAddress)(oidcClient?.accessToken),
   );
 
   return {
