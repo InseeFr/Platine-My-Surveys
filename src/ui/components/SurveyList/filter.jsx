@@ -21,10 +21,21 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
 
   const statusOrder = ["Fermeture", "Ouverte", "A Venir", "Fermée"];
   const status = ["A Venir", "Ouverte", "Fermeture", "Fermée"];
+  const questioningStatusOrder = ["VALINT", "VALPAP", "REFUSAL", "HC"];
 
-  const sortFunction = (a, b) => {
-    console.log(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status);
-    console.log(statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status));
+  const sortBySurveyStatus = (a, b) => {
+    if (
+      !questioningStatusOrder.includes(a.questioningStatus) &&
+      questioningStatusOrder.includes(b.questioningStatus)
+    ) {
+      return -1;
+    }
+    if (
+      questioningStatusOrder.includes(a.questioningStatus) &&
+      !questioningStatusOrder.includes(b.questioningStatus)
+    ) {
+      return 1;
+    }
     if (
       statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status) <
       statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status)
@@ -37,11 +48,17 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
     ) {
       return 1;
     }
+    if (a.returnDate < b.returnDate) {
+      return -1;
+    }
+    if (b.returnDate < a.returnDate) {
+      return 1;
+    }
     // a must be equal to b
     return 0;
   };
 
-  const [surveysList] = useState(mySurveys.sort(sortFunction));
+  const [surveysList] = useState(mySurveys.sort(sortBySurveyStatus));
 
   const handleChangeFilter = event => {
     setFilter(event.target.value);
@@ -73,9 +90,11 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       );
 
       setSurveyFiltered(newSurveys);
+      console.log(newSurveys);
       setPage(0);
     } else {
       setSurveyFiltered(mySurveys);
+      console.log(mySurveys);
       setPage(0);
     }
   }, [filter, selectedSurveysFilter, selectedStatusFilter, mySurveys, setSurveyFiltered, setPage]);
