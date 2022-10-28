@@ -1,11 +1,11 @@
-import { ContentPasteGo, ListAlt, Message } from "@mui/icons-material";
+import { ContentPasteGo, ListAlt } from "@mui/icons-material";
 import { Chip, Grid, Grow, IconButton, Link, Paper, Typography } from "@mui/material";
 import { format, isFuture, isPast, differenceInDays } from "date-fns";
 import { getSurveyStatus } from "../../../../core/functions";
 
 export const SurveyItem = ({ survey, index }) => {
   const {
-    surveyUnitId,
+    identificationCode,
     surveyWording,
     openingDate,
     closingDate,
@@ -88,8 +88,8 @@ export const SurveyItem = ({ survey, index }) => {
                   {surveyWording}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  <b>{"Référence UE : "}</b>
-                  {surveyUnitId}
+                  <b>{"Identifiant : "}</b>
+                  {identificationCode}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {getMessageDisplay()}
