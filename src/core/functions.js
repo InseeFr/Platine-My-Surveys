@@ -15,24 +15,29 @@ export const fieldToTest = field => `${field}`.toLowerCase();
 export const getSurveyStatus = (openingDate, closingDate, returnDate) => {
   var status;
   var colorChip;
+  var toolTip;
 
   if (isFuture(new Date(openingDate))) {
     status = "A venir";
     colorChip = "primary";
+    toolTip = " n'a pas encore démarrée";
   }
   if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
     status = "Ouverte";
     colorChip = "success";
+    toolTip = " est ouverte";
   }
   if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
     status = "Fermeture";
     colorChip = "warning";
+    toolTip = " est en cours de fermeture";
   }
   if (isPast(new Date(closingDate))) {
     status = "Fermée";
     colorChip = "error";
+    toolTip = " est fermée";
   }
-  return { status, colorChip };
+  return { status, colorChip, toolTip };
 };
 
 export const filterSurveys = (surveys, filterStr, surveysList, statusList) => {

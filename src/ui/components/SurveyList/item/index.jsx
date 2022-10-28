@@ -1,5 +1,5 @@
 import { ContentPasteGo, ListAlt } from "@mui/icons-material";
-import { Chip, Grid, Grow, IconButton, Link, Paper, Typography } from "@mui/material";
+import { Chip, Grid, Grow, IconButton, Link, Paper, Typography, Tooltip } from "@mui/material";
 import { format, isFuture, isPast, differenceInDays } from "date-fns";
 import { getSurveyStatus } from "../../../../core/functions";
 
@@ -116,10 +116,19 @@ export const SurveyItem = ({ survey, index }) => {
                 )}
 
                 <Grid item>
-                  <Chip
-                    label={getSurveyStatus(openingDate, closingDate, returnDate).status}
-                    color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
-                  />
+                  <Tooltip
+                    title={`L'enquête ${surveyWording} ${
+                      getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                    }`}
+                  >
+                    <Chip
+                      aria-label={`L'enquête ${surveyWording} ${
+                        getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                      }`}
+                      label={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                      color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
+                    />
+                  </Tooltip>
                 </Grid>
               </Grid>
             </Grid>
