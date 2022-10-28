@@ -79,7 +79,7 @@ export const Header = () => {
             component={Link}
             href={`${portailUrl}/aqv/contacter-assistance`}
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
           >
             <Link>
               <ListItemIcon>
