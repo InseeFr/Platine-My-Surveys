@@ -1,14 +1,16 @@
 import { AccountCircle, ContactSupport, Logout } from "@mui/icons-material";
 import { Button, Divider, ListItem, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { AuthContext } from "ui/context/auth/provider";
+import { AppContext } from "App";
 import { UserAccountContext } from "ui/context/UserAccount";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "@mui/material/Link";
 import { defaultDictionary, buttonDictionary } from "i18n";
 import "./header.css";
 
 export const Header = () => {
   const { logout } = useContext(AuthContext);
+  const { portailUrl } = useContext(AppContext);
   const { user } = useContext(UserAccountContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -72,14 +74,16 @@ export const Header = () => {
         >
           <ListItem>{`${user.lastName} ${user.firstName}`}</ListItem>
           <Divider />
-          <Link to="/portail">
-            <MenuItem>
-              <ListItemIcon>
-                <ContactSupport fontSize="small" />
-              </ListItemIcon>
+
+          <MenuItem>
+            <ListItemIcon>
+              <ContactSupport fontSize="small" />
+            </ListItemIcon>
+            <Link href={`${portailUrl}/aqv/contacter-assistance`} target="_blank" rel="noopener">
               {buttonDictionary.help}
-            </MenuItem>
-          </Link>
+            </Link>
+          </MenuItem>
+
           <MenuItem onClick={logout}>
             <ListItemIcon>
               <Logout fontSize="small" />
