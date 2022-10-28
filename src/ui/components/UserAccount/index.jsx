@@ -5,25 +5,22 @@ import { AddressBlock } from "./address";
 import { PersonalDataBlock } from "./personalData";
 import { MailBlock } from "./mail";
 import { menuDictionary } from "i18n";
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 export const UserAccount = () => {
-
   return (
     <>
-      <div className="welcomeUser">
-        {menuDictionary.welcomeUser}
-      </div>
+      <div className="welcomeUser">{menuDictionary.welcomeUser}</div>
       <Box sx={{ m: 2 }}>
         <Grid container spacing={3}>
           <Grid item container xs={12} spacing={3}>
             <Grow in style={{ transformOrigin: "0 0 0" }} timeout={400}>
-              <Grid item xs={12} sm={4}>                
+              <Grid item xs={12} sm={4}>
                 <Typography variant="h6" sx={{ p: 1, textTransform: "uppercase" }}>
-                <AlternateEmailIcon /> {menuDictionary.myEmail}
+                  <AlternateEmailIcon /> {menuDictionary.myEmail}
                 </Typography>
                 <MailBlock />
               </Grid>
@@ -38,7 +35,7 @@ export const UserAccount = () => {
                     p: 2,
                   }}
                 >
-                  <Button>Liste des enquêtes liées à mon compte</Button>
+                  <Button>Modifier mon mot de passe</Button>
                   <Button>Autres enquêtes liées à mon adresse de messagerie</Button>
                   <Button>
                     Vous avez reçu un nouveau compte que vous souhaitez associer au compte ?
