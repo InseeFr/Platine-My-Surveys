@@ -12,23 +12,46 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { filterSurveys } from "core/functions";
+import { filterSurveys, getSurveyStatus } from "core/functions";
 
 export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
   const [filter, setFilter] = useState("");
   const [selectedSurveysFilter, setSelectedSurveysFilter] = useState([]);
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState([]);
 
-  const [surveysList] = useState(
-    mySurveys
-      .reduce((_, { surveyWording }) => {
-        if (!_.includes(surveyWording)) return [..._, surveyWording];
-        return _;
-      }, [])
-      .sort(),
-  );
+  const statusOrder = ["Fermeture", "Ouverte", "A Venir", "Fermée"];
+  const status = ["A Venir", "Ouverte", "Fermeture", "Fermée"];
+
+  const sortFunction = (a, b) => {
+    console.log(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status);
+    console.log(statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status));
+    if (
+      statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status) <
+      statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status)
+    ) {
+      return -1;
+    }
+    if (
+      statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status) <
+      statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status)
+    ) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  };
+
+  const [surveysList] = useState(mySurveys.sort(sortFunction));
 
   const handleChangeFilter = event => {
     setFilter(event.target.value);
+  };
+
+  const handleChangeFilterStatus = event => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedStatusFilter(value);
   };
 
   const handleChangeFilterSurvey = event => {
@@ -41,8 +64,13 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
     );
   };
   useEffect(() => {
-    if (filter || selectedSurveysFilter) {
-      const newSurveys = filterSurveys([...mySurveys], filter, selectedSurveysFilter);
+    if (filter || selectedSurveysFilter || selectedStatusFilter) {
+      const newSurveys = filterSurveys(
+        [...mySurveys],
+        filter,
+        selectedSurveysFilter,
+        selectedStatusFilter,
+      );
 
       setSurveyFiltered(newSurveys);
       setPage(0);
@@ -50,10 +78,14 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       setSurveyFiltered(mySurveys);
       setPage(0);
     }
-  }, [filter, selectedSurveysFilter, mySurveys, setSurveyFiltered, setPage]);
+  }, [filter, selectedSurveysFilter, selectedStatusFilter, mySurveys, setSurveyFiltered, setPage]);
 
   const removeSurvey = survey => {
     setSelectedSurveysFilter(selectedSurveysFilter.filter(s => s !== survey));
+  };
+
+  const removeStatus = status => {
+    setSelectedStatusFilter(selectedStatusFilter.filter(st => st !== status));
   };
 
   return (
@@ -65,7 +97,7 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       }}
     >
       <Grid container spacing={2} sx={{ marginTop: "15px" }}>
-        <Grid item xs={8}>
+        <Grid item xs={4}>
           <FormControl fullWidth sx={{ backgroundColor: "white" }}>
             <InputLabel id="demo-multiple-chip-label">Enquêtes</InputLabel>
             <Select
@@ -95,6 +127,39 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
           >
             {selectedSurveysFilter.map(value => (
               <Chip sx={{ m: 0.5 }} key={value} label={value} onDelete={() => removeSurvey(value)} />
+            ))}
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <FormControl fullWidth sx={{ backgroundColor: "white" }}>
+            <InputLabel id="demo-multiple-chip-label">Statut</InputLabel>
+            <Select
+              labelId="demo-multiple-chip-label"
+              id="demo-multiple-chip"
+              variant="standard"
+              label="Statut"
+              multiple
+              value={selectedStatusFilter}
+              onChange={handleChangeFilterStatus}
+              input={<OutlinedInput id="select-multiple-chip" label="Statut" />}
+              renderValue={selected => selected.join(", ")}
+            >
+              {status.map(name => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={selectedStatusFilter.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box
+            sx={{
+              marginTop: "15px",
+              marginBottom: "15px",
+            }}
+          >
+            {selectedStatusFilter.map(value => (
+              <Chip sx={{ m: 0.5 }} key={value} label={value} onDelete={() => removeStatus(value)} />
             ))}
           </Box>
         </Grid>

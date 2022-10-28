@@ -1,6 +1,7 @@
-import { ContentPasteGo, ListAlt } from "@mui/icons-material";
+import { ContentPasteGo, ListAlt, Message } from "@mui/icons-material";
 import { Chip, Grid, Grow, IconButton, Link, Paper, Typography } from "@mui/material";
-import { format, isFuture, isPast } from "date-fns";
+import { format, isFuture, isPast, differenceInDays } from "date-fns";
+import { getSurveyStatus } from "../../../../core/functions";
 
 export const SurveyItem = ({ survey, index }) => {
   const {
@@ -9,36 +10,53 @@ export const SurveyItem = ({ survey, index }) => {
     openingDate,
     closingDate,
     returnDate,
-    questioningStatus /*, accessUrl*/,
+    questioningStatus,
+    questioningDate /*, accessUrl*/,
   } = survey;
 
-  /*primary, warning*/
-  /*   const labelChip = surveyOpen ? "Ouverte" : "Fermée";
-  const colorChip = surveyOpen ? "success" : "error"; */
+  const surveyOpen = isPast(new Date(openingDate)) && isFuture(new Date(returnDate));
 
-  const surveyOpen = isPast(new Date(openingDate)) && isFuture(new Date());
+  const getMessageDisplay = () => {
+    var message;
+    switch (questioningStatus) {
+      case "PARTIELINT":
+        message =
+          isPast(new Date(openingDate)) && isFuture(new Date(returnDate))
+            ? `Compléter vos réponses avant le ${format(new Date(returnDate), "dd/MM/yyyy")}`
+            : "vous n avez pas finalisé vos réponses";
+        break;
+      case "HC":
+        message = "Vous êtes finalement hors champ de l’étude de l’enquête.";
+        break;
+      case "VALPAP":
+        message = `Vous avez répondu au format papier, votre réponse a été prise en compte le ${questioningDate}`;
+        break;
+      case "VALINT":
+        message = `Vous avez répondu le ${format(new Date(questioningDate), "dd/MM/yyyy")}`;
+        break;
+      case "REFUSAL":
+        message = "Vous avez refusé de répondre à l’enquête.";
+        break;
+      default:
+        if (isFuture(new Date(openingDate))) {
+          message = `Répondre à partir du ${format(new Date(openingDate), "dd/MM/yyyy")}`;
+        }
+        if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
+          message = `Il vous reste ${differenceInDays(
+            new Date(returnDate),
+            new Date(),
+          )} jours pour répondre à l’enquête.`;
+        }
 
-  const getSurveyStatus = () => {
-    var labelChip;
-    var colorChip;
-
-    if (isFuture(new Date(openingDate))) {
-      labelChip = "A venir";
-      colorChip = "primary";
+        if (isPast(new Date(closingDate))) {
+          message = `Votre réponse était attendue pour le ${format(
+            new Date(returnDate),
+            "dd/MM/yyyy",
+          )}.`;
+        }
+        break;
     }
-    if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
-      labelChip = "Ouverte";
-      colorChip = "success";
-    }
-    if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
-      labelChip = "Fermeture";
-      colorChip = "warning";
-    }
-    if (isPast(new Date(closingDate))) {
-      labelChip = "Fermée";
-      colorChip = "error";
-    }
-    return { labelChip, colorChip };
+    return message;
   };
 
   return (
@@ -74,7 +92,7 @@ export const SurveyItem = ({ survey, index }) => {
                   {surveyUnitId}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {`Réponse attendu avant le ${format(new Date(returnDate), "dd/MM/yyyy")}`}
+                  {getMessageDisplay()}
                 </Typography>
               </Grid>
             </Grid>
@@ -98,7 +116,10 @@ export const SurveyItem = ({ survey, index }) => {
                 )}
 
                 <Grid item>
-                  <Chip label={getSurveyStatus().labelChip} color={getSurveyStatus().colorChip} />
+                  <Chip
+                    label={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                    color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
+                  />
                 </Grid>
               </Grid>
             </Grid>
