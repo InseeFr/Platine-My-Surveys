@@ -57,9 +57,14 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
     // a must be equal to b
     return 0;
   };
-
-  const [surveysList] = useState(mySurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));
-
+  const [surveysList] = useState(
+    mySurveys
+      .reduce((_, { surveyWording }) => {
+        if (!_.includes(surveyWording)) return [..._, surveyWording];
+        return _;
+      }, [])
+      .sort(sortByQuestioningStatusBySurveyStatusByReturnDate),
+  );
   const handleChangeFilter = event => {
     setFilter(event.target.value);
   };
