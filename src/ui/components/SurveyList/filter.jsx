@@ -23,7 +23,7 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
   const status = ["A Venir", "Ouverte", "Fermeture", "Fermée"];
   const questioningStatusOrder = ["VALINT", "VALPAP", "REFUSAL", "HC"];
 
-  const sortBySurveyStatus = (a, b) => {
+  const sortByQuestioningStatusBySurveyStatusByReturnDate = (a, b) => {
     if (
       !questioningStatusOrder.includes(a.questioningStatus) &&
       questioningStatusOrder.includes(b.questioningStatus)
@@ -58,7 +58,7 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
     return 0;
   };
 
-  const [surveysList] = useState(mySurveys.sort(sortBySurveyStatus));
+  const [surveysList] = useState(mySurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));
 
   const handleChangeFilter = event => {
     setFilter(event.target.value);
