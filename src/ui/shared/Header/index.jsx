@@ -75,11 +75,16 @@ export const Header = () => {
           <ListItem>{`${user.lastName} ${user.firstName}`}</ListItem>
           <Divider />
 
-          <MenuItem>
-            <ListItemIcon>
-              <ContactSupport fontSize="small" />
-            </ListItemIcon>
-            <Link href={`${portailUrl}/aqv/contacter-assistance`} target="_blank" rel="noopener">
+          <MenuItem
+            component={Link}
+            href={`${portailUrl}/aqv/contacter-assistance`}
+            target="_blank"
+            rel="noopener"
+          >
+            <Link>
+              <ListItemIcon>
+                <ContactSupport fontSize="small" />
+              </ListItemIcon>
               {buttonDictionary.help}
             </Link>
           </MenuItem>
