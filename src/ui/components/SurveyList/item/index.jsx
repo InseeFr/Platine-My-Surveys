@@ -1,14 +1,46 @@
 import { ContentPasteGo, ListAlt } from "@mui/icons-material";
 import { Chip, Grid, Grow, IconButton, Link, Paper, Typography } from "@mui/material";
-import { format, isFuture } from "date-fns";
+import { format, isFuture, isPast } from "date-fns";
 
 export const SurveyItem = ({ survey, index }) => {
-  const { surveyUnitId, surveyWording, monitoringDate /*, accessUrl*/ } = survey;
+  const {
+    surveyUnitId,
+    surveyWording,
+    openingDate,
+    closingDate,
+    returnDate,
+    questioningStatus /*, accessUrl*/,
+  } = survey;
 
-  const surveyOpen = isFuture(new Date(monitoringDate));
+  /*primary, warning*/
+  /*   const labelChip = surveyOpen ? "Ouverte" : "Fermée";
+  const colorChip = surveyOpen ? "success" : "error"; */
 
-  const labelChip = surveyOpen ? "Ouverte" : "Fermée";
-  const colorChip = surveyOpen ? "success" : "error";
+  const surveyOpen = isPast(new Date(openingDate)) && isFuture(new Date());
+
+  const getSurveyStatus = () => {
+    var labelChip;
+    var colorChip;
+
+    if (isFuture(new Date(openingDate))) {
+      labelChip = "A venir";
+      colorChip = "primary";
+    }
+    if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
+      labelChip = "Ouverte";
+      colorChip = "success";
+    }
+    if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
+      labelChip = "Fermeture";
+      colorChip = "warning";
+    }
+    if (isPast(new Date(closingDate))) {
+      labelChip = "Fermée";
+      colorChip = "error";
+    }
+    return { labelChip, colorChip };
+  };
+
   return (
     <Grow
       in
@@ -42,7 +74,7 @@ export const SurveyItem = ({ survey, index }) => {
                   {surveyUnitId}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {`Réponse attendu avant le ${format(new Date(monitoringDate), "dd/MM/yyyy")}`}
+                  {`Réponse attendu avant le ${format(new Date(returnDate), "dd/MM/yyyy")}`}
                 </Typography>
               </Grid>
             </Grid>
@@ -66,7 +98,7 @@ export const SurveyItem = ({ survey, index }) => {
                 )}
 
                 <Grid item>
-                  <Chip label={labelChip} color={colorChip} />
+                  <Chip label={getSurveyStatus().labelChip} color={getSurveyStatus().colorChip} />
                 </Grid>
               </Grid>
             </Grid>

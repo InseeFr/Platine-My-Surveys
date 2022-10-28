@@ -1,6 +1,6 @@
 {
-  "authType": "${AUTHENTICATION_TYPE}",
+  "authType": "noauth",
   "_authenticationType_comment_": "Authentication type : OIDC or NONE",
-  "apiUrl": "${API_URL}",
-  "portailUrl": "${PORTAIL_URL}"
+  "apiUrl": "http://localhost:8080",
+  "portailUrl": "www.insee.Fr"
 }
