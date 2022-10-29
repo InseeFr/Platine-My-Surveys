@@ -1,7 +1,10 @@
-import { ContentPasteGo, ListAlt } from "@mui/icons-material";
+import { ContentPasteGo } from "@mui/icons-material";
 import { Chip, Grid, Grow, IconButton, Link, Paper, Typography, Tooltip } from "@mui/material";
 import { format, isFuture, isPast, differenceInDays } from "date-fns";
 import { getSurveyStatus } from "../../../../core/functions";
+import WarningIcon from "@mui/icons-material/Warning";
+import CloseIcon from "@mui/icons-material/Close";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 export const SurveyItem = ({ survey, index }) => {
   const {
@@ -13,8 +16,6 @@ export const SurveyItem = ({ survey, index }) => {
     questioningStatus,
     questioningDate /*, accessUrl*/,
   } = survey;
-
-  const surveyOpen = isPast(new Date(openingDate)) && isFuture(new Date(returnDate));
 
   const getMessageDisplay = () => {
     var message;
@@ -76,13 +77,32 @@ export const SurveyItem = ({ survey, index }) => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item>
-            <IconButton aria-label="Accéder au questionnaire">
-              <ListAlt />
-            </IconButton>
-          </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs={7} container direction="column" spacing={2}>
+            <Grid
+              item
+              xs={3}
+              md={2}
+              sm={2}
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Tooltip
+                title={`L'enquête ${surveyWording} ${
+                  getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                }`}
+              >
+                <Chip
+                  aria-label={`L'enquête ${surveyWording} ${
+                    getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                  }`}
+                  label={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                  color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
+                />
+              </Tooltip>
+            </Grid>
+            <Grid item xs={5} container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1" component="div">
                   {surveyWording}
@@ -96,40 +116,36 @@ export const SurveyItem = ({ survey, index }) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={5} container direction="column" sx={{ textAlign: "right" }}>
+            <Grid
+              item
+              xs={4}
+              container
+              direction="column"
+              sx={{ textAlign: "right" }}
+              justifyContent="center"
+            >
               <Grid item>
-                {surveyOpen && (
+                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Ouverte" && (
                   <Link
                     href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
                     target="_blank"
                     rel="noreferrer"
                   >
                     <IconButton aria-label="Accéder au questionnaire">
+                      <Typography>Accéder au questionnaire</Typography>
                       <ContentPasteGo />
                     </IconButton>
                   </Link>
                 )}
-                {!surveyOpen && (
-                  <IconButton aria-label="Accéder au questionnaire" disabled>
-                    <ContentPasteGo />
-                  </IconButton>
+                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Fermeture" && (
+                  <WarningIcon />
                 )}
-
-                <Grid item>
-                  <Tooltip
-                    title={`L'enquête ${surveyWording} ${
-                      getSurveyStatus(openingDate, closingDate, returnDate).toolTip
-                    }`}
-                  >
-                    <Chip
-                      aria-label={`L'enquête ${surveyWording} ${
-                        getSurveyStatus(openingDate, closingDate, returnDate).toolTip
-                      }`}
-                      label={getSurveyStatus(openingDate, closingDate, returnDate).status}
-                      color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
-                    />
-                  </Tooltip>
-                </Grid>
+                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Fermée" && (
+                  <CloseIcon />
+                )}
+                {getSurveyStatus(openingDate, closingDate, returnDate).status == "A Venir" && (
+                  <HourglassEmptyIcon />
+                )}
               </Grid>
             </Grid>
           </Grid>
