@@ -22,7 +22,10 @@ export const Header = () => {
   };
   return (
     <div className="header">
-      <img src={`${process.env.PUBLIC_URL}/logo-proto.png`} alt="alt" />
+      <img
+        src={`${process.env.PUBLIC_URL}/img/logo-marianne.png`}
+        alt="Marianne de la République française"
+      />
 
       <h1>{defaultDictionary.appTitle}</h1>
       <div className="kfc" style={{ borderLeft: "1px solid #3467ae" }}>
