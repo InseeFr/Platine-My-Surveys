@@ -13,26 +13,37 @@ import {
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { filterSurveys, getSurveyStatus } from "core/functions";
+import { surveyDictionary } from "i18n";
 
 export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
   const [filter, setFilter] = useState("");
   const [selectedSurveysFilter, setSelectedSurveysFilter] = useState([]);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState([]);
 
-  const statusOrder = ["Fermeture", "Ouverte", "A Venir", "Fermée"];
-  const status = ["A Venir", "Ouverte", "Fermeture", "Fermée"];
-  const questioningStatusOrder = ["VALINT", "VALPAP", "REFUSAL", "HC"];
+  const statusOrder = [
+    surveyDictionary.surveyClosing,
+    surveyDictionary.surveyOpen,
+    surveyDictionary.surveyIncoming,
+    surveyDictionary.surveyClosed,
+  ];
+  const status = [
+    surveyDictionary.surveyIncoming,
+    surveyDictionary.surveyOpen,
+    surveyDictionary.surveyClosing,
+    surveyDictionary.surveyClosed,
+  ];
+  const lowOrderQuestioningStatus = ["VALINT", "VALPAP", "REFUSAL", "HC"];
 
   const sortByQuestioningStatusBySurveyStatusByReturnDate = (a, b) => {
     if (
-      !questioningStatusOrder.includes(a.questioningStatus) &&
-      questioningStatusOrder.includes(b.questioningStatus)
+      !lowOrderQuestioningStatus.includes(a.questioningStatus) &&
+      lowOrderQuestioningStatus.includes(b.questioningStatus)
     ) {
       return -1;
     }
     if (
-      questioningStatusOrder.includes(a.questioningStatus) &&
-      !questioningStatusOrder.includes(b.questioningStatus)
+      lowOrderQuestioningStatus.includes(a.questioningStatus) &&
+      !lowOrderQuestioningStatus.includes(b.questioningStatus)
     ) {
       return 1;
     }

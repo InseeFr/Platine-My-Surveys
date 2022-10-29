@@ -1,4 +1,5 @@
 import { isFuture, isPast } from "date-fns";
+import { surveyDictionary } from "i18n";
 
 export const chunkArray = (myArray, chunk_size) => {
   var results = [];
@@ -18,22 +19,22 @@ export const getSurveyStatus = (openingDate, closingDate, returnDate) => {
   var toolTip;
 
   if (isFuture(new Date(openingDate))) {
-    status = "A venir";
+    status = surveyDictionary.surveyIncoming;
     colorChip = "primary";
     toolTip = " n'a pas encore démarrée";
   }
   if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
-    status = "Ouverte";
+    status = surveyDictionary.surveyOpen;
     colorChip = "success";
     toolTip = " est ouverte";
   }
   if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
-    status = "Fermeture";
+    status = surveyDictionary.surveyClosing;
     colorChip = "warning";
     toolTip = " est en cours de fermeture";
   }
   if (isPast(new Date(closingDate))) {
-    status = "Fermée";
+    status = surveyDictionary.surveyClosed;
     colorChip = "error";
     toolTip = " est fermée";
   }

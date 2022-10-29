@@ -5,6 +5,7 @@ import { getSurveyStatus } from "../../../../core/functions";
 import WarningIcon from "@mui/icons-material/Warning";
 import CloseIcon from "@mui/icons-material/Close";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import { surveyDictionary } from "i18n";
 
 export const SurveyItem = ({ survey, index }) => {
   const {
@@ -125,7 +126,8 @@ export const SurveyItem = ({ survey, index }) => {
               justifyContent="center"
             >
               <Grid item>
-                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Ouverte" && (
+                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
+                  surveyDictionary.surveyOpen && (
                   <Link
                     href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
                     target="_blank"
@@ -137,15 +139,12 @@ export const SurveyItem = ({ survey, index }) => {
                     </IconButton>
                   </Link>
                 )}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Fermeture" && (
-                  <WarningIcon />
-                )}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status == "Fermée" && (
-                  <CloseIcon />
-                )}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status == "A Venir" && (
-                  <HourglassEmptyIcon />
-                )}
+                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
+                  surveyDictionary.surveyClosing && <WarningIcon />}
+                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
+                  surveyDictionary.surveyClosed && <CloseIcon />}
+                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
+                  surveyDictionary.surveyIncoming && <HourglassEmptyIcon />}
               </Grid>
             </Grid>
           </Grid>
