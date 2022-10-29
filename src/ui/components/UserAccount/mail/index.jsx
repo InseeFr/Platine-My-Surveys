@@ -6,9 +6,7 @@ import { MailForm } from "./form";
 import { buttonDictionary } from "i18n";
 
 export const MailBlock = () => {
-  const {
-    user,
-  } = useContext(UserAccountContext);
+  const { user } = useContext(UserAccountContext);
 
   const [MailEdit, setMailEdit] = useState(false);
 

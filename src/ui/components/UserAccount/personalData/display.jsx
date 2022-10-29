@@ -16,21 +16,33 @@ export const PersonalDataDisplay = ({ user }) => {
           id="outlined-read-only-input"
           label={formDictionary.personalDataLastname}
           value={`${lastName}`}
+          InputProps={{
+            readOnly: true,
+          }}
         />
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.personalDataFirstname}
           value={`${firstName}`}
+          InputProps={{
+            readOnly: true,
+          }}
         />
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.personalDataFunction}
           value={`${fonction}`}
+          InputProps={{
+            readOnly: true,
+          }}
         />
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.personalDataPhone}
           value={`${phone}`}
+          InputProps={{
+            readOnly: true,
+          }}
         />
       </div>
     </Box>

@@ -6,7 +6,7 @@ import { PersonalDataForm } from "./form";
 import { buttonDictionary } from "i18n";
 
 export const PersonalDataBlock = () => {
-  const {user} = useContext(UserAccountContext);
+  const { user } = useContext(UserAccountContext);
 
   const [personalDataEdit, setPersonalDataEdit] = useState(false);
 

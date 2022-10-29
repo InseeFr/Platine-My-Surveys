@@ -6,12 +6,15 @@ export const MailDisplay = ({ user }) => {
 
   return (
     <div className="mail-display">
-    <TextField
-                    id="outlined-read-only-input"
-                    label={formDictionary.email}
-                    fullWidth
-                    value={`${email}`}
-                  />
+      <TextField
+        id="outlined-read-only-input"
+        label={formDictionary.email}
+        fullWidth
+        value={`${email}`}
+        InputProps={{
+          readOnly: true,
+        }}
+      />
     </div>
   );
 };
