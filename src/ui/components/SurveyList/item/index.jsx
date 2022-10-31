@@ -1,10 +1,11 @@
 import { ContentPasteGo } from "@mui/icons-material";
 import { Chip, Grid, Grow, IconButton, Link, Paper, Typography, Tooltip } from "@mui/material";
-import { format, isFuture, isPast, differenceInDays } from "date-fns";
+import { isFuture, isPast } from "date-fns";
 import { getSurveyStatus } from "../../../../core/functions";
 import WarningIcon from "@mui/icons-material/Warning";
 import CloseIcon from "@mui/icons-material/Close";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { surveyDictionary } from "i18n";
 
 export const SurveyItem = ({ survey, index }) => {
@@ -24,41 +25,73 @@ export const SurveyItem = ({ survey, index }) => {
       case "PARTIELINT":
         message =
           isPast(new Date(openingDate)) && isFuture(new Date(returnDate))
-            ? `Compléter vos réponses avant le ${format(new Date(returnDate), "dd/MM/yyyy")}`
-            : "vous n avez pas finalisé vos réponses";
+            ? surveyDictionary.surveyMessagePartielIntOpen(returnDate)
+            : surveyDictionary.surveyMessagePartielIntNotOpen;
         break;
       case "HC":
-        message = "Vous êtes finalement hors champ de l’étude de l’enquête.";
+        message = surveyDictionary.surveyMessageHC;
         break;
       case "VALPAP":
-        message = `Vous avez répondu au format papier, votre réponse a été prise en compte le ${questioningDate}`;
+        message = surveyDictionary.surveyMessageValPap(questioningDate);
         break;
       case "VALINT":
-        message = `Vous avez répondu le ${format(new Date(questioningDate), "dd/MM/yyyy")}`;
+        message = surveyDictionary.surveyMessageValInt(questioningDate);
         break;
       case "REFUSAL":
-        message = "Vous avez refusé de répondre à l’enquête.";
+        message = surveyDictionary.surveyMessageRefusal;
         break;
       default:
         if (isFuture(new Date(openingDate))) {
-          message = `Répondre à partir du ${format(new Date(openingDate), "dd/MM/yyyy")}`;
+          message = surveyDictionary.surveyMessageIncoming(openingDate);
         }
         if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
-          message = `Il vous reste ${differenceInDays(
-            new Date(returnDate),
-            new Date(),
-          )} jours pour répondre à l’enquête.`;
+          message = surveyDictionary.surveyMessageOpen(returnDate);
         }
 
         if (isPast(new Date(closingDate))) {
-          message = `Votre réponse était attendue pour le ${format(
-            new Date(returnDate),
-            "dd/MM/yyyy",
-          )}.`;
+          message = surveyDictionary.surveyMessageClosed(returnDate);
         }
         break;
     }
     return message;
+  };
+
+  const getLogoType = () => {
+    if (
+      getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyIncoming
+    ) {
+      return <HourglassEmptyIcon color="primary" />;
+    }
+    if (questioningStatus === "VALINT" || questioningStatus === "VALPAP") {
+      return <CheckCircleIcon color="success" />;
+    }
+    if (
+      questioningStatus === "HC" ||
+      questioningStatus === "REFUSAL" ||
+      getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyClosed
+    ) {
+      return <CloseIcon color="error" />;
+    }
+    if (getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyOpen) {
+      return (
+        <Link
+          href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <IconButton aria-label={surveyDictionary.accessSurvey}>
+            <Typography>{surveyDictionary.accessSurvey}</Typography>
+            <ContentPasteGo />
+          </IconButton>
+        </Link>
+      );
+    }
+    if (
+      getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyClosing
+    ) {
+      return <WarningIcon color="warning" />;
+    }
+    return "nothing";
   };
 
   return (
@@ -109,7 +142,7 @@ export const SurveyItem = ({ survey, index }) => {
                   {surveyWording}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  <b>{"Identifiant : "}</b>
+                  <b>{surveyDictionary.suIdentifier}</b>
                   {identificationCode}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -125,27 +158,7 @@ export const SurveyItem = ({ survey, index }) => {
               sx={{ textAlign: "right" }}
               justifyContent="center"
             >
-              <Grid item>
-                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
-                  surveyDictionary.surveyOpen && (
-                  <Link
-                    href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <IconButton aria-label="Accéder au questionnaire">
-                      <Typography>Accéder au questionnaire</Typography>
-                      <ContentPasteGo />
-                    </IconButton>
-                  </Link>
-                )}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
-                  surveyDictionary.surveyClosing && <WarningIcon />}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
-                  surveyDictionary.surveyClosed && <CloseIcon />}
-                {getSurveyStatus(openingDate, closingDate, returnDate).status ==
-                  surveyDictionary.surveyIncoming && <HourglassEmptyIcon />}
-              </Grid>
+              <Grid item>{getLogoType()}</Grid>
             </Grid>
           </Grid>
         </Grid>
