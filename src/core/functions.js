@@ -42,8 +42,6 @@ export const getSurveyStatus = (openingDate, closingDate, returnDate) => {
 };
 
 export const filterSurveys = (surveys, filterStr, surveysList, statusList) => {
-  console.log(surveysList);
-  console.log(statusList);
   return surveys.filter(({ surveyUnitId, surveyWording, openingDate, closingDate, returnDate }) => {
     return (
       (fieldToTest(surveyUnitId).includes(filterStr.toLowerCase()) ||

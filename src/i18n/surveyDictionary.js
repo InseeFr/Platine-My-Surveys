@@ -11,7 +11,7 @@ const dictionary = {
   },
   surveyIncoming: {
     fr: "A Venir",
-    en: "Incoming.",
+    en: "Coming",
   },
   surveyOpen: {
     fr: "Ouverte",
@@ -59,7 +59,7 @@ const dictionary = {
   },
   surveyMessageValInt: {
     fr: date => `Vous avez répondu le ${format(new Date(date), "dd/MM/yyyy")}`,
-    en: date => `>You answered on ${format(new Date(date), "dd/MM/yyyy")}`,
+    en: date => `You answered on ${format(new Date(date), "dd/MM/yyyy")}`,
   },
   surveyMessageRefusal: {
     fr: "Vous avez refusé de répondre à l’enquête.",
@@ -86,6 +86,26 @@ const dictionary = {
   accessSurvey: {
     fr: "Accéder au questionnaire",
     en: "Access the survey",
+  },
+  searchBySurveyName: {
+    fr: "Enquêtes",
+    en: "Surveys",
+  },
+  searchByStatus: {
+    fr: "Statuts",
+    en: "Status",
+  },
+  searchByStringLabel: {
+    fr: "Rechercher",
+    en: "Search",
+  },
+  searchByStringPlaceholder: {
+    fr: "Filter par UE, enquêtes...",
+    en: "Filter by SU, surveys...",
+  },
+  noSurveys: {
+    fr: "Vous n'avez aucune enquête.",
+    en: "You have no survey.",
   },
 };
 export default dictionary;

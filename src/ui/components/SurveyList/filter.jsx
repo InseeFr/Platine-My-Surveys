@@ -106,11 +106,9 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       );
 
       setSurveyFiltered(newSurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));
-      console.log(newSurveys);
       setPage(0);
     } else {
       setSurveyFiltered(mySurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));
-      console.log(mySurveys);
       setPage(0);
     }
   }, [filter, selectedSurveysFilter, selectedStatusFilter, mySurveys, setSurveyFiltered, setPage]);
@@ -134,16 +132,18 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       <Grid container spacing={2} sx={{ marginTop: "15px" }}>
         <Grid item xs={4}>
           <FormControl fullWidth sx={{ backgroundColor: "white" }}>
-            <InputLabel id="demo-multiple-chip-label">Enquêtes</InputLabel>
+            <InputLabel id="demo-multiple-chip-label">{surveyDictionary.searchBySurveyName}</InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               variant="standard"
-              label="Enquêtes"
+              label={surveyDictionary.searchBySurveyName}
               multiple
               value={selectedSurveysFilter}
               onChange={handleChangeFilterSurvey}
-              input={<OutlinedInput id="select-multiple-chip" label="Enquêtes" />}
+              input={
+                <OutlinedInput id="select-multiple-chip" label={surveyDictionary.searchBySurveys} />
+              }
               renderValue={selected => selected.join(", ")}
             >
               {surveysList.map(name => (
@@ -167,16 +167,16 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
         </Grid>
         <Grid item xs={4}>
           <FormControl fullWidth sx={{ backgroundColor: "white" }}>
-            <InputLabel id="demo-multiple-chip-label">Statut</InputLabel>
+            <InputLabel id="demo-multiple-chip-label">{surveyDictionary.searchByStatus}</InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               variant="standard"
-              label="Statut"
+              label={surveyDictionary.searchByStatus}
               multiple
               value={selectedStatusFilter}
               onChange={handleChangeFilterStatus}
-              input={<OutlinedInput id="select-multiple-chip" label="Statut" />}
+              input={<OutlinedInput id="select-multiple-chip" label={surveyDictionary.searchByStatus} />}
               renderValue={selected => selected.join(", ")}
             >
               {status.map(name => (
@@ -212,8 +212,8 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
               fullWidth
               id="filter"
               value={filter}
-              label="Rechercher"
-              placeholder="Filtrer par UE, enquêtes ...."
+              label={surveyDictionary.searchByStringLabel}
+              placeholder={surveyDictionary.searchByStringPlaceholder}
               onChange={handleChangeFilter}
             />
           </FormControl>
