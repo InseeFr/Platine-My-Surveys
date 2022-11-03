@@ -14,6 +14,12 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { filterSurveys, getSurveyStatus } from "core/functions";
 import { surveyDictionary } from "i18n";
+import {
+  VALINT_QUESTIONING,
+  VALPAP_QUESTIONING,
+  HC_QUESTIONING,
+  REFUSAL_QUESTIONING,
+} from "core/constants";
 
 export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
   const [filter, setFilter] = useState("");
@@ -32,7 +38,12 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
     surveyDictionary.surveyClosing,
     surveyDictionary.surveyClosed,
   ];
-  const lowOrderQuestioningStatus = ["VALINT", "VALPAP", "REFUSAL", "HC"];
+  const lowOrderQuestioningStatus = [
+    VALINT_QUESTIONING,
+    VALPAP_QUESTIONING,
+    REFUSAL_QUESTIONING,
+    HC_QUESTIONING,
+  ];
 
   const sortByQuestioningStatusBySurveyStatusByReturnDate = (a, b) => {
     if (
@@ -106,6 +117,7 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
       );
 
       setSurveyFiltered(newSurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));
+
       setPage(0);
     } else {
       setSurveyFiltered(mySurveys.sort(sortByQuestioningStatusBySurveyStatusByReturnDate));

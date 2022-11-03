@@ -21,22 +21,22 @@ export const getSurveyStatus = (openingDate, closingDate, returnDate) => {
   if (isFuture(new Date(openingDate))) {
     status = surveyDictionary.surveyIncoming;
     colorChip = "primary";
-    toolTip = " n'a pas encore démarrée";
+    toolTip = surveyDictionary.surveyIncomingTooltip;
   }
   if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
     status = surveyDictionary.surveyOpen;
     colorChip = "success";
-    toolTip = " est ouverte";
+    toolTip = surveyDictionary.surveyOpenTooltip;
   }
   if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
     status = surveyDictionary.surveyClosing;
     colorChip = "warning";
-    toolTip = " est en cours de fermeture";
+    toolTip = surveyDictionary.surveyClosingTooltip;
   }
   if (isPast(new Date(closingDate))) {
     status = surveyDictionary.surveyClosed;
     colorChip = "error";
-    toolTip = " est fermée";
+    toolTip = surveyDictionary.surveyClosedTooltip;
   }
   return { status, colorChip, toolTip };
 };

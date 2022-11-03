@@ -18,20 +18,20 @@ const dictionary = {
     en: "Open",
   },
   surveyClosedTooltip: {
-    fr: "",
-    en: "",
+    fr: " est fermée.",
+    en: " is closed.",
   },
   surveyClosingTooltip: {
-    fr: id => ``,
-    en: id => ``,
+    fr: " est en cours de fermeture.",
+    en: " is closing.",
   },
   surveyIncomingTooltip: {
-    fr: "",
-    en: "",
+    fr: " n'est pas encore ouverte.",
+    en: "is coming.",
   },
   surveyOpenTooltip: {
-    fr: "",
-    en: "",
+    fr: " est ouverte.",
+    en: " is open.",
   },
   surveyMessagePartielIntOpen: {
     fr: date => `Compléter vos réponses avant le ${format(new Date(date), "dd/MM/yyyy")}`,
@@ -70,6 +70,12 @@ const dictionary = {
     en: date => `Reply from the ${format(new Date(date), "dd/MM/yyyy")}`,
   },
   surveyMessageOpen: {
+    fr: date =>
+      `Il vous reste ${differenceInDays(new Date(date), new Date())} jours pour répondre à l’enquête.`,
+    en: date =>
+      `You have ${differenceInDays(new Date(date), new Date())} days left to complete the survey.`,
+  },
+  surveyMessageClosing: {
     fr: date =>
       `Il vous reste ${differenceInDays(new Date(date), new Date())} jours pour répondre à l’enquête.`,
     en: date =>

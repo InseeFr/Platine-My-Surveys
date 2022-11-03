@@ -5,6 +5,7 @@ import { useAPI } from "../../../core/hooks";
 import { SmartList } from "./smartList";
 import { UserAccountContext } from "ui/context/UserAccount";
 import { menuDictionary, surveyDictionary } from "../../../i18n";
+import "./surveyList.css";
 
 export const SurveyList = () => {
   const { user, setUser } = useContext(UserAccountContext);
