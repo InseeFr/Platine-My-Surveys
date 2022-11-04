@@ -16,7 +16,7 @@ const mockGetMySurveys = () => () => async () => {
 };
 
 const getMySurveys = apiUrl => id => async token => {
-  return getRequest(`${apiUrl}/mySurveys/${id}`)(null)(token);
+  return getRequest(`${apiUrl}/api/my-questionings/${id}`)(null)(token);
 };
 
 const getContacts = apiUrl => async token => {

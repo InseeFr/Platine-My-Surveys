@@ -5,6 +5,7 @@ import buttonMessage from "./buttonDictionary";
 import mainMenuMessage from "./mainMenuDictionary";
 import notifMessage from "./notifDictionary";
 import formMessage from "./formDictionary";
+import surveyMessage from "./surveyDictionary";
 
 const language = getLang();
 
@@ -14,3 +15,4 @@ export const defaultDictionary = createDictionary(language)(dictionary);
 export const menuDictionary = createDictionary(language)(mainMenuMessage);
 export const notifDictionary = createDictionary(language)(notifMessage);
 export const formDictionary = createDictionary(language)(formMessage);
+export const surveyDictionary = createDictionary(language)(surveyMessage);

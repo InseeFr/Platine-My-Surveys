@@ -1,14 +1,67 @@
-import { ContentPasteGo, ListAlt } from "@mui/icons-material";
-import { Chip, Grid, Grow, IconButton, Link, Paper, Typography } from "@mui/material";
-import { format, isFuture } from "date-fns";
+import { Chip, Grid, Grow, Paper, Typography, Tooltip } from "@mui/material";
+import { isFuture, isPast } from "date-fns";
+import { getSurveyStatus } from "../../../../core/functions";
+import { surveyDictionary } from "i18n";
+import { ItemIcon } from "./itemIcon";
+import {
+  VALINT_QUESTIONING,
+  VALPAP_QUESTIONING,
+  PARTIELINT_QUESTIONING,
+  HC_QUESTIONING,
+  REFUSAL_QUESTIONING,
+} from "core/constants";
 
 export const SurveyItem = ({ survey, index }) => {
-  const { surveyUnitId, surveyWording, monitoringDate /*, accessUrl*/ } = survey;
+  const {
+    identificationCode,
+    surveyWording,
+    openingDate,
+    closingDate,
+    returnDate,
+    questioningStatus,
+    questioningDate /*, accessUrl*/,
+  } = survey;
 
-  const surveyOpen = isFuture(new Date(monitoringDate));
+  const getMessageDisplay = () => {
+    var message;
+    switch (questioningStatus) {
+      case PARTIELINT_QUESTIONING:
+        message =
+          isPast(new Date(openingDate)) && isFuture(new Date(returnDate))
+            ? surveyDictionary.surveyMessagePartielIntOpen(returnDate)
+            : surveyDictionary.surveyMessagePartielIntNotOpen;
+        break;
+      case HC_QUESTIONING:
+        message = surveyDictionary.surveyMessageHC;
+        break;
+      case VALPAP_QUESTIONING:
+        message = surveyDictionary.surveyMessageValPap(questioningDate);
+        break;
+      case VALINT_QUESTIONING:
+        message = surveyDictionary.surveyMessageValInt(questioningDate);
+        break;
+      case REFUSAL_QUESTIONING:
+        message = surveyDictionary.surveyMessageRefusal;
+        break;
+      default:
+        if (isFuture(new Date(openingDate))) {
+          message = surveyDictionary.surveyMessageIncoming(openingDate);
+        }
+        if (isPast(new Date(openingDate)) && isFuture(new Date(returnDate))) {
+          message = surveyDictionary.surveyMessageOpen(returnDate);
+        }
+        if (isPast(new Date(returnDate)) && isFuture(new Date(closingDate))) {
+          message = surveyDictionary.surveyMessageClosing(closingDate);
+        }
 
-  const labelChip = surveyOpen ? "Ouverte" : "Fermée";
-  const colorChip = surveyOpen ? "success" : "error";
+        if (isPast(new Date(closingDate))) {
+          message = surveyDictionary.surveyMessageClosed(returnDate);
+        }
+        break;
+    }
+    return message;
+  };
+
   return (
     <Grow
       in
@@ -26,48 +79,58 @@ export const SurveyItem = ({ survey, index }) => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item>
-            <IconButton aria-label="Accéder au questionnaire">
-              <ListAlt />
-            </IconButton>
-          </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs={7} container direction="column" spacing={2}>
+            <Grid
+              item
+              xs={3}
+              md={2}
+              sm={2}
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Tooltip
+                title={`${surveyWording} ${
+                  getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                }`}
+              >
+                <Chip
+                  aria-label={`${surveyWording} ${
+                    getSurveyStatus(openingDate, closingDate, returnDate).toolTip
+                  }`}
+                  label={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                  color={getSurveyStatus(openingDate, closingDate, returnDate).colorChip}
+                />
+              </Tooltip>
+            </Grid>
+            <Grid item xs={5} container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1" component="div">
                   {surveyWording}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  <b>{"Référence UE : "}</b>
-                  {surveyUnitId}
+                  <b>{surveyDictionary.suIdentifier}</b>
+                  {identificationCode}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {`Réponse attendu avant le ${format(new Date(monitoringDate), "dd/MM/yyyy")}`}
+                  {getMessageDisplay()}
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={5} container direction="column" sx={{ textAlign: "right" }}>
+            <Grid
+              item
+              xs={4}
+              container
+              direction="column"
+              sx={{ textAlign: "right" }}
+              justifyContent="center"
+            >
               <Grid item>
-                {surveyOpen && (
-                  <Link
-                    href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <IconButton aria-label="Accéder au questionnaire">
-                      <ContentPasteGo />
-                    </IconButton>
-                  </Link>
-                )}
-                {!surveyOpen && (
-                  <IconButton aria-label="Accéder au questionnaire" disabled>
-                    <ContentPasteGo />
-                  </IconButton>
-                )}
-
-                <Grid item>
-                  <Chip label={labelChip} color={colorChip} />
-                </Grid>
+                <ItemIcon
+                  status={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                  questioningStatus={questioningStatus}
+                />
               </Grid>
             </Grid>
           </Grid>

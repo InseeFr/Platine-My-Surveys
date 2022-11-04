@@ -1,14 +1,16 @@
 import { AccountCircle, ContactSupport, Logout } from "@mui/icons-material";
 import { Button, Divider, ListItem, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { AuthContext } from "ui/context/auth/provider";
+import { AppContext } from "App";
 import { UserAccountContext } from "ui/context/UserAccount";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "@mui/material/Link";
 import { defaultDictionary, buttonDictionary } from "i18n";
 import "./header.css";
 
 export const Header = () => {
   const { logout } = useContext(AuthContext);
+  const { portailUrl } = useContext(AppContext);
   const { user } = useContext(UserAccountContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -20,7 +22,10 @@ export const Header = () => {
   };
   return (
     <div className="header">
-      <img src={`${process.env.PUBLIC_URL}/logo-proto.png`} alt="alt" />
+      <img
+        src={`${process.env.PUBLIC_URL}/img/logo-marianne.png`}
+        alt="Marianne de la République française"
+      />
 
       <h1>{defaultDictionary.appTitle}</h1>
       <div className="kfc" style={{ borderLeft: "1px solid #3467ae" }}>
@@ -72,14 +77,19 @@ export const Header = () => {
         >
           <ListItem>{`${user.lastName} ${user.firstName}`}</ListItem>
           <Divider />
-          <Link to="/portail">
-            <MenuItem>
-              <ListItemIcon>
-                <ContactSupport fontSize="small" />
-              </ListItemIcon>
-              {buttonDictionary.help}
-            </MenuItem>
-          </Link>
+
+          <MenuItem
+            component={Link}
+            href={`${portailUrl}/aqv/contacter-assistance`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ListItemIcon>
+              <ContactSupport fontSize="small" />
+            </ListItemIcon>
+            {buttonDictionary.help}
+          </MenuItem>
+
           <MenuItem onClick={logout}>
             <ListItemIcon>
               <Logout fontSize="small" />

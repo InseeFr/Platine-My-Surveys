@@ -4,7 +4,8 @@ import { Typography } from "@mui/material";
 import { useAPI } from "../../../core/hooks";
 import { SmartList } from "./smartList";
 import { UserAccountContext } from "ui/context/UserAccount";
-import { menuDictionary} from "../../../i18n";
+import { menuDictionary, surveyDictionary } from "../../../i18n";
+import "./surveyList.css";
 
 export const SurveyList = () => {
   const { user, setUser } = useContext(UserAccountContext);
@@ -27,7 +28,7 @@ export const SurveyList = () => {
         {user.mySurveys && user.mySurveys.length > 0 && <SmartList mySurveys={user.mySurveys} />}
 
         {user.mySurveys && user.mySurveys.length === 0 && (
-          <Typography>{`Vous n'avez aucune enquête.`}</Typography>
+          <Typography>{surveyDictionary.noSurveys}</Typography>
         )}
         {!user.mySurveys && <Typography>Chargement en cours ...</Typography>}
       </div>
