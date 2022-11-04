@@ -2,8 +2,7 @@ import { TextField, Box } from "@mui/material";
 import { formDictionary } from "i18n";
 
 export const PersonalDataDisplay = ({ user }) => {
-  const { lastName, firstName, phone } = user;
-  const fonction = user.function;
+  const { lastName, firstName, phone, function: userFunction } = user;
 
   return (
     <Box
@@ -31,7 +30,7 @@ export const PersonalDataDisplay = ({ user }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.personalDataFunction}
-          value={`${fonction}`}
+          value={`${userFunction}`}
           InputProps={{
             readOnly: true,
           }}

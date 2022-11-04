@@ -1,5 +1,6 @@
 import { isFuture, isPast } from "date-fns";
 import { surveyDictionary } from "i18n";
+import { lowOrderQuestioningStatus, statusOrder } from "./filterConstants";
 
 export const chunkArray = (myArray, chunk_size) => {
   var results = [];
@@ -35,7 +36,7 @@ export const getSurveyStatus = (openingDate, closingDate, returnDate) => {
   }
   if (isPast(new Date(closingDate))) {
     status = surveyDictionary.surveyClosed;
-    colorChip = "error";
+    colorChip = "default";
     toolTip = surveyDictionary.surveyClosedTooltip;
   }
   return { status, colorChip, toolTip };
@@ -52,4 +53,39 @@ export const filterSurveys = (surveys, filterStr, surveysList, statusList) => {
         : true)
     );
   });
+};
+
+export const sortByQuestioningStatusBySurveyStatusByReturnDate = (a, b) => {
+  if (
+    !lowOrderQuestioningStatus.includes(a.questioningStatus) &&
+    lowOrderQuestioningStatus.includes(b.questioningStatus)
+  ) {
+    return -1;
+  }
+  if (
+    lowOrderQuestioningStatus.includes(a.questioningStatus) &&
+    !lowOrderQuestioningStatus.includes(b.questioningStatus)
+  ) {
+    return 1;
+  }
+  if (
+    statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status) <
+    statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status)
+  ) {
+    return -1;
+  }
+  if (
+    statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status) <
+    statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status)
+  ) {
+    return 1;
+  }
+  if (a.returnDate < b.returnDate) {
+    return -1;
+  }
+  if (b.returnDate < a.returnDate) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
 };

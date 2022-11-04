@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Portail Mes Enquêtes",
+  "name": "Portail de réponse aux enquêtes de la statistique publique",
   "icons": [
     {
       "src": "favicon.ico",

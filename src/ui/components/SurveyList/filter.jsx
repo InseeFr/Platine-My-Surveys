@@ -12,73 +12,16 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { filterSurveys, getSurveyStatus } from "core/functions";
+import { filterSurveys } from "core/functions";
 import { surveyDictionary } from "i18n";
-import {
-  VALINT_QUESTIONING,
-  VALPAP_QUESTIONING,
-  HC_QUESTIONING,
-  REFUSAL_QUESTIONING,
-} from "core/constants";
+import { status } from "core/filterConstants";
+import { sortByQuestioningStatusBySurveyStatusByReturnDate } from "core/functions";
 
 export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
   const [filter, setFilter] = useState("");
   const [selectedSurveysFilter, setSelectedSurveysFilter] = useState([]);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState([]);
 
-  const statusOrder = [
-    surveyDictionary.surveyClosing,
-    surveyDictionary.surveyOpen,
-    surveyDictionary.surveyIncoming,
-    surveyDictionary.surveyClosed,
-  ];
-  const status = [
-    surveyDictionary.surveyIncoming,
-    surveyDictionary.surveyOpen,
-    surveyDictionary.surveyClosing,
-    surveyDictionary.surveyClosed,
-  ];
-  const lowOrderQuestioningStatus = [
-    VALINT_QUESTIONING,
-    VALPAP_QUESTIONING,
-    REFUSAL_QUESTIONING,
-    HC_QUESTIONING,
-  ];
-
-  const sortByQuestioningStatusBySurveyStatusByReturnDate = (a, b) => {
-    if (
-      !lowOrderQuestioningStatus.includes(a.questioningStatus) &&
-      lowOrderQuestioningStatus.includes(b.questioningStatus)
-    ) {
-      return -1;
-    }
-    if (
-      lowOrderQuestioningStatus.includes(a.questioningStatus) &&
-      !lowOrderQuestioningStatus.includes(b.questioningStatus)
-    ) {
-      return 1;
-    }
-    if (
-      statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status) <
-      statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status)
-    ) {
-      return -1;
-    }
-    if (
-      statusOrder.indexOf(getSurveyStatus(b.openingDate, b.closingDate, b.returnDate).status) <
-      statusOrder.indexOf(getSurveyStatus(a.openingDate, a.closingDate, a.returnDate).status)
-    ) {
-      return 1;
-    }
-    if (a.returnDate < b.returnDate) {
-      return -1;
-    }
-    if (b.returnDate < a.returnDate) {
-      return 1;
-    }
-    // a must be equal to b
-    return 0;
-  };
   const [surveysList] = useState(
     mySurveys
       .reduce((_, { surveyWording }) => {
@@ -179,16 +122,23 @@ export const SmartFilter = ({ mySurveys, setSurveyFiltered, setPage }) => {
         </Grid>
         <Grid item xs={4}>
           <FormControl fullWidth sx={{ backgroundColor: "white" }}>
-            <InputLabel id="demo-multiple-chip-label">{surveyDictionary.searchByStatus}</InputLabel>
+            <InputLabel id="demo-multiple-chip-status-label">
+              {surveyDictionary.searchByStatus}
+            </InputLabel>
             <Select
-              labelId="demo-multiple-chip-label"
-              id="demo-multiple-chip"
+              labelId="demo-multiple-chip-status-label"
+              id="demo-multiple-chip-status"
               variant="standard"
               label={surveyDictionary.searchByStatus}
               multiple
               value={selectedStatusFilter}
               onChange={handleChangeFilterStatus}
-              input={<OutlinedInput id="select-multiple-chip" label={surveyDictionary.searchByStatus} />}
+              input={
+                <OutlinedInput
+                  id="select-multiple-chip-status"
+                  label={surveyDictionary.searchByStatus}
+                />
+              }
               renderValue={selected => selected.join(", ")}
             >
               {status.map(name => (

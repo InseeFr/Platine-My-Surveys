@@ -84,12 +84,10 @@ export const Header = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Link>
-              <ListItemIcon>
-                <ContactSupport fontSize="small" />
-              </ListItemIcon>
-              {buttonDictionary.help}
-            </Link>
+            <ListItemIcon>
+              <ContactSupport fontSize="small" />
+            </ListItemIcon>
+            {buttonDictionary.help}
           </MenuItem>
 
           <MenuItem onClick={logout}>

@@ -1,11 +1,8 @@
-import { ContentPasteGo } from "@mui/icons-material";
-import { Chip, Grid, Grow, Button, Link, Paper, Typography, Tooltip } from "@mui/material";
+import { Chip, Grid, Grow, Paper, Typography, Tooltip } from "@mui/material";
 import { isFuture, isPast } from "date-fns";
 import { getSurveyStatus } from "../../../../core/functions";
-import CloseIcon from "@mui/icons-material/Close";
-import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { surveyDictionary } from "i18n";
+import { ItemIcon } from "./itemIcon";
 import {
   VALINT_QUESTIONING,
   VALPAP_QUESTIONING,
@@ -63,47 +60,6 @@ export const SurveyItem = ({ survey, index }) => {
         break;
     }
     return message;
-  };
-
-  const getLogoType = () => {
-    if (
-      getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyIncoming
-    ) {
-      return <HourglassEmptyIcon />;
-    }
-    if (questioningStatus === VALINT_QUESTIONING || questioningStatus === VALPAP_QUESTIONING) {
-      return <CheckCircleIcon />;
-    }
-    if (
-      questioningStatus === HC_QUESTIONING ||
-      questioningStatus === REFUSAL_QUESTIONING ||
-      getSurveyStatus(openingDate, closingDate, returnDate).status === surveyDictionary.surveyClosed
-    ) {
-      return <CloseIcon />;
-    }
-    if (
-      getSurveyStatus((openingDate, closingDate, returnDate).status === surveyDictionary.surveyOpen) ||
-      getSurveyStatus((openingDate, closingDate, returnDate).status === surveyDictionary.surveyClosing)
-    ) {
-      return (
-        <Link
-          href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Button
-            aria-label={surveyDictionary.accessSurvey}
-            sx={{ textTransform: "none" }}
-            variant="contained"
-            endIcon={<ContentPasteGo />}
-          >
-            <Typography>{surveyDictionary.accessSurvey}</Typography>
-          </Button>
-        </Link>
-      );
-    }
-
-    return "nothing";
   };
 
   return (
@@ -170,7 +126,12 @@ export const SurveyItem = ({ survey, index }) => {
               sx={{ textAlign: "right" }}
               justifyContent="center"
             >
-              <Grid item>{getLogoType()}</Grid>
+              <Grid item>
+                <ItemIcon
+                  status={getSurveyStatus(openingDate, closingDate, returnDate).status}
+                  questioningStatus={questioningStatus}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
