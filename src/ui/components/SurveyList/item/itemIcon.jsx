@@ -29,7 +29,7 @@ export const ItemIcon = ({ status, questioningStatus }) => {
     if (status === surveyDictionary.surveyOpen || status === surveyDictionary.surveyClosing) {
       return (
         <Link
-          href="https://stromae-v2.dev.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
+          href="https://stromae-v2.demo.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
           target="_blank"
           rel="noreferrer"
         >
