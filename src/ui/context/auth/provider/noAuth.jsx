@@ -71,8 +71,8 @@ export const NoAuthLogin = ({ setOidcClient }) => {
   const chooseUser = type => {
     if (type) {
       const { identifier } = contacts[selected];
-      login(identifier.toUpperCase());
-    } else if (!type) login(idSelected.toUpperCase());
+      login(identifier?.toUpperCase());
+    } else if (!type) login(idSelected?.toUpperCase());
   };
 
   return (
