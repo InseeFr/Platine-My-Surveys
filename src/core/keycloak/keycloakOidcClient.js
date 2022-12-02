@@ -18,7 +18,7 @@ export const createKeycloakOidcClient = async ({ url, realm, clientId, evtUserAc
 
   const loadUserInfo = async () => {
     const userInfo = await keycloakInstance.loadUserInfo();
-    return { ...userInfo, id: userInfo?.preferred_username.toUpperCase() };
+    return { ...userInfo, id: userInfo?.preferred_username?.toUpperCase() };
   };
   if (!isAuthenticated) {
     return {
