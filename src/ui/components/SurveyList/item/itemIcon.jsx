@@ -28,16 +28,17 @@ export const ItemIcon = ({ status, questioningStatus, accessUrl }) => {
     }
     if (status === surveyDictionary.surveyOpen || status === surveyDictionary.surveyClosing) {
       return (
-        <Link href={accessUrl} target="_blank" rel="noreferrer">
-          <Button
-            aria-label={surveyDictionary.accessSurvey}
-            sx={{ textTransform: "none" }}
-            variant="contained"
-            endIcon={<ContentPasteGo />}
-          >
-            <Typography>{surveyDictionary.accessSurvey}</Typography>
-          </Button>
-        </Link>
+        <Button
+          aria-label={surveyDictionary.accessSurvey}
+          sx={{ textTransform: "none" }}
+          variant="contained"
+          href={accessUrl}
+          target="_blank"
+          endIcon={<ContentPasteGo />}
+          rel="noreferrer"
+        >
+          <Typography>{surveyDictionary.accessSurvey}</Typography>
+        </Button>
       );
     }
 
