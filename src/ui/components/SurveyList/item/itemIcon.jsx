@@ -9,7 +9,7 @@ import {
   REFUSAL_QUESTIONING,
 } from "core/constants";
 import { surveyDictionary } from "i18n";
-import { Link, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 export const ItemIcon = ({ status, questioningStatus, accessUrl }) => {
   const getLogoType = () => {
