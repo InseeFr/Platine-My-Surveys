@@ -1,10 +1,17 @@
+import { AppContext } from "App";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./footer.css";
 
 export const Footer = () => {
+  const { appVersion } = useContext(AppContext);
+
   return (
     <nav className="footer">
       <ul>
+        <li>
+          <li>{`Version ${appVersion}`}</li>
+        </li>
         <li>
           <Link to="/security">Sécurité</Link>
         </li>
