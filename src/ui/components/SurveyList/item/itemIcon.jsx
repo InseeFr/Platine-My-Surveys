@@ -1,17 +1,18 @@
+import { ContentPasteGo } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { ContentPasteGo } from "@mui/icons-material";
+import { Button, Typography } from "@mui/material";
 import {
-  VALINT_QUESTIONING,
-  VALPAP_QUESTIONING,
   HC_QUESTIONING,
   REFUSAL_QUESTIONING,
+  VALINT_QUESTIONING,
+  VALPAP_QUESTIONING,
 } from "core/constants";
 import { surveyDictionary } from "i18n";
-import { Link, Button, Typography } from "@mui/material";
+import "./itemIcon.css";
 
-export const ItemIcon = ({ status, questioningStatus }) => {
+export const ItemIcon = ({ surveyWording, status, questioningStatus }) => {
   const getLogoType = () => {
     if (status === surveyDictionary.surveyIncoming) {
       return <HourglassEmptyIcon />;
@@ -28,20 +29,18 @@ export const ItemIcon = ({ status, questioningStatus }) => {
     }
     if (status === surveyDictionary.surveyOpen || status === surveyDictionary.surveyClosing) {
       return (
-        <Link
+        <Button
+          aria-label={`${surveyDictionary.accessSurvey} ${surveyWording}`}
+          sx={{ textTransform: "none" }}
+          className="go-to-questionnaire"
+          variant="contained"
           href="https://stromae-v2.demo.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
           target="_blank"
           rel="noreferrer"
+          endIcon={<ContentPasteGo />}
         >
-          <Button
-            aria-label={surveyDictionary.accessSurvey}
-            sx={{ textTransform: "none" }}
-            variant="contained"
-            endIcon={<ContentPasteGo />}
-          >
-            <Typography>{surveyDictionary.accessSurvey}</Typography>
-          </Button>
-        </Link>
+          <Typography>{surveyDictionary.accessSurvey}</Typography>
+        </Button>
       );
     }
 
