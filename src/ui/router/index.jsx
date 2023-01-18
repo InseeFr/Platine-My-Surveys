@@ -21,13 +21,13 @@ export const Router = () => {
                 <div className="main-content">
                   <Header />
                   <Menu />
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box>
                     <div className="main-body">
                       <Outlet />
                     </div>
-                    <Footer />
                   </Box>
                 </div>
+                <Footer />
               </UserAccountProvider>
             </ProtectedRoute>
           }

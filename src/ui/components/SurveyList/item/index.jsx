@@ -123,8 +123,8 @@ export const SurveyItem = ({ survey, index }) => {
               spacing={1}
               container
               direction="column"
-              sx={{ textAlign: "right" }}
               justifyContent="center"
+              alignItems="end"
             >
               <Grid item>
                 <ItemIcon

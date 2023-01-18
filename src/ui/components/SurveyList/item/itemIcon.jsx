@@ -10,6 +10,7 @@ import {
   VALPAP_QUESTIONING,
 } from "core/constants";
 import { surveyDictionary } from "i18n";
+import "./itemIcon.css";
 
 export const ItemIcon = ({ status, surveyWording, questioningStatus, accessUrl }) => {
   const getLogoType = () => {
