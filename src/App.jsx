@@ -12,6 +12,8 @@ const App = () => {
   const [configuration, setConfiguration] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [notif, setNotif] = useState({ open: false, severity: "info", message: "" });
+  const packageInfo = require("../package.json");
+  const appVersion = packageInfo?.version;
 
   const openNotif = ({ message, severity }) => {
     setNotif({ open: true, message, severity });
@@ -37,7 +39,10 @@ const App = () => {
     setNotif(oldNotif => ({ ...oldNotif, open: false }));
   };
 
-  const context = useMemo(() => ({ ...configuration, setLoading, openNotif }), [configuration]);
+  const context = useMemo(
+    () => ({ ...configuration, appVersion, setLoading, openNotif }),
+    [configuration],
+  );
 
   return (
     <>

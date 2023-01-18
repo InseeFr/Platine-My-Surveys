@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: dc-ui
-          image: inseefr/coleman-my-surveys:0.2.8-rc
+          image: inseefr/coleman-my-surveys:0.2.10-rc

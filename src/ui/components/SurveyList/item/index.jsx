@@ -19,7 +19,8 @@ export const SurveyItem = ({ survey, index }) => {
     closingDate,
     returnDate,
     questioningStatus,
-    questioningDate /*, accessUrl*/,
+    questioningDate,
+    accessUrl,
   } = survey;
 
   const getMessageDisplay = () => {
@@ -130,6 +131,7 @@ export const SurveyItem = ({ survey, index }) => {
                   status={getSurveyStatus(openingDate, closingDate, returnDate).status}
                   questioningStatus={questioningStatus}
                   surveyWording={surveyWording}
+                  accessUrl={accessUrl}
                 />
               </Grid>
               <Grid item>

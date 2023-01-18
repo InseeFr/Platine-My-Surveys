@@ -10,9 +10,8 @@ import {
   VALPAP_QUESTIONING,
 } from "core/constants";
 import { surveyDictionary } from "i18n";
-import "./itemIcon.css";
 
-export const ItemIcon = ({ surveyWording, status, questioningStatus }) => {
+export const ItemIcon = ({ status, surveyWording, questioningStatus, accessUrl }) => {
   const getLogoType = () => {
     if (status === surveyDictionary.surveyIncoming) {
       return <HourglassEmptyIcon />;
@@ -34,10 +33,10 @@ export const ItemIcon = ({ surveyWording, status, questioningStatus }) => {
           sx={{ textTransform: "none" }}
           className="go-to-questionnaire"
           variant="contained"
-          href="https://stromae-v2.demo.insee.io/visualize?questionnaire=https%3A%2F%2Fpogues-back-office.dev.insee.io%2Fapi%2Fpersistence%2Fquestionnaire%2Fjson-lunatic%2Fkzqsw3qa-q-0-1647855585412"
+          href={accessUrl}
           target="_blank"
-          rel="noreferrer"
           endIcon={<ContentPasteGo />}
+          rel="noreferrer"
         >
           <Typography>{surveyDictionary.accessSurvey}</Typography>
         </Button>
