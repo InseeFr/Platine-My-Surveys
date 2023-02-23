@@ -15,11 +15,9 @@ import { UserAccountContext } from "../../context/UserAccount";
 import { FirstConnectForm } from "./firstConnect";
 
 export const UserAccount = () => {
-  const {
-    isFirstConnect: { firstConnect },
-  } = useContext(UserAccountContext);
+  const { user } = useContext(UserAccountContext);
 
-  const [openFirstConnectForm, setOpenFirstConnectForm] = useState(firstConnect);
+  const [openFirstConnectForm, setOpenFirstConnectForm] = useState(user.firstConnect);
 
   const closeFirstConnectForm = () => {
     setOpenFirstConnectForm(false);
