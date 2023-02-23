@@ -13,7 +13,7 @@ import { UserAccountContext } from "../../context/UserAccount";
 import { buttonDictionary } from "i18n";
 
 export const FirstConnectForm = ({ open, close }) => {
-  const { mySurveys } = useContext(UserAccountContext);
+  const { user } = useContext(UserAccountContext);
 
   const handleClose = () => {
     //PUT User with first connect false ou POST contact event
@@ -40,7 +40,7 @@ export const FirstConnectForm = ({ open, close }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {mySurveys.length
+            {user.mySurveys.length > 0
               ? "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre à (l’/aux) enquête(s) via l’onglet “Mes Enquêtes”"
               : "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre à (l’/aux) enquête(s) via l’onglet “Mes Enquêtes”"}
           </DialogContentText>
