@@ -36,7 +36,7 @@ export const AddressForm = ({ open, close, address }) => {
   const onClose = () => {
     setFormValues(address);
     close();
-  }
+  };
 
   return (
     <>

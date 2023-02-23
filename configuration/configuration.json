@@ -1,6 +1,5 @@
 {
-  "authType": "${AUTHENTICATION_TYPE}",
-  "_authenticationType_comment_": "Authentication type : OIDC or NONE",
-  "apiUrl": "${API_URL}",
-  "portailUrl": "${PORTAIL_URL}"
+  "authType": "OIDC",
+  "apiUrl": "https://api-pilotage-enquetes.developpement.insee.fr",
+  "portailUrl": "https://enquetes.developpement.insee.fr"
 }

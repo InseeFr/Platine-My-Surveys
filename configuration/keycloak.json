@@ -1,8 +1,8 @@
 {
-  "realm": "${REALM}",
-  "auth-server-url": "${AUTH_URL}",
+  "realm": "questionnaire-particuliers",
+  "auth-server-url": "https://auth.insee.test/auth",
   "ssl-required": "none",
-  "resource": "${CLIENT_ID}",
+  "resource": "coleman-portal",
   "public-client": true,
   "confidential-port": 0
 }
