@@ -12,7 +12,9 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
+        <UserAccountProvider>
+          <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
+        </UserAccountProvider>
         <Route
           path="/portail"
           element={
