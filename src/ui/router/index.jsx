@@ -11,13 +11,13 @@ import { Menu } from "ui/shared/Menu";
 export const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
-        <Route
-          path="/portail"
-          element={
-            <ProtectedRoute>
-              <UserAccountProvider>
+      <UserAccountProvider>
+        <Routes>
+          <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
+          <Route
+            path="/portail"
+            element={
+              <ProtectedRoute>
                 <div className="main-content">
                   <Header />
                   <Menu />
@@ -28,16 +28,16 @@ export const Router = () => {
                     <Footer />
                   </Box>
                 </div>
-              </UserAccountProvider>
-            </ProtectedRoute>
-          }
-        >
-          <Route path="mes-enquetes" element={<SurveyList />} />
-          <Route path="mon-compte" element={<UserAccount />} />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="mes-enquetes" element={<SurveyList />} />
+            <Route path="mon-compte" element={<UserAccount />} />
+            <Route path="*" element={<Navigate to="/portail/mes-enquetes" />} />
+          </Route>
           <Route path="*" element={<Navigate to="/portail/mes-enquetes" />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/portail/mes-enquetes" />} />
-      </Routes>
+        </Routes>
+      </UserAccountProvider>
     </BrowserRouter>
   );
 };

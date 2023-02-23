@@ -8,15 +8,19 @@ import {
   IconButton,
   DialogContentText,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserAccountContext } from "../../context/UserAccount";
 import { buttonDictionary } from "i18n";
 
-export const FirstConnectForm = ({ open, close }) => {
-  const { user } = useContext(UserAccountContext);
+export const FirstConnectForm = ({ open, close, user }) => {
+  const { updateContact } = useContext(UserAccountContext);
+  const [formValues, setFormValues] = useState({ ...user });
 
   const handleClose = () => {
+    setFormValues({ ...formValues, firstConnect: false });
+    const modifiedContact = { ...formValues };
     //PUT User with first connect false ou POST contact event
+    //updateContact(modifiedContact);
     close();
   };
 
@@ -41,7 +45,7 @@ export const FirstConnectForm = ({ open, close }) => {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {user.mySurveys.length > 0
-              ? "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre à aux enquêtes via l’onglet “Mes Enquêtes”"
+              ? "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre aux enquêtes via l’onglet “Mes Enquêtes”"
               : "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre à l’ enquête via l’onglet “Mes Enquêtes”"}
           </DialogContentText>
         </DialogContent>

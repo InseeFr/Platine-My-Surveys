@@ -79,7 +79,7 @@ export const UserAccount = () => {
             </Grid>
           </Grid>
         </Box>
-        <FirstConnectForm open={openFirstConnectForm} close={closeFirstConnectForm} />
+        <FirstConnectForm open={openFirstConnectForm} close={closeFirstConnectForm} user={user} />
       </div>
     </>
   );
