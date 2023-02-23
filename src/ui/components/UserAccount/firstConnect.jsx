@@ -8,8 +8,7 @@ import {
   IconButton,
   DialogContentText,
 } from "@mui/material";
-import { useContext, useState } from "react";
-import { UserAccountContext } from "../../context/UserAccount";
+import { useState } from "react";
 import { buttonDictionary } from "i18n";
 
 export const FirstConnectForm = ({ open, close, user }) => {
