@@ -47,7 +47,9 @@ export const UserAccount = () => {
                       p: 2,
                     }}
                   >
-                    <Button>Modifier mon mot de passe - first connect is {"user.firstConnect"}</Button>
+                    <Button>
+                      Modifier mon mot de passe - first connect is {`${user.firstConnect}`}
+                    </Button>
                     <Button>Autres enquêtes liées à mon adresse de messagerie</Button>
                     <Button>
                       Vous avez reçu un nouveau compte que vous souhaitez associer au compte ?
