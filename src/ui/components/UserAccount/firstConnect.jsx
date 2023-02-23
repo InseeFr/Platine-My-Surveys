@@ -13,12 +13,12 @@ import { UserAccountContext } from "../../context/UserAccount";
 import { buttonDictionary } from "i18n";
 
 export const FirstConnectForm = ({ open, close, user }) => {
-  const { updateContact } = useContext(UserAccountContext);
+  //const { updateContact } = useContext(UserAccountContext);
   const [formValues, setFormValues] = useState({ ...user });
 
   const handleClose = () => {
     setFormValues({ ...formValues, firstConnect: false });
-    const modifiedContact = { ...formValues };
+    //const modifiedContact = { ...formValues };
     //PUT User with first connect false ou POST contact event
     //updateContact(modifiedContact);
     close();
