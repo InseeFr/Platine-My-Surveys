@@ -16,7 +16,7 @@ import { buttonDictionary } from "i18n";
 import { formDictionary } from "i18n";
 
 export const MailForm = ({ open, close, user }) => {
-  const { updateContact, updateContactContactEvent } = useContext(UserAccountContext);
+  const { updateContact } = useContext(UserAccountContext);
   const [confirmation, setConfirmation] = useState(false);
   const [formValues, setFormValues] = useState({ ...user });
 
@@ -40,13 +40,6 @@ export const MailForm = ({ open, close, user }) => {
     close();
     const modifiedContact = { ...formValues };
     updateContact(modifiedContact);
-    const newContactEvent = {
-      identifier: user.id,
-      type: "update",
-      eventDate: new Date().toISOString(),
-    };
-    console.log(newContactEvent);
-    updateContactContactEvent(newContactEvent);
   };
   const onClose = () => {
     setFormValues(user);

@@ -69,22 +69,6 @@ export const UserAccountProvider = ({ children }) => {
     }
     setLoading(false);
   };
-  const updateContactContactEvent = async newContactEvent => {
-    setLoading(true);
-    const { error } = await postContactEvent(newContactEvent);
-    if (!error) {
-      openNotif({
-        severity: SUCCESS_SEVERITY,
-        message: notifDictionary.addressChangeConfirmation,
-      });
-    } else {
-      openNotif({
-        severity: ERROR_SEVERITY,
-        message: notifDictionary.addressChangeError,
-      });
-    }
-    setLoading(false);
-  };
 
   const updateContact = async modifiedContact => {
     setLoading(true);
@@ -122,7 +106,6 @@ export const UserAccountProvider = ({ children }) => {
         updateAddress,
         updateContact,
         updateFirstConnect,
-        updateContactContactEvent,
       }}
     >
       {user && children}

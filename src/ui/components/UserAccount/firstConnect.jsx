@@ -20,8 +20,8 @@ export const FirstConnectForm = ({ open, close, user }) => {
       identifier: user.id,
       type: "firstConnect",
       eventDate: new Date().toISOString(),
+      payload: { "source": "MySurveys IHM" },
     };
-    console.log(newContactEvent);
     updateFirstConnect(newContactEvent);
     close();
     close;
