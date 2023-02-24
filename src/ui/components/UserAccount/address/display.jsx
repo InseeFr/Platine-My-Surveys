@@ -2,7 +2,7 @@ import { TextField, Box } from "@mui/material";
 import { formDictionary } from "i18n";
 
 export const AddressDisplay = ({ address }) => {
-  const { streetNumber, streetName, zipCode, city, countryName } = address;
+  const { streetNumber, streetName, zipCode, cityName, countryName } = address;
 
   return (
     <Box
@@ -38,7 +38,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressCity}
-          value={`${city}`}
+          value={`${cityName}`}
           InputProps={{
             readOnly: true,
           }}

@@ -91,8 +91,8 @@ export const AddressForm = ({ open, close, address }) => {
               label={formDictionary.addressCity}
               fullWidth
               variant="standard"
-              value={formValues.city}
-              onChange={onChange("city")}
+              value={formValues.cityName}
+              onChange={onChange("cityName")}
             />
             <TextField
               className="name-form"
