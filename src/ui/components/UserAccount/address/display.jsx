@@ -2,7 +2,20 @@ import { TextField, Box } from "@mui/material";
 import { formDictionary } from "i18n";
 
 export const AddressDisplay = ({ address }) => {
-  const { streetNumber, streetName, zipCode, cityName, countryName } = address;
+  const {
+    streetNumber,
+    repetitionIndex,
+    streetType,
+    streetName,
+    addressSupplement,
+    zipCode,
+    cedexCode,
+    cedexName,
+    specialDistribution,
+    cityName,
+    countryName,
+    countryCode,
+  } = address;
 
   return (
     <Box
@@ -21,8 +34,32 @@ export const AddressDisplay = ({ address }) => {
         />
         <TextField
           id="outlined-read-only-input"
+          label={formDictionary.addressRepetitionIndex}
+          value={`${repetitionIndex}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label={formDictionary.addressStreetType}
+          value={`${streetType}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          id="outlined-read-only-input"
           label={formDictionary.addressStreetName}
           value={`${streetName}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label={formDictionary.addressAddressSupplement}
+          value={`${addressSupplement}`}
           InputProps={{
             readOnly: true,
           }}
@@ -37,8 +74,24 @@ export const AddressDisplay = ({ address }) => {
         />
         <TextField
           id="outlined-read-only-input"
-          label={formDictionary.addressCity}
+          label={formDictionary.addressCityName}
           value={`${cityName}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label={formDictionary.addressZipCode}
+          value={`${zipCode}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label={formDictionary.addressCedexCode}
+          value={`${cedexCode}`}
           InputProps={{
             readOnly: true,
           }}
@@ -46,7 +99,34 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
-          label={formDictionary.addressCountry}
+          label={formDictionary.addressCedexName}
+          value={`${cedexName}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          inputProps={{ style: { textTransform: "uppercase" } }}
+          id="outlined-read-only-input"
+          label={formDictionary.addressSpecialDistribution}
+          value={`${specialDistribution}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          inputProps={{ style: { textTransform: "uppercase" } }}
+          id="outlined-read-only-input"
+          label={formDictionary.addressCountryCode}
+          value={`${countryCode}`}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+        <TextField
+          inputProps={{ style: { textTransform: "uppercase" } }}
+          id="outlined-read-only-input"
+          label={formDictionary.addressCountryName}
           value={`${countryName}`}
           InputProps={{
             readOnly: true,

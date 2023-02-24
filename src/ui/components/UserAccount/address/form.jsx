@@ -70,11 +70,38 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
+              label={formDictionary.addressRepetitionIndex}
+              fullWidth
+              variant="standard"
+              value={formValues.repetitionIndex}
+              onChange={onChange("repetitionIndex")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressStreetType}
+              fullWidth
+              variant="standard"
+              value={formValues.streetType}
+              onChange={onChange("streetType")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
               label={formDictionary.addressStreetName}
               fullWidth
               variant="standard"
               value={formValues.streetName}
               onChange={onChange("streetName")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressAddressSupplement}
+              fullWidth
+              variant="standard"
+              value={formValues.addressSupplement}
+              onChange={onChange("addressSupplement")}
             />
             <TextField
               className="name-form"
@@ -88,7 +115,7 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={formDictionary.addressCity}
+              label={formDictionary.addressCityName}
               fullWidth
               variant="standard"
               value={formValues.cityName}
@@ -97,7 +124,43 @@ export const AddressForm = ({ open, close, address }) => {
             <TextField
               className="name-form"
               margin="dense"
-              label={formDictionary.addressCountry}
+              label={formDictionary.addressCedexCode}
+              fullWidth
+              variant="standard"
+              value={formValues.cedexCode}
+              onChange={onChange("cedexCode")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressCedexName}
+              fullWidth
+              variant="standard"
+              value={formValues.cedexName}
+              onChange={onChange("cedexName")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressSpecialDistribution}
+              fullWidth
+              variant="standard"
+              value={formValues.specialDistribution}
+              onChange={onChange("specialDistribution")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressCountryCode}
+              fullWidth
+              variant="standard"
+              value={formValues.countryCode}
+              onChange={onChange("countryCode")}
+            />
+            <TextField
+              className="name-form"
+              margin="dense"
+              label={formDictionary.addressCountryName}
               fullWidth
               variant="standard"
               value={formValues.countryName}
