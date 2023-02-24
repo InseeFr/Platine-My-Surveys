@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 export const Redirect = () => {
   const { user } = useContext(UserAccountContext);
-  if (!user.firstConnect) {
+  if (user.firstConnect) {
     return <Navigate to="/portail/mon-compte" />;
   }
 
