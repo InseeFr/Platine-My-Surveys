@@ -16,7 +16,12 @@ export const FirstConnectForm = ({ open, close, user }) => {
   const { updateFirstConnect } = useContext(UserAccountContext);
 
   const onClose = () => {
-    const newContactEvent = { identifier: user.id, type: "firstConnect", eventDate: "today" };
+    const newContactEvent = {
+      identifier: user.id,
+      type: "firstConnect",
+      eventDate: new Date().toLocaleString(),
+    };
+    console.log(newContactEvent);
     updateFirstConnect(newContactEvent);
     close();
     close;
