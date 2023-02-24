@@ -8,31 +8,28 @@ import {
   IconButton,
   DialogContentText,
 } from "@mui/material";
-import { useState } from "react";
 import { buttonDictionary } from "i18n";
+import { useContext } from "react";
+import { UserAccountContext } from "ui/context/UserAccount";
 
 export const FirstConnectForm = ({ open, close, user }) => {
-  //const { updateContact } = useContext(UserAccountContext);
-  const [formValues, setFormValues] = useState({ ...user });
+  const { updateFirstConnect } = useContext(UserAccountContext);
 
-  const handleClose = () => {
-    setFormValues({ ...formValues, firstConnect: false });
-    console.log(formValues);
-    const modifiedContact = { ...formValues };
-    console.log(modifiedContact);
-    //PUT User with first connect false ou POST contact event
-    //updateContact(modifiedContact);
+  const onClose = () => {
+    const newContactEvent = { id: user.id, type: "firstConnect", eventDate: "today" };
+    updateFirstConnect(newContactEvent);
     close();
+    close;
   };
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
+      <Dialog open={open} onClose={onClose} maxWidth="xl" fullWidth>
         <DialogTitle>
           {"Vérifier vos informations de contact"}
           <IconButton
             aria-label="close"
-            onClick={handleClose}
+            onClick={onClose}
             sx={{
               position: "absolute",
               right: 8,
@@ -51,7 +48,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose}>
+          <Button variant="contained" onClick={onClose}>
             {buttonDictionary.save}
           </Button>
         </DialogActions>

@@ -22,6 +22,10 @@ export const useAPI = () => {
     API.putContact(apiUrl)(id)(newContact)(oidcClient?.accessToken),
   );
 
+  const postContactEvent = useConstCallback(newContactEvent =>
+    API.postContactEvent(apiUrl)(newContactEvent)(oidcClient?.accessToken),
+  );
+
   const putAddress = useConstCallback((id, newAddress) =>
     API.putAddress(apiUrl)(id)(newAddress)(oidcClient?.accessToken),
   );
@@ -33,5 +37,6 @@ export const useAPI = () => {
     putContact,
     getContactAddress,
     putAddress,
+    postContactEvent,
   };
 };

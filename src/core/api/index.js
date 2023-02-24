@@ -2,6 +2,7 @@ import { rows, sleep } from "../mock/surveys";
 import { fetcher } from "./fetcher";
 
 const putRequest = url => body => token => fetcher(url, token, "PUT", null, body);
+const postRequest = url => body => token => fetcher(url, token, "POST", null, body);
 /*
   const postRequest = (url) => (token) => (body) =>
 	fetcher(url, token, "POST", body);
@@ -32,6 +33,10 @@ const putContact = apiUrl => id => body => async token => {
   return putRequest(`${apiUrl}/api/contacts/${id}`)(body)(token);
 };
 
+const postContactEvent = apiUrl => body => async token => {
+  return postRequest(`${apiUrl}/api/contacts/contact-events`)(body)(token);
+};
+
 const getContactAddress = apiUrl => id => async token => {
   return getRequest(`${apiUrl}/api/contacts/${id}/address`)(null)(token);
 };
@@ -48,4 +53,5 @@ export const API = {
   getContactAddress,
   putAddress,
   putContact,
+  postContactEvent,
 };

@@ -15,7 +15,7 @@ export const UserAccountProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userError, setUserError] = useState(null);
 
-  const { getMySurveys, getContact, putAddress, putContact } = useAPI();
+  const { getMySurveys, getContact, putAddress, putContact, postContactEvent } = useAPI();
 
   const loadUserData = useConstCallback(async id => {
     setLoading(true);
@@ -43,6 +43,40 @@ export const UserAccountProvider = ({ children }) => {
         message: notifDictionary.addressChangeConfirmation,
       });
       setUser({ ...user, address: newAddress });
+    } else {
+      openNotif({
+        severity: ERROR_SEVERITY,
+        message: notifDictionary.addressChangeError,
+      });
+    }
+    setLoading(false);
+  };
+
+  const updateFirstConnect = async newContactEvent => {
+    setLoading(true);
+    const { error } = await postContactEvent(newContactEvent);
+    if (!error) {
+      openNotif({
+        severity: SUCCESS_SEVERITY,
+        message: notifDictionary.addressChangeConfirmation,
+      });
+      setUser({ ...user, firstConnect: false });
+    } else {
+      openNotif({
+        severity: ERROR_SEVERITY,
+        message: notifDictionary.addressChangeError,
+      });
+    }
+    setLoading(false);
+  };
+  const updateContactContactEvent = async newContactEvent => {
+    setLoading(true);
+    const { error } = await postContactEvent(newContactEvent);
+    if (!error) {
+      openNotif({
+        severity: SUCCESS_SEVERITY,
+        message: notifDictionary.addressChangeConfirmation,
+      });
     } else {
       openNotif({
         severity: ERROR_SEVERITY,
