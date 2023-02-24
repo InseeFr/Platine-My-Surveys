@@ -1,0 +1,5 @@
+a.go-to-questionnaire:hover,
+a.go-to-questionnaire:focus {
+  background-color: var(--theme-menu-background-hover);
+  color: var(--theme-menu-link-hover);
+}

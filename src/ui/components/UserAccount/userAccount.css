@@ -1,9 +1,7 @@
-.user-account button:hover {
-  background-color: var(--theme-menu-background-hover);
-  color: var(--theme-menu-link-hover);
-}
-
-.MuiDialog-root button:hover {
+.user-account button:hover,
+.MuiDialog-root button:hover,
+.user-account button:focus,
+.MuiDialog-root button:focus {
   background-color: var(--theme-menu-background-hover);
   color: var(--theme-menu-link-hover);
 }
