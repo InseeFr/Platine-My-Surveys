@@ -17,6 +17,8 @@ import { FirstConnectForm } from "./firstConnect";
 export const UserAccount = () => {
   const { user } = useContext(UserAccountContext);
 
+  console.log(user);
+
   const [openFirstConnectForm, setOpenFirstConnectForm] = useState(user.firstConnect);
 
   const closeFirstConnectForm = () => {
