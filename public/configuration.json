@@ -1,5 +1,5 @@
 {
-  "authType": "OIDC",
+  "authType": "NONE",
   "apiUrl": "https://api-pilotage-enquetes.developpement.insee.fr",
   "portailUrl": "https://enquetes.developpement.insee.fr"
 }

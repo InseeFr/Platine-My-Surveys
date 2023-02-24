@@ -36,7 +36,7 @@ const dictionary = {
     en: "Cedex Name",
   },
   addressSpecialDistribution: {
-    fr: "Disctribution Spéciale",
+    fr: "Distribution Spéciale",
     en: "Special Distribution",
   },
   addressCountryCode: {
