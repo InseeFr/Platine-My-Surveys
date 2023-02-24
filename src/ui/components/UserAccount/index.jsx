@@ -14,14 +14,14 @@ import { useContext, useState } from "react";
 import { UserAccountContext } from "../../context/UserAccount";
 import { FirstConnectForm } from "./firstConnect";
 
-const [firstConnectDisplay, setFirstConnectDisplay] = useState(false);
-
-const closeFirstConnectDisplay = () => {
-  setFirstConnectDisplay(false);
-};
-
 export const UserAccount = () => {
   const { user } = useContext(UserAccountContext);
+
+  const [firstConnectDisplay, setFirstConnectDisplay] = useState(false);
+
+  const closeFirstConnectDisplay = () => {
+    setFirstConnectDisplay(false);
+  };
 
   console.log(user);
 
