@@ -43,7 +43,7 @@ export const MailForm = ({ open, close, user }) => {
     const newContactEvent = {
       identifier: user.id,
       type: "update",
-      eventDate: new Date().toLocaleString(),
+      eventDate: new Date().toISOString(),
     };
     console.log(newContactEvent);
     updateContactContactEvent(newContactEvent);

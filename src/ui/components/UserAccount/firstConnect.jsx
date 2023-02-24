@@ -19,7 +19,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
     const newContactEvent = {
       identifier: user.id,
       type: "firstConnect",
-      eventDate: new Date().toLocaleString(),
+      eventDate: new Date().toISOString(),
     };
     console.log(newContactEvent);
     updateFirstConnect(newContactEvent);
