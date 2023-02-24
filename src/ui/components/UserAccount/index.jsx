@@ -19,11 +19,6 @@ export const UserAccount = () => {
 
   console.log(user);
 
-  const [openFirstConnectForm, setOpenFirstConnectForm] = useState(user.firstConnect);
-
-  const closeFirstConnectForm = () => {
-    setOpenFirstConnectForm(false);
-  };
   return (
     <>
       <div className="user-account">
@@ -81,7 +76,8 @@ export const UserAccount = () => {
             </Grid>
           </Grid>
         </Box>
-        <FirstConnectForm open={openFirstConnectForm} close={closeFirstConnectForm} user={user} />
+        (${user.firstConnect} &&
+        <FirstConnectForm user={user} />)
       </div>
     </>
   );
