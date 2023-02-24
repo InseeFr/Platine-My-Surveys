@@ -76,8 +76,7 @@ export const UserAccount = () => {
             </Grid>
           </Grid>
         </Box>
-        (${user.firstConnect} &&
-        <FirstConnectForm user={user} />)
+        <FirstConnectForm open={user.firstConnect} user={user} />
       </div>
     </>
   );
