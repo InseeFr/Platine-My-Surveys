@@ -11,16 +11,16 @@
   --theme-menu-link-hover: #514930;
   --theme-menu-separator: #414c5c;
 
-  --theme-footer-link: #514930;
+  --theme-footer-link: white;
 
   --theme-gray-gradient: linear-gradient(180deg, #ffffffd7, #dbdbdb);
 
   box-sizing: border-box;
-  background-color: white;
+  background-color: #efefef;
 }
 
 body {
-  background-color: white;
+  background-color: #efefef;
 }
 
 .main-content {

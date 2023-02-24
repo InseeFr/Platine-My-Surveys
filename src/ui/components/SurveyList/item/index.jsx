@@ -1,15 +1,15 @@
-import { Chip, Grid, Grow, Paper, Typography, Tooltip } from "@mui/material";
-import { isFuture, isPast } from "date-fns";
-import { getSurveyStatus } from "../../../../core/functions";
-import { surveyDictionary } from "i18n";
-import { ItemIcon } from "./itemIcon";
+import { Chip, Grid, Grow, Paper, Tooltip, Typography } from "@mui/material";
 import {
+  HC_QUESTIONING,
+  PARTIELINT_QUESTIONING,
+  REFUSAL_QUESTIONING,
   VALINT_QUESTIONING,
   VALPAP_QUESTIONING,
-  PARTIELINT_QUESTIONING,
-  HC_QUESTIONING,
-  REFUSAL_QUESTIONING,
 } from "core/constants";
+import { isFuture, isPast } from "date-fns";
+import { surveyDictionary } from "i18n";
+import { getSurveyStatus } from "../../../../core/functions";
+import { ItemIcon } from "./itemIcon";
 
 export const SurveyItem = ({ survey, index }) => {
   const {
@@ -83,9 +83,9 @@ export const SurveyItem = ({ survey, index }) => {
           <Grid item xs={12} sm container>
             <Grid
               item
-              xs={3}
-              md={2}
+              xs={12}
               sm={2}
+              md={2}
               container
               direction="column"
               justifyContent="center"
@@ -105,7 +105,7 @@ export const SurveyItem = ({ survey, index }) => {
                 />
               </Tooltip>
             </Grid>
-            <Grid item xs={5} container direction="column" spacing={2}>
+            <Grid item xs={12} sm={5} container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1" component="div">
                   {surveyWording}
@@ -114,25 +114,30 @@ export const SurveyItem = ({ survey, index }) => {
                   <b>{surveyDictionary.suIdentifier}</b>
                   {identificationCode}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {getMessageDisplay()}
-                </Typography>
               </Grid>
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={12}
+              sm={4}
+              spacing={1}
               container
               direction="column"
-              sx={{ textAlign: "right" }}
               justifyContent="center"
+              alignItems="end"
             >
               <Grid item>
                 <ItemIcon
                   status={getSurveyStatus(openingDate, closingDate, returnDate).status}
                   questioningStatus={questioningStatus}
+                  surveyWording={surveyWording}
                   accessUrl={accessUrl}
                 />
+              </Grid>
+              <Grid item>
+                <Typography variant="body2" color="text.secondary">
+                  {getMessageDisplay()}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>

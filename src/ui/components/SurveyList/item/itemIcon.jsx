@@ -1,17 +1,18 @@
+import { ContentPasteGo } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { ContentPasteGo } from "@mui/icons-material";
+import { Button, Typography } from "@mui/material";
 import {
-  VALINT_QUESTIONING,
-  VALPAP_QUESTIONING,
   HC_QUESTIONING,
   REFUSAL_QUESTIONING,
+  VALINT_QUESTIONING,
+  VALPAP_QUESTIONING,
 } from "core/constants";
 import { surveyDictionary } from "i18n";
-import { Button, Typography } from "@mui/material";
+import "./itemIcon.css";
 
-export const ItemIcon = ({ status, questioningStatus, accessUrl }) => {
+export const ItemIcon = ({ status, surveyWording, questioningStatus, accessUrl }) => {
   const getLogoType = () => {
     if (status === surveyDictionary.surveyIncoming) {
       return <HourglassEmptyIcon />;
@@ -29,8 +30,9 @@ export const ItemIcon = ({ status, questioningStatus, accessUrl }) => {
     if (status === surveyDictionary.surveyOpen || status === surveyDictionary.surveyClosing) {
       return (
         <Button
-          aria-label={surveyDictionary.accessSurvey}
+          aria-label={`${surveyDictionary.accessSurvey} ${surveyWording}`}
           sx={{ textTransform: "none" }}
+          className="go-to-questionnaire"
           variant="contained"
           href={accessUrl}
           target="_blank"
