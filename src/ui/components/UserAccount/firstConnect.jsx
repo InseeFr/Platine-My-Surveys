@@ -17,6 +17,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
 
   const handleClose = () => {
     setFormValues({ ...formValues, firstConnect: false });
+    console.log(formValues);
     const modifiedContact = { ...formValues };
     console.log(modifiedContact);
     //PUT User with first connect false ou POST contact event
