@@ -3,7 +3,6 @@ import { getConfiguration } from "core/configuration";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import AuthProvider from "./ui/context/auth/provider/component";
-import { UserAccountProvider } from "ui/context/UserAccount";
 import { Router } from "./ui/router";
 import { LoaderSimple } from "./ui/shared/loader";
 
@@ -50,11 +49,9 @@ const App = () => {
       {configuration && (
         <AppContext.Provider value={context}>
           <AuthProvider authType={configuration.authType}>
-            <UserAccountProvider>
-              <React.StrictMode>
-                <Router />
-              </React.StrictMode>
-            </UserAccountProvider>
+            <React.StrictMode>
+              <Router />
+            </React.StrictMode>
           </AuthProvider>
         </AppContext.Provider>
       )}

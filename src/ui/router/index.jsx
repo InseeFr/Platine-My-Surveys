@@ -3,41 +3,41 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 import { SurveyList } from "ui/components/SurveyList";
 import { UserAccount } from "ui/components/UserAccount";
 import { ProtectedRoute } from "ui/context/auth";
-import { UserAccountContext } from "ui/context/UserAccount";
+import { UserAccountProvider } from "ui/context/UserAccount";
 import { Footer } from "ui/shared/Footer";
 import { Header } from "ui/shared/Header";
 import { Menu } from "ui/shared/Menu";
-import { useContext } from "react";
 
 export const Router = () => {
-  const { user } = useContext(UserAccountContext);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={
-            user.firstConnect ? (
-              <Navigate to="/portail/mon-compte" />
-            ) : (
-              <Navigate to="/portail/mes-enquetes" />
-            )
+            <ProtectedRoute>
+              <UserAccountProvider>
+                <Redirect />
+              </UserAccountProvider>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/portail"
           element={
             <ProtectedRoute>
-              <div className="main-content">
-                <Header />
-                <Menu />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <div className="main-body">
-                    <Outlet />
-                  </div>
-                  <Footer />
-                </Box>
-              </div>
+              <UserAccountProvider>
+                <div className="main-content">
+                  <Header />
+                  <Menu />
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <div className="main-body">
+                      <Outlet />
+                    </div>
+                    <Footer />
+                  </Box>
+                </div>
+              </UserAccountProvider>
             </ProtectedRoute>
           }
         >
