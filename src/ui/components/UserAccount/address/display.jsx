@@ -30,7 +30,7 @@ export const AddressDisplay = ({ address }) => {
           value={`${streetNumber}` || ""}
           InputProps={{
             readOnly: true,
-            sx: { width: "4ch" },
+            sx: { width: "15ch" },
           }}
         />
         <TextField
@@ -103,7 +103,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressSpecialDistribution}
-          value={`${specialDistribution}|| ""`}
+          value={`${specialDistribution}` || ""}
           InputProps={{
             readOnly: true,
           }}
@@ -112,7 +112,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressCountryCode}
-          value={`${countryCode}|| ""`}
+          value={`${countryCode}` || ""}
           InputProps={{
             readOnly: true,
           }}
