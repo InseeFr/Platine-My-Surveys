@@ -115,7 +115,16 @@ export const UserAccountProvider = ({ children }) => {
   }, [oidcUser?.id]);
 
   return (
-    <UserAccountContext.Provider value={{ user, setUser, updateAddress, updateContact }}>
+    <UserAccountContext.Provider
+      value={{
+        user,
+        setUser,
+        updateAddress,
+        updateContact,
+        updateFirstConnect,
+        updateContactContactEvent,
+      }}
+    >
       {user && children}
       {userError && <Typography>{userError.message}</Typography>}
     </UserAccountContext.Provider>
