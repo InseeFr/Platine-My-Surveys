@@ -103,7 +103,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressSpecialDistribution}
-          value={`${specialDistribution}` || ""}
+          value={specialDistribution === null ? "" : specialDistribution}
           InputProps={{
             readOnly: true,
           }}
