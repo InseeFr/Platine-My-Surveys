@@ -10,9 +10,15 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import "./userAccount.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserAccountContext } from "../../context/UserAccount";
 import { FirstConnectForm } from "./firstConnect";
+
+const [firstConnectDisplay, setFirstConnectDisplay] = useState(false);
+
+const closeFirstConnectDisplay = () => {
+  setFirstConnectDisplay(false);
+};
 
 export const UserAccount = () => {
   const { user } = useContext(UserAccountContext);
@@ -76,7 +82,7 @@ export const UserAccount = () => {
             </Grid>
           </Grid>
         </Box>
-        <FirstConnectForm open={user.firstConnect} user={user} />
+        <FirstConnectForm open={firstConnectDisplay} close={closeFirstConnectDisplay} user={user} />
       </div>
     </>
   );

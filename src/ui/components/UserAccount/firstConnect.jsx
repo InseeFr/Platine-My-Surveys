@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { buttonDictionary } from "i18n";
 
-export const FirstConnectForm = ({ user }) => {
+export const FirstConnectForm = ({ open, close, user }) => {
   //const { updateContact } = useContext(UserAccountContext);
   const [formValues, setFormValues] = useState({ ...user });
 
@@ -22,6 +22,7 @@ export const FirstConnectForm = ({ user }) => {
     console.log(modifiedContact);
     //PUT User with first connect false ou POST contact event
     //updateContact(modifiedContact);
+    close();
   };
 
   return (
