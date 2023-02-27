@@ -27,7 +27,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressStreetNumber}
-          value={`${streetNumber}` || ""}
+          value={streetNumber === null ? "" : streetNumber}
           InputProps={{
             readOnly: true,
             sx: { width: "15ch" },
@@ -36,7 +36,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressRepetitionIndex}
-          value={`${repetitionIndex}` || ""}
+          value={repetitionIndex === null ? "" : repetitionIndex}
           InputProps={{
             readOnly: true,
           }}
@@ -44,7 +44,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressStreetType}
-          value={`${streetType}` || ""}
+          value={streetType === null ? "" : streetType}
           InputProps={{
             readOnly: true,
           }}
@@ -52,7 +52,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressStreetName}
-          value={`${streetName}` || ""}
+          value={streetName === null ? "" : streetName}
           InputProps={{
             readOnly: true,
           }}
@@ -60,7 +60,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressAddressSupplement}
-          value={`${addressSupplement}` || ""}
+          value={addressSupplement === null ? "" : addressSupplement}
           InputProps={{
             readOnly: true,
           }}
@@ -68,7 +68,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressZipCode}
-          value={`${zipCode}` || ""}
+          value={zipCode === null ? "" : zipCode}
           InputProps={{
             readOnly: true,
           }}
@@ -76,7 +76,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressCityName}
-          value={`${cityName}` || ""}
+          value={cityName === null ? "" : cityName}
           InputProps={{
             readOnly: true,
           }}
@@ -85,7 +85,7 @@ export const AddressDisplay = ({ address }) => {
         <TextField
           id="outlined-read-only-input"
           label={formDictionary.addressCedexCode}
-          value={`${cedexCode}` || ""}
+          value={cedexCode === null ? "" : cedexCode}
           InputProps={{
             readOnly: true,
           }}
@@ -94,7 +94,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressCedexName}
-          value={`${cedexName}` || ""}
+          value={cedexName === null ? "" : cedexName}
           InputProps={{
             readOnly: true,
           }}
@@ -112,7 +112,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressCountryCode}
-          value={`${countryCode}` || ""}
+          value={countryCode === null ? "" : countryCode}
           InputProps={{
             readOnly: true,
           }}
@@ -121,7 +121,7 @@ export const AddressDisplay = ({ address }) => {
           inputProps={{ style: { textTransform: "uppercase" } }}
           id="outlined-read-only-input"
           label={formDictionary.addressCountryName}
-          value={`${countryName}` || ""}
+          value={countryName === null ? "" : countryName}
           InputProps={{
             readOnly: true,
           }}
