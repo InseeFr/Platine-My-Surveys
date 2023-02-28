@@ -29,7 +29,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="xl" fullWidth>
+      <Dialog open={open} onClose={onClose} maxWidth="sm">
         <DialogTitle>
           {"Vérifier vos informations de contact"}
           <IconButton

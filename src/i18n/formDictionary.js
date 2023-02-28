@@ -5,7 +5,7 @@ const dictionary = {
   },
   addressRepetitionIndex: {
     fr: "Index Répétition",
-    en: "Repeition Index",
+    en: "Repetition Index",
   },
   addressStreetType: {
     fr: "Type Voie",
