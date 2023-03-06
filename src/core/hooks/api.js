@@ -12,7 +12,7 @@ export const useAPI = () => {
 
   const getContact = useConstCallback(id => API.getContact(apiUrl)(id)(oidcClient?.accessToken));
 
-  const getMySurveys = useConstCallback(id => API.getMySurveys(apiUrl)(id)(oidcClient?.accessToken));
+  const getMySurveys = useConstCallback(() => API.getMySurveys(apiUrl)(oidcClient?.accessToken));
 
   const getContactAddress = useConstCallback(id =>
     API.getContactAddress(apiUrl)(id)(oidcClient?.accessToken),

@@ -13,7 +13,7 @@ export const SurveyList = () => {
 
   useEffect(() => {
     const load = async () => {
-      const { data, error } = await getMySurveys(user.id);
+      const { data, error } = await getMySurveys();
       if (!error) {
         setUser({ ...user, mySurveys: data });
       }

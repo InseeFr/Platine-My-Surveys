@@ -20,7 +20,7 @@ export const UserAccountProvider = ({ children }) => {
   const loadUserData = useConstCallback(async id => {
     setLoading(true);
     const { data: account, error: accountError } = await getContact(id);
-    const { data: mySurveys, error: mySurveysError } = await getMySurveys(id);
+    const { data: mySurveys, error: mySurveysError } = await getMySurveys();
     setLoading(false);
     if (!accountError && !mySurveysError) setUser({ id, ...account, mySurveys });
     else {
