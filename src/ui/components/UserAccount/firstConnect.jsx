@@ -47,7 +47,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {user.mySurveys.length > 0
+            {user.mySurveys.length > 1
               ? "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre aux enquêtes via l’onglet “Mes Enquêtes”"
               : "Veuillez vérifier et mettre à jour si nécessaire vos informations de contacts. Vous pourrez ensuite répondre à l’ enquête via l’onglet “Mes Enquêtes”"}
           </DialogContentText>

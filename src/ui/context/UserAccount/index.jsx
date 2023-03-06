@@ -56,16 +56,7 @@ export const UserAccountProvider = ({ children }) => {
     setLoading(true);
     const { error } = await postContactEvent(newContactEvent);
     if (!error) {
-      openNotif({
-        severity: SUCCESS_SEVERITY,
-        message: notifDictionary.addressChangeConfirmation,
-      });
       setUser({ ...user, firstConnect: false });
-    } else {
-      openNotif({
-        severity: ERROR_SEVERITY,
-        message: notifDictionary.addressChangeError,
-      });
     }
     setLoading(false);
   };
