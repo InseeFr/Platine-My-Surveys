@@ -3,12 +3,6 @@ import { fetcher } from "./fetcher";
 
 const putRequest = url => body => token => fetcher(url, token, "PUT", null, body);
 const postRequest = url => body => token => fetcher(url, token, "POST", null, body);
-/*
-  const postRequest = (url) => (token) => (body) =>
-	fetcher(url, token, "POST", body);
-const deleteRequest = (url) => (token) => (body) =>
-	fetcher(url, token, "DELETE", body);
-*/
 const getRequest = url => params => token => fetcher(url, token, "GET", params, null);
 
 const mockGetMySurveys = () => () => async () => {
