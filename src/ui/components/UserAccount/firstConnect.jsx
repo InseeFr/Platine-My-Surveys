@@ -54,7 +54,7 @@ export const FirstConnectForm = ({ open, close, user }) => {
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={onClose}>
-            {buttonDictionary.save}
+            {buttonDictionary.check}
           </Button>
         </DialogActions>
       </Dialog>
