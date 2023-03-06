@@ -1,6 +1,5 @@
 {
-  "authType": "${AUTHENTICATION_TYPE}",
-  "_authenticationType_comment_": "Authentication type : OIDC or NONE",
-  "apiUrl": "${API_URL}",
-  "portailUrl": "${PORTAIL_URL}"
+  "authType": "NONE",
+  "apiUrl": "https://datacollection-management-api.dev.insee.io",
+  "portailUrl": "https://enquetes.dev.insee.io"
 }

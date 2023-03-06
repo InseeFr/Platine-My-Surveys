@@ -1,8 +1,8 @@
 {
-  "realm": "${REALM}",
-  "auth-server-url": "${AUTH_URL}",
+  "realm": "my-realm",
+  "auth-server-url": "https://my.nice.server/auth",
   "ssl-required": "none",
-  "resource": "${CLIENT_ID}",
+  "resource": "localhost-frontend",
   "public-client": true,
   "confidential-port": 0
 }
