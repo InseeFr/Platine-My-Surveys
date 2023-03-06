@@ -15,7 +15,7 @@ export const UserAccountProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userError, setUserError] = useState(null);
 
-  const { getMySurveys, getContact, putAddress, putContact } = useAPI();
+  const { getMySurveys, getContact, putAddress, putContact, postContactEvent } = useAPI();
 
   const loadUserData = useConstCallback(async id => {
     setLoading(true);
@@ -52,6 +52,15 @@ export const UserAccountProvider = ({ children }) => {
     setLoading(false);
   };
 
+  const updateFirstConnect = async newContactEvent => {
+    setLoading(true);
+    const { error } = await postContactEvent(newContactEvent);
+    if (!error) {
+      setUser({ ...user, firstConnect: false });
+    }
+    setLoading(false);
+  };
+
   const updateContact = async modifiedContact => {
     setLoading(true);
     const { error } = await putContact(user.id, modifiedContact);
@@ -81,7 +90,15 @@ export const UserAccountProvider = ({ children }) => {
   }, [oidcUser?.id]);
 
   return (
-    <UserAccountContext.Provider value={{ user, setUser, updateAddress, updateContact }}>
+    <UserAccountContext.Provider
+      value={{
+        user,
+        setUser,
+        updateAddress,
+        updateContact,
+        updateFirstConnect,
+      }}
+    >
       {user && children}
       {userError && <Typography>{userError.message}</Typography>}
     </UserAccountContext.Provider>

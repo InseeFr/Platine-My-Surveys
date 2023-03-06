@@ -20,9 +20,9 @@ export const MailForm = ({ open, close, user }) => {
   const [confirmation, setConfirmation] = useState(false);
   const [formValues, setFormValues] = useState({ ...user });
 
-  const mailValidation = (email) => {
+  const mailValidation = email => {
     return email.trim().length === 0 || /\S+@\S+\.\S+/.test(email);
-  }
+  };
 
   const [isValid, setIsValid] = useState(mailValidation(user.email));
 
@@ -45,7 +45,7 @@ export const MailForm = ({ open, close, user }) => {
     setFormValues(user);
     setIsValid(mailValidation(user.email));
     close();
-  }
+  };
 
   return (
     <>

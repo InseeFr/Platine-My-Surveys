@@ -7,12 +7,22 @@ import { UserAccountProvider } from "ui/context/UserAccount";
 import { Footer } from "ui/shared/Footer";
 import { Header } from "ui/shared/Header";
 import { Menu } from "ui/shared/Menu";
+import { Redirect } from "./redirect.js";
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/portail/mes-enquetes" />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <UserAccountProvider>
+                <Redirect />
+              </UserAccountProvider>
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/portail"
           element={
