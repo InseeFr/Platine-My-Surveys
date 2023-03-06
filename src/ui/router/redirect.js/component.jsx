@@ -1,4 +1,4 @@
-const { UserAccountContext } = require("ui/context/UserAccount");
+import { UserAccountContext } from "ui/context/UserAccount";
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 
