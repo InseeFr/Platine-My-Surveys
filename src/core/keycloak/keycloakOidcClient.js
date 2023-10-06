@@ -9,7 +9,10 @@ export const createKeycloakOidcClient = async ({ url, realm, clientId, evtUserAc
       silentCheckSsoRedirectUri: `${window.location.origin}/silent-sso.html`,
       checkLoginIframe: false,
     })
-    .catch(error => error);
+    .catch(error => {
+      console.log(error);
+      return error;
+    });
 
   const login = async () => {
     await keycloakInstance.login({ redirectUri: window.location.href });
