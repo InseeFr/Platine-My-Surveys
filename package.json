@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build && copy-and-watch configuration/* build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prestart": "node -r dotenv/config ./scripts/generate-oidc-trusted-domains.js",
+    "postbuild": "node -r dotenv/config ./scripts/generate-oidc-trusted-domains.js"
   },
   "browserslist": {
     "production": [

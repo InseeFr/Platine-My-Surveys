@@ -1,16 +1,16 @@
 import { AccountCircle, ContactSupport, Logout } from "@mui/icons-material";
 import { Button, Divider, ListItem, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import { AuthContext } from "ui/context/auth/provider";
-import { AppContext } from "App";
 import { UserAccountContext } from "ui/context/UserAccount";
 import { useContext, useState } from "react";
 import Link from "@mui/material/Link";
 import { defaultDictionary, buttonDictionary } from "i18n";
 import "./header.css";
+import { environment } from "utils/read-env-vars";
 
 export const Header = () => {
   const { logout } = useContext(AuthContext);
-  const { portailUrl } = useContext(AppContext);
+  const { PORTAIL_URL: portailUrl } = environment;
   const { user } = useContext(UserAccountContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

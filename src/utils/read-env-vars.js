@@ -4,22 +4,20 @@
  * @param varName : the variable name
  * @returns the value of variable name
  */
-export const getEnvVar = (varName) => {
-    // eslint-disable-next-line no-restricted-globals
-    return self?._env_[varName] || process.env[varName] || '';
-  };
-  
-  export const environment = {
-    API_URL: getEnvVar('REACT_APP_MANAGEMENT_API_BASE_URL'),
-    AUTH_TYPE: getEnvVar('REACT_APP_AUTH_TYPE') || 'none',
-    PORTAIL_URL:
-      getEnvVar('REACT_APP_PORTAIL_URL') || `${window.location.origin}`,
-  };
-  
-  export const oidcConf = {
-    client_id: getEnvVar('REACT_APP_CLIENT_ID'),
-    authority: getEnvVar('REACT_APP_AUTHORITY'),
-    scope: 'openid profile email offline_access',
-    service_worker_relative_url: '/OidcServiceWorker.js',
-    service_worker_only: false,
-  };
+export const getEnvVar = varName => {
+  // eslint-disable-next-line no-restricted-globals
+  return self?._env_?.[varName] || process.env[varName] || "";
+};
+
+export const environment = {
+  API_URL: getEnvVar("REACT_APP_MANAGEMENT_API_BASE_URL"),
+  AUTH_TYPE: getEnvVar("REACT_APP_AUTH_TYPE") || "NONE",
+  PORTAIL_URL: getEnvVar("REACT_APP_PORTAIL_URL") || `${window.location.origin}`,
+};
+
+export const oidcConf = {
+  client_id: getEnvVar("REACT_APP_CLIENT_ID"),
+  authority: getEnvVar("REACT_APP_AUTHORITY"),
+  realm: getEnvVar("REACT_APP_REALM"),
+  scope: "openid profile email offline_access",
+};
