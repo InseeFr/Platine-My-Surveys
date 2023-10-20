@@ -15,9 +15,11 @@ import { ERROR_SEVERITY } from "core/constants";
 import { buttonDictionary } from "i18n";
 import "./noAuth.css";
 import { API } from "core/api";
+import { environment } from "utils/read-env-vars";
 
 export const NoAuthLogin = ({ setOidcClient }) => {
-  const { apiUrl, portailUrl, setLoading, openNotif } = useContext(AppContext);
+  const { setLoading, openNotif } = useContext(AppContext);
+  const { API_URL: apiUrl, PORTAIL_URL: portailUrl } = environment;
   const [contacts, setContacts] = useState([]);
   const [selected, setSelected] = useState("");
   const [idSelected, setIdSelected] = useState("");

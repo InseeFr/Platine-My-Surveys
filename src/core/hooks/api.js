@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { AppContext } from "App";
 import { AuthContext } from "ui/context/auth/provider";
 import { API } from "core/api";
 import { useConstCallback } from "./useConstCallback";
+import { environment } from "utils/read-env-vars";
 
 export const useAPI = () => {
   const oidcClient = useContext(AuthContext);
-  const { apiUrl } = useContext(AppContext);
+  const { API_URL: apiUrl } = environment;
 
   const getFirstContacts = useConstCallback(() => API.getContacts(apiUrl)(oidcClient?.accessToken));
 

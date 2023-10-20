@@ -1,28 +1,29 @@
-import { getOidc } from "core/configuration";
 import { NONE, OIDC } from "core/constants";
 import { listenActivity } from "core/events";
 import { createKeycloakOidcClient } from "core/keycloak";
 import React, { useEffect, useMemo, useState } from "react";
 import { LoaderSimple } from "ui/shared/loader";
 import { NoAuthLogin } from "./noAuth";
+import { environment, oidcConf } from "utils/read-env-vars";
 
 export const AuthContext = React.createContext();
+
+const { AUTH_TYPE: authType } = environment;
+const { authority, realm, client_id } = oidcConf;
 
 const dummyOidcClient = {
   isUserLoggedIn: false,
 };
 
-const AuthProvider = ({ authType, children }) => {
+const AuthProvider = ({ children }) => {
   const [oidcClient, setOidcClient] = useState(null);
 
   useEffect(() => {
     const loadOidcConf = async () => {
-      const oidcConf = await getOidc();
-
       const oidcClientKC = await createKeycloakOidcClient({
-        url: oidcConf["auth-server-url"],
-        realm: oidcConf["realm"],
-        clientId: oidcConf["resource"],
+        url: authority,
+        realm: realm,
+        clientId: client_id,
         evtUserActivity: listenActivity,
       });
       return oidcClientKC;

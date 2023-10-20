@@ -1,8 +1,0 @@
-{
-  "realm": "${REALM}",
-  "auth-server-url": "${AUTH_URL}",
-  "ssl-required": "none",
-  "resource": "${CLIENT_ID}",
-  "public-client": true,
-  "confidential-port": 0
-}
