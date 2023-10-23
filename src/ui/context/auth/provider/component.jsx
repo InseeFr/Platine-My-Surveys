@@ -1,6 +1,6 @@
 import { NONE, OIDC } from "core/constants";
 import { listenActivity } from "core/events";
-import { createKeycloakOidcClient } from "core/keycloak";
+import { createOidcClient } from "core/keycloak";
 import React, { useEffect, useMemo, useState } from "react";
 import { LoaderSimple } from "ui/shared/loader";
 import { NoAuthLogin } from "./noAuth";
@@ -11,8 +11,9 @@ export const AuthContext = React.createContext();
 const { AUTH_TYPE, PORTAIL_URL } = environment;
 
 const dummyOidcClient = {
-  isUserLoggedIn: false,
-  getUser: () => ({ accessToken: null, sub: "" }),
+  isUserLoggedIn: true,
+  accessToken: null,
+  oidcUser: null,
   logout: () => (window.location.href = "/"),
   renewToken: () => {},
 };
