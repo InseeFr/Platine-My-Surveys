@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "copy-and-watch": "^0.1.6",
     "date-fns": "^2.28.0",
     "jwt-decode": "^3.1.2",
     "oidc-client-ts": "^2.3.0",
