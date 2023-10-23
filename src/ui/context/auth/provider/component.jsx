@@ -8,41 +8,49 @@ import { environment, oidcConf } from "utils/read-env-vars";
 
 export const AuthContext = React.createContext();
 
-const { AUTH_TYPE: authType } = environment;
-const { authority, realm, client_id } = oidcConf;
+const { AUTH_TYPE, PORTAIL_URL } = environment;
 
 const dummyOidcClient = {
   isUserLoggedIn: false,
+  getUser: () => ({ accessToken: null, sub: "" }),
+  logout: () => (window.location.href = "/"),
+  renewToken: () => {},
 };
 
 const AuthProvider = ({ children }) => {
-  const [oidcClient, setOidcClient] = useState(null);
+  const [oidcClient, setOidcClient] = useState(() => {
+    switch (AUTH_TYPE) {
+      case OIDC:
+        return null;
+      case NONE:
+        return dummyOidcClient;
+      default:
+        throw new Error("wrong auth Type");
+    }
+  });
 
   useEffect(() => {
-    const loadOidcConf = async () => {
-      const oidcClientKC = await createKeycloakOidcClient({
-        url: authority,
-        realm: realm,
-        clientId: client_id,
+    if (AUTH_TYPE !== OIDC) {
+      return;
+    }
+
+    (async () => {
+      const oidcClient = await createOidcClient({
+        url: oidcConf.authUrl,
+        realm: oidcConf.realm,
+        clientId: oidcConf.client_id,
+        urlPortail: PORTAIL_URL,
         evtUserActivity: listenActivity,
       });
-      return oidcClientKC;
-    };
 
-    const loadConf = async () => {
-      if (authType === OIDC) {
-        const conf = await loadOidcConf();
-        setOidcClient(conf);
-      } else setOidcClient(dummyOidcClient);
-    };
-
-    if (authType && oidcClient === null) loadConf();
-  }, [authType]);
+      setOidcClient(oidcClient);
+    })();
+  }, []);
 
   const contextOidc = useMemo(() => oidcClient, [oidcClient]);
 
   if (oidcClient === null) return <LoaderSimple />;
-  if (authType === NONE && !oidcClient?.isUserLoggedIn)
+  if (AUTH_TYPE === NONE && !oidcClient?.isUserLoggedIn)
     return <NoAuthLogin setOidcClient={setOidcClient} />;
   return <AuthContext.Provider value={contextOidc}>{children}</AuthContext.Provider>;
 };
