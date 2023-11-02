@@ -4,7 +4,7 @@ import { addParamToUrl, retrieveParamFromUrl } from "powerhooks/tools/urlSearchP
 import { Deferred } from "utils/tools/Deferred";
 import { fnv1aHashToHex } from "utils/tools/fnv1aHashToHex";
 
-export const createOidcClient = async ({ url, realm, clientId, evtUserActivity, urlPortail }) => {
+export const createOidcClient = async ({ url, realm, clientId, evtUserActivity }) => {
   const configHash = fnv1aHashToHex(`${url} ${realm} ${clientId}`);
   const configHashKey = "configHash";
 

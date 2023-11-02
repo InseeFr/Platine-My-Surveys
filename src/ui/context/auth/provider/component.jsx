@@ -8,7 +8,7 @@ import { environment, oidcConf } from "utils/read-env-vars";
 
 export const AuthContext = React.createContext();
 
-const { AUTH_TYPE, PORTAIL_URL } = environment;
+const { AUTH_TYPE } = environment;
 
 const dummyOidcClient = {
   isUserLoggedIn: true,
@@ -40,7 +40,6 @@ const AuthProvider = ({ children }) => {
         url: oidcConf.authUrl,
         realm: oidcConf.realm,
         clientId: oidcConf.client_id,
-        urlPortail: PORTAIL_URL,
         evtUserActivity: listenActivity,
       });
 
