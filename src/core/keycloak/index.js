@@ -1,1 +1,1 @@
-export { createKeycloakOidcClient } from "./keycloakOidcClient";
+export { createOidcClient } from "./oidcClient";

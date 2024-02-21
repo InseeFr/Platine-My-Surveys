@@ -31,6 +31,7 @@ export const NoAuthLogin = ({ setOidcClient }) => {
       accessToken: null,
       oidcUser: { id: id },
       logout: () => (window.location.href = "/"),
+      renewToken: () => {},
     };
     setOidcClient(oidcClient);
   };
