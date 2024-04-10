@@ -1,6 +1,6 @@
 {
   "name": "coleman-my-surveys",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
