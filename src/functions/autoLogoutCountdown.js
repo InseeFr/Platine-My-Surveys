@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useOidc } from "../hooks/useAuth";
+import { useOidc } from "hooks/useAuth";
 
 export function AutoLogoutCountdown() {
   const { isUserLoggedIn, subscribeToAutoLogoutCountdown } = useOidc();

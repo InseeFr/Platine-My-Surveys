@@ -19,5 +19,6 @@ export const oidcConf = {
   client_id: getEnvVar("REACT_APP_CLIENT_ID"),
   authority: getEnvVar("REACT_APP_AUTHORITY"),
   realm: getEnvVar("REACT_APP_REALM"),
+  issuer: getEnvVar("REACT_APP_ISSUER"),
   scope: "openid profile email offline_access",
 };

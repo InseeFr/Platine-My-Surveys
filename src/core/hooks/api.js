@@ -1,34 +1,27 @@
-import { useContext } from "react";
-import { AuthContext } from "ui/context/auth/provider";
 import { API } from "core/api";
 import { useConstCallback } from "./useConstCallback";
 import { environment } from "utils/read-env-vars";
+import { useAccessToken } from "hooks/useAuth";
 
 export const useAPI = () => {
-  const oidcClient = useContext(AuthContext);
+  const token = useAccessToken();
   const { API_URL: apiUrl } = environment;
 
-  const getFirstContacts = useConstCallback(() => API.getContacts(apiUrl)(oidcClient?.accessToken));
+  const getFirstContacts = useConstCallback(() => API.getContacts(apiUrl)(token));
 
-  const getContact = useConstCallback(id => API.getContact(apiUrl)(id)(oidcClient?.accessToken));
+  const getContact = useConstCallback(id => API.getContact(apiUrl)(id)(token));
 
-  const getMySurveys = useConstCallback(() => API.getMySurveys(apiUrl)(oidcClient?.accessToken));
+  const getMySurveys = useConstCallback(() => API.getMySurveys(apiUrl)(token));
 
-  const getContactAddress = useConstCallback(id =>
-    API.getContactAddress(apiUrl)(id)(oidcClient?.accessToken),
-  );
+  const getContactAddress = useConstCallback(id => API.getContactAddress(apiUrl)(id)(token));
 
-  const putContact = useConstCallback((id, newContact) =>
-    API.putContact(apiUrl)(id)(newContact)(oidcClient?.accessToken),
-  );
+  const putContact = useConstCallback((id, newContact) => API.putContact(apiUrl)(id)(newContact)(token));
 
   const postContactEvent = useConstCallback(newContactEvent =>
-    API.postContactEvent(apiUrl)(newContactEvent)(oidcClient?.accessToken),
+    API.postContactEvent(apiUrl)(newContactEvent)(token),
   );
 
-  const putAddress = useConstCallback((id, newAddress) =>
-    API.putAddress(apiUrl)(id)(newAddress)(oidcClient?.accessToken),
-  );
+  const putAddress = useConstCallback((id, newAddress) => API.putAddress(apiUrl)(id)(newAddress)(token));
 
   return {
     getFirstContacts,

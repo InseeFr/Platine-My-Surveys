@@ -1,15 +1,15 @@
 import { AccountCircle, ContactSupport, Logout } from "@mui/icons-material";
 import { Button, Divider, ListItem, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
-import { AuthContext } from "ui/context/auth/provider";
 import { UserAccountContext } from "ui/context/UserAccount";
 import { useContext, useState } from "react";
 import Link from "@mui/material/Link";
 import { defaultDictionary, buttonDictionary } from "i18n";
 import "./header.css";
 import { environment } from "utils/read-env-vars";
+import { useOidc } from "hooks/useAuth";
 
 export const Header = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout } = useOidc();
   const { PORTAIL_URL: portailUrl } = environment;
   const { user } = useContext(UserAccountContext);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,6 +20,7 @@ export const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <div className="header">
       <img
@@ -90,12 +91,21 @@ export const Header = () => {
             {buttonDictionary.help}
           </MenuItem>
 
-          <MenuItem onClick={logout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            {buttonDictionary.logout}
-          </MenuItem>
+          {logout && (
+            <MenuItem
+              onClick={() =>
+                logout({
+                  redirectTo: "specific url",
+                  url: portailUrl,
+                })
+              }
+            >
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              {buttonDictionary.logout}
+            </MenuItem>
+          )}
         </Menu>
       </div>
     </div>
