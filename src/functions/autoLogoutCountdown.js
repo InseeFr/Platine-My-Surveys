@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useOidc } from "hooks/useAuth";
+import { notifDictionary } from "i18n";
 
 export function AutoLogoutCountdown() {
   const { isUserLoggedIn, subscribeToAutoLogoutCountdown } = useOidc();
@@ -55,8 +56,8 @@ export function AutoLogoutCountdown() {
       }}
     >
       <div>
-        <Typography variant="h5">{"Vous êtes toujours là?"}</Typography>
-        <Typography>{`Vous allez être déconnecté(e) dans ${secondsLeft} sec.`}</Typography>
+        <Typography variant="h5">{notifDictionary.autoLogoutWarning}</Typography>
+        <Typography>{notifDictionary.autoLogoutDisconnecting(secondsLeft)}</Typography>
       </div>
     </div>
   );

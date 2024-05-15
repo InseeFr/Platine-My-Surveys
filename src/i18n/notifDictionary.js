@@ -23,6 +23,14 @@ const dictionary = {
     fr: "Une erreur est survenue lors de la modification de vos informations.",
     en: "An error occurred when modifying your personal datas.",
   },
+  autoLogoutWarning: {
+    fr: "Vous êtes toujours là?",
+    en: "Are you still here?",
+  },
+  autoLogoutDisconnecting: {
+    fr: secondsLeft => `Vous allez être déconnecté(e) dans ${secondsLeft} sec.`,
+    en: secondsLeft => `You will be disconnected in ${secondsLeft} seconds.`,
+  },
 };
 
 export default dictionary;
