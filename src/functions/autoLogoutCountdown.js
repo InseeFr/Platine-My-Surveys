@@ -14,13 +14,11 @@ export function AutoLogoutCountdown() {
 
       const { unsubscribeFromAutoLogoutCountdown } = subscribeToAutoLogoutCountdown(
         ({ secondsLeft }) => {
-          setSecondsLeft(secondsLeft === undefined || secondsLeft > 60 ? undefined : secondsLeft),
-            console.log(`seconds Left: ${secondsLeft}`);
+          setSecondsLeft(secondsLeft === undefined || secondsLeft > 60 ? undefined : secondsLeft);
         },
       );
 
       return () => {
-        console.log("unsuscribing");
         unsubscribeFromAutoLogoutCountdown();
       };
     },
