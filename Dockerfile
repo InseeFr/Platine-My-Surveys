@@ -7,6 +7,9 @@ ADD build /usr/share/nginx/html
 RUN rm etc/nginx/conf.d/default.conf
 COPY nginx.conf etc/nginx/conf.d/
 
+
+COPY entrypoint.sh /entrypoint.sh
+
 # add non-root user
 RUN touch /var/run/nginx.pid
 RUN chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
@@ -15,9 +18,6 @@ RUN chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/ngi
 EXPOSE 8080
 
 USER nginx
-
-
-COPY entrypoint.sh /entrypoint.sh
 
 # Start Nginx server
 ENTRYPOINT sh -c "./entrypoint.sh && nginx -g 'daemon off;'"
