@@ -1,9 +1,10 @@
 import { Alert, Snackbar } from "@mui/material";
 import React, { createContext, useMemo, useState } from "react";
 import "./App.css";
-import AuthProvider from "./ui/context/auth/provider/component";
+import { AuthProvider } from "hooks/useAuth";
 import { Router } from "./ui/router";
 import { LoaderSimple } from "./ui/shared/loader";
+import { AutoLogoutCountdown } from "functions/autoLogoutCountdown";
 
 export const AppContext = createContext();
 
@@ -31,6 +32,7 @@ const App = () => {
     <>
       <AppContext.Provider value={context}>
         <AuthProvider>
+          <AutoLogoutCountdown />
           <React.StrictMode>
             <Router />
           </React.StrictMode>

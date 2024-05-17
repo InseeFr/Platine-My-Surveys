@@ -4,14 +4,13 @@ import { ERROR_SEVERITY, SUCCESS_SEVERITY } from "core/constants";
 import { useAPI, useConstCallback } from "core/hooks";
 import { errorDictionary, notifDictionary } from "i18n";
 import { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "../auth/provider";
+import { useMaybeUser } from "hooks/useAuth";
 
 export const UserAccountContext = createContext();
 
 export const UserAccountProvider = ({ children }) => {
   const { setLoading, openNotif } = useContext(AppContext);
-  const oidcClient = useContext(AuthContext);
-  const oidcUser = oidcClient?.oidcUser;
+  const oidcUser = useMaybeUser();
   const [user, setUser] = useState(null);
   const [userError, setUserError] = useState(null);
 
@@ -29,7 +28,7 @@ export const UserAccountProvider = ({ children }) => {
         message: notifDictionary.contactsLoadingError(id),
       });
       setUserError({
-        message: errorDictionary.errorUser(oidcUser?.id),
+        message: errorDictionary.errorUser(oidcUser?.preferred_username),
       });
     }
   });
@@ -80,14 +79,8 @@ export const UserAccountProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    /**
-     * For Keyloack : check if the id is "id" or something like : "preferred_username"
-     * If it's not "id" but "preferred_username", change "oidcUser?.id" to "oidcUser?.preferred_username"
-     * Please change in ui/context/auth/provider/NoAuth.jsx, "oidcUser: { id: id }," to "`oidcUser: { preferred_username: id },"
-     */
-
-    if (oidcUser?.id) loadUserData(oidcUser?.id);
-  }, [oidcUser?.id]);
+    if (oidcUser?.preferred_username) loadUserData(oidcUser?.preferred_username.toUpperCase());
+  }, [oidcUser?.preferred_username]);
 
   return (
     <UserAccountContext.Provider

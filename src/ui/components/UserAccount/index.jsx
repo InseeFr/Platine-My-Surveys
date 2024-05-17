@@ -23,8 +23,6 @@ export const UserAccount = () => {
     setFirstConnectDisplay(false);
   };
 
-  console.log(user);
-
   return (
     <>
       <div className="user-account">

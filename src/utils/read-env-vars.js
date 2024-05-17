@@ -13,11 +13,13 @@ export const environment = {
   API_URL: getEnvVar("REACT_APP_MANAGEMENT_API_BASE_URL"),
   AUTH_TYPE: getEnvVar("REACT_APP_AUTH_TYPE") || "NONE",
   PORTAIL_URL: getEnvVar("REACT_APP_PORTAIL_URL") || `${window.location.origin}`,
+  DUMMY_USER_ROLE: getEnvVar("REACT_APP_DUMMY_USER_ROLE"),
 };
 
 export const oidcConf = {
   client_id: getEnvVar("REACT_APP_CLIENT_ID"),
   authority: getEnvVar("REACT_APP_AUTHORITY"),
   realm: getEnvVar("REACT_APP_REALM"),
+  issuer: getEnvVar("REACT_APP_ISSUER"),
   scope: "openid profile email offline_access",
 };

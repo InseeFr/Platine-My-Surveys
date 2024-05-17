@@ -2,12 +2,25 @@ import { Box } from "@mui/material";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { SurveyList } from "ui/components/SurveyList";
 import { UserAccount } from "ui/components/UserAccount";
-import { ProtectedRoute } from "ui/context/auth";
 import { UserAccountProvider } from "ui/context/UserAccount";
 import { Footer } from "ui/shared/Footer";
 import { Header } from "ui/shared/Header";
 import { Menu } from "ui/shared/Menu";
 import { Redirect } from "./redirect.js";
+import { LoaderSimple } from "ui/shared/loader/index.js";
+import { useIsAuthenticated } from "hooks/useAuth.js";
+
+const ProtectedRoute = ({ children, redirect, isAllowed = true }) => {
+  const { isAuthenticated } = useIsAuthenticated();
+  if (!isAuthenticated) {
+    return <LoaderSimple />;
+  }
+  if (!isAllowed) {
+    return <Navigate to={redirect} />;
+  }
+
+  return children ? children : <Outlet />;
+};
 
 export const Router = () => {
   return (
