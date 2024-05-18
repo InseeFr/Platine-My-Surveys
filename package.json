@@ -1,6 +1,6 @@
 {
   "name": "platine-my-surveys",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",

@@ -21,4 +21,3 @@ USER nginx
 
 # Start Nginx server
 ENTRYPOINT sh -c "./entrypoint.sh && nginx -g 'daemon off;'"
-RUN chmod +x entrypoint.sh
