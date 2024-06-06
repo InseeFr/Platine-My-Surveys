@@ -1,0 +1,7 @@
+/node_modules/
+/dist/
+/.eslintrc.js
+/docs/
+/CHANGELOG.md
+/src/vite-env.d.ts
+/src/routeTree.gen.ts
