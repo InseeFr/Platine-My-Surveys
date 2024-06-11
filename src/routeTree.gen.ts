@@ -15,7 +15,6 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as MonCompteImport } from './routes/mon-compte'
 import { Route as MesEnquetesImport } from './routes/mes-enquetes'
-import { Route as AccountImport } from './routes/account'
 
 // Create Virtual Routes
 
@@ -33,11 +32,6 @@ const MesEnquetesRoute = MesEnquetesImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AccountRoute = AccountImport.update({
-  path: '/account',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -52,13 +46,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/account': {
-      id: '/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AccountImport
       parentRoute: typeof rootRoute
     }
     '/mes-enquetes': {
@@ -82,7 +69,6 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
-  AccountRoute,
   MesEnquetesRoute,
   MonCompteRoute,
 })
@@ -96,16 +82,12 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/account",
         "/mes-enquetes",
         "/mon-compte"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
-    },
-    "/account": {
-      "filePath": "account.tsx"
     },
     "/mes-enquetes": {
       "filePath": "mes-enquetes.tsx"

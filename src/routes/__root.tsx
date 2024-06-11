@@ -5,6 +5,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { QueryClient } from "@tanstack/react-query";
 import { AutoLogoutCountdown } from "components/AutoLogoutCountdown";
 import { tss, GlobalStyles } from "tss";
+import { useIsAuthenticated } from "hooks/useAuth";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: RootComponent,
@@ -13,6 +14,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { classes } = useStyles();
+  const { isAuthenticated } = useIsAuthenticated();
+
+  if (!isAuthenticated) {
+    return;
+  }
 
   return (
     <div className={classes.root}>
