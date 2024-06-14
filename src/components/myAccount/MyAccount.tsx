@@ -1,30 +1,38 @@
 import { tss } from "tss";
 import { fr } from "@codegouvfr/react-dsfr";
-import Typography from "@mui/material/Typography";
 import { declareComponentKeys } from "i18nifty/declareComponentKeys";
 import { useTranslation } from "i18n";
+import { APISchemas } from "types/api";
+import Avatar from "../../assets/avatar.svg";
 
 type Props = {
   className?: string;
+  contact: APISchemas["ContactFirstLoginDto"];
 };
 
-export function MyAccount(props: Props) {
-  const { className } = props;
-
+export function MyAccount({ className, contact }: Props) {
   const { classes, cx } = useStyles();
 
   const { t } = useTranslation("MyAccount");
 
   return (
-    <div className={cx(classes.root, className)}>
-      <Typography variant="h1">{t("title my account")}</Typography>
-    </div>
+    <section className={cx(className)}>
+      <div className={classes.titleContainer}>
+        <img src={Avatar} alt="" width={"100px"} className={classes.avatar} />
+        <h1>{t("title my account")}</h1>
+      </div>
+    </section>
   );
 }
 
 const useStyles = tss.withName({ MyAccount }).create({
-  root: {
-    padding: fr.spacing("2w"),
+  titleContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: fr.spacing("8v"),
+  },
+  avatar: {
+    paddingBottom: fr.spacing("6v"),
   },
 });
 

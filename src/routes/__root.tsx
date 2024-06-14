@@ -66,7 +66,7 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
         return "80vw";
       }
 
-      return "60vw";
+      return "80vw";
     })(),
   },
 }));

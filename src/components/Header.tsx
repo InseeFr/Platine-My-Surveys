@@ -1,6 +1,5 @@
 import { Header as DsfrHeader } from "@codegouvfr/react-dsfr/Header";
 import logoInsee from "assets/logo-insee.png";
-import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { declareComponentKeys, useTranslation, useLang } from "i18n";
 import { LanguageSelector } from "components/LanguageSelector";
 import { fr } from "@codegouvfr/react-dsfr";
@@ -8,7 +7,7 @@ import { useLogout } from "hooks/useAuth";
 
 export function Header() {
   const { t } = useTranslation("Header");
-  const { lang, setLang } = useLang();
+  // const { lang, setLang } = useLang();
   const logout = useLogout();
 
   return (
@@ -26,17 +25,31 @@ export function Header() {
       }}
       quickAccessItems={
         logout && [
+          // {
+          //   buttonProps: {
+          //     "aria-controls": "translate-select",
+          //     "aria-expanded": false,
+          //     title: t("select language"),
+          //     className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
+          //   },
+          //   iconId: "fr-icon-translate-2",
+          //   text: <LanguageSelector lang={lang} setLang={setLang} />,
+          // },
+
           {
-            buttonProps: {
-              "aria-controls": "translate-select",
-              "aria-expanded": false,
-              title: t("select language"),
-              className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
+            iconId: "fr-icon-todo-fill",
+            linkProps: {
+              to: "/mes-enquetes",
             },
-            iconId: "fr-icon-translate-2",
-            text: <LanguageSelector lang={lang} setLang={setLang} />,
+            text: t("page title surveys"),
           },
-          headerFooterDisplayItem,
+          {
+            iconId: "fr-icon-user-fill",
+            linkProps: {
+              to: "/mon-compte",
+            },
+            text: t("my account"),
+          },
           {
             iconId: "ri-account-box-line",
             buttonProps: {
@@ -57,18 +70,6 @@ export function Header() {
         imgUrl: logoInsee,
         orientation: "vertical",
       }}
-      navigation={(() =>
-        (
-          [
-            ["/mes-enquetes", t("page title surveys")],
-            ["/mon-compte", t("my account")],
-          ] as const
-        ).map(([to, label]) => ({
-          text: label,
-          linkProps: {
-            to,
-          },
-        })))()}
     />
   );
 }
