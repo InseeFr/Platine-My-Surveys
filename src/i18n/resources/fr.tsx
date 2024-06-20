@@ -21,7 +21,7 @@ export const translations: Translations<"fr"> = {
     `,
   },
   MySurveys: {
-    "title my surveys": "Bienvenue sur votre tableau de bord,",
+    "title my surveys": "Bienvenue sur votre tableau de bord",
     "closed": "Terminé",
     "opened": "En cours",
     "future": "Non commencée",
@@ -42,6 +42,8 @@ export const translations: Translations<"fr"> = {
     "status column": "colonne statut",
     "respond before column": "colonne répondre avant le...",
     "actions column": "colonne d'actions",
+    "sortable column": "colonne triable",
+    "identifier label": "Identifiant :",
   },
   MyAccount: {
     "title my account": "Bienvenue sur votre compte",
@@ -57,6 +59,17 @@ export const translations: Translations<"fr"> = {
     "phone": "Téléphone :",
     "edit": "Modifier",
     "postal address": "Mes coordonnées postales",
+    "country name": "Pays :",
+    "street number": "Numéro de voie :",
+    "repetition index": "Indice de répétition :",
+    "street type": "Type de voie :",
+    "street name": "Libellé de voie :",
+    "address supplement": "Complément(ZI, Bat, Res, ...) :",
+    "special distribution": "Mention spéciale :",
+    "zip code": "Code postal :",
+    "city name": "Libellé commune :",
+    "cedex code": "Code cedex(exemple: 75675) :",
+    "cedex name": "Bureau distributeur(exemple: PARIS CEDEX 14) :",
   },
 
   /* spell-checker: enable */

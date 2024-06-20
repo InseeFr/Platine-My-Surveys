@@ -28,6 +28,9 @@ const useStyles = tss.withName({ MySurveysIndex }).create({
   root: {
     display: "flex",
     justifyContent: "center",
+    [fr.breakpoints.down("sm")]: {
+      margin: fr.spacing("2w"),
+    },
   },
   mySurveys: {
     width: `min(100%, ${fr.breakpoints.emValues.lg}em)`,

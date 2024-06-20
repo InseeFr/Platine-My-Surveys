@@ -52,7 +52,9 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
   main: {
     flex: 1,
     margin: "auto",
-    ...fr.spacing("padding", { topBottom: "10v" }),
+    [fr.breakpoints.up("sm")]: {
+      ...fr.spacing("padding", { topBottom: "10v" }),
+    },
     width: (() => {
       if (windowInnerWidth < breakpointsValues.sm) {
         return `calc(100vw - ${fr.spacing("3v")})`;

@@ -6,6 +6,7 @@ import { APISchemas } from "types/api";
 import Search from "../../assets/search.svg";
 import { SurveysDatagrid, getColumns } from "./SurveysDatagrid";
 import CircularProgress from "@mui/material/CircularProgress";
+import { SurveyCard } from "./SurveyCard";
 
 type Props = {
   className?: string;
@@ -22,26 +23,44 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
   return (
     <section className={cx(className)}>
       <div className={classes.titleContainer}>
-        <img src={Search} alt="" role="presentation" className={classes.search} />
+        <img
+          src={Search}
+          alt=""
+          role="presentation"
+          className={cx("fr-hidden", "fr-unhidden-sm", classes.search)}
+        />
         <h1>{t("title my surveys")}</h1>
       </div>
       {isLoading ? (
         <div>
-          <h6 id="tableTitle">{t("surveys table title")}</h6>
+          <h6 className={cx("fr-hidden", "fr-unhidden-sm")} id="tableTitle">
+            {t("surveys table title")}
+          </h6>
           <div style={{ display: "flex", justifyContent: "center" }} aria-label={t("loading surveys")}>
             <CircularProgress />
           </div>
         </div>
       ) : (
         <div>
-          <h6 id="tableTitle">{t("surveys table title")}</h6>
+          <h6 id="tableTitle" className={cx("fr-hidden fr-unhidden-sm")}>
+            {t("surveys table title")}
+          </h6>
 
           <SurveysDatagrid
-            className={` ${classes.datagrid}`}
+            className={cx("fr-hidden fr-unhidden-sm", classes.datagrid)}
             surveys={surveys}
             t={t}
             columns={columns}
           />
+          <div className={cx("fr-hidden-sm", classes.cardsContainer)}>
+            {surveys.map(survey => (
+              <SurveyCard
+                survey={survey}
+                t={t}
+                key={`${survey.identificationCode}-${survey.surveyWording}`}
+              />
+            ))}
+          </div>
         </div>
       )}
     </section>
@@ -49,6 +68,11 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
 }
 
 const useStyles = tss.withName({ MySurveys }).create({
+  cardsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: fr.spacing("2w"),
+  },
   titleContainer: {
     display: "flex",
     alignItems: "center",
@@ -104,6 +128,8 @@ const { i18n } = declareComponentKeys<
   | "status column"
   | "respond before column"
   | "actions column"
+  | "sortable column"
+  | "identifier label"
 >()("MySurveys");
 
 export type I18n = typeof i18n;

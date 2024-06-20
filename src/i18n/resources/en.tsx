@@ -21,7 +21,7 @@ export const translations: Translations<"en"> = {
     `,
   },
   MySurveys: {
-    "title my surveys": "Welcome on your dashboard,",
+    "title my surveys": "Welcome on your dashboard",
     "closed": "Finished",
     "opened": "In progress",
     "future": "Unstarted",
@@ -42,6 +42,8 @@ export const translations: Translations<"en"> = {
     "status column": "status column",
     "respond before column": "respond before column",
     "actions column": "actions column",
+    "sortable column": "sortable column",
+    "identifier label": "Identifier:",
   },
   MyAccount: {
     "title my account": "Welcome on your account",
@@ -57,6 +59,17 @@ export const translations: Translations<"en"> = {
     "phone": "Phone:",
     "edit": "Edit",
     "postal address": "Postal address",
+    "country name": "Country name:",
+    "street number": "Street number:",
+    "repetition index": "Repetition index:",
+    "street type": "Street type:",
+    "street name": "Street name:",
+    "address supplement": "Address supplement:",
+    "special distribution": "Special distribution:",
+    "zip code": "Zip code:",
+    "city name": "City name:",
+    "cedex code": "Cedex code(example: 75675):",
+    "cedex name": "Cedex name(example: PARIS CEDEX 14):",
   },
 
   /* spell-checker: enable */

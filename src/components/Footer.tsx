@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <DSFRFooter
-      accessibility="fully compliant"
+      accessibility="non compliant"
       contentDescription={t("content description")}
       operatorLogo={{
         alt: t("operator logo alt"),

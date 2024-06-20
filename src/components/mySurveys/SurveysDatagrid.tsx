@@ -52,11 +52,21 @@ export const SurveysDatagrid = ({ surveys, t, className, columns }: Props) => {
   );
 };
 
-const renderHeader = (params: GridColumnHeaderParams, ariaLabel: string) => {
+const renderHeader = (
+  params: GridColumnHeaderParams,
+  ariaLabel: string,
+  t: TranslationFunction<"MySurveys", ComponentKey>,
+  isSortable: boolean = true,
+) => {
   return (
-    <th scope="col" aria-label={ariaLabel}>
+    <div aria-label={ariaLabel}>
+      {isSortable && (
+        <p className="fr-sr-only">
+          {t("sortable column")} {params.colDef.headerName}
+        </p>
+      )}
       {params.colDef.headerName}
-    </th>
+    </div>
   );
 };
 
@@ -68,7 +78,7 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       minWidth: 110,
       flex: 0.4,
       renderHeader: params => {
-        return renderHeader(params, t("identificationCode column"));
+        return renderHeader(params, t("identificationCode column"), t);
       },
     },
     {
@@ -77,7 +87,7 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       flex: 1,
       minWidth: 160,
       renderHeader: params => {
-        return renderHeader(params, t("survey name column"));
+        return renderHeader(params, t("survey name column"), t);
       },
     },
     {
@@ -93,7 +103,7 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
         return SurveysStatus({ status: status, t });
       },
       renderHeader: params => {
-        return renderHeader(params, t("status column"));
+        return renderHeader(params, t("status column"), t);
       },
     },
     {
@@ -103,9 +113,12 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       flex: 0.4,
       renderHeader: params => {
         return (
-          <th scope="col" aria-label={"respond before column"} style={{ width: "min-content" }}>
+          <div aria-label={"respond before column"} style={{ width: "min-content" }}>
+            <p className="fr-sr-only">
+              {t("sortable column")} {params.colDef.headerName}
+            </p>
             {params.colDef.headerName}
-          </th>
+          </div>
         );
       },
       renderCell: params => {
@@ -119,7 +132,7 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       minWidth: 130,
       sortable: false,
       renderHeader: params => {
-        return renderHeader(params, t("actions column"));
+        return renderHeader(params, "actions column", t, false);
       },
       renderCell: params => {
         const surveyStatus = getSurveysStatus({
