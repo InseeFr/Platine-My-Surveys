@@ -110,7 +110,7 @@ const { i18n } = declareComponentKeys<
   | "title my surveys"
   | "closed"
   | "opened"
-  | "future"
+  | "unstarted"
   | "search"
   | "surveys"
   | "surveys table title"
@@ -130,6 +130,9 @@ const { i18n } = declareComponentKeys<
   | "actions column"
   | "sortable column"
   | "identifier label"
+  | "download deposit proof"
+  | "continue"
+  | "from"
 >()("MySurveys");
 
 export type I18n = typeof i18n;

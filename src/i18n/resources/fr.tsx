@@ -24,7 +24,7 @@ export const translations: Translations<"fr"> = {
     "title my surveys": "Bienvenue sur votre tableau de bord",
     "closed": "Terminé",
     "opened": "En cours",
-    "future": "Non commencée",
+    "unstarted": "Non commencée",
     "search": "Rechercher",
     "surveys": "Enquêtes",
     "surveys table title": "Mes enquêtes",
@@ -44,6 +44,9 @@ export const translations: Translations<"fr"> = {
     "actions column": "colonne d'actions",
     "sortable column": "colonne triable",
     "identifier label": "Identifiant :",
+    "download deposit proof": "Preuve de dépot",
+    "continue": "Continuer",
+    "from": "à partir du",
   },
   MyAccount: {
     "title my account": "Bienvenue sur votre compte",
@@ -70,6 +73,19 @@ export const translations: Translations<"fr"> = {
     "city name": "Libellé commune :",
     "cedex code": "Code cedex(exemple: 75675) :",
     "cedex name": "Bureau distributeur(exemple: PARIS CEDEX 14) :",
+  },
+  PersonalInformationsForm: {
+    "civility": "Civilité",
+    "lastName": "Nom",
+    "firstName": "Prénom",
+    "email": "Adresse mail",
+    "function": "Fonction",
+    "usual company name": "Entreprise",
+    "phone": "Téléphone",
+    "phone hint text": "Saisissez le numéro sans point ni espace.",
+    "phone example": "Exemple : 0102030405",
+    "cancel": "Annuler",
+    "register": "Enregistrer",
   },
 
   /* spell-checker: enable */

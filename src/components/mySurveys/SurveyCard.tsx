@@ -4,7 +4,7 @@ import { TranslationFunction } from "i18nifty/typeUtils/TranslationFunction";
 import { tss } from "tss-react/dsfr";
 import { APISchemas } from "types/api";
 import { SurveysStatus, getSurveysStatus } from "./SurveyStatus";
-import { Button } from "@codegouvfr/react-dsfr/Button";
+import { ActionButton } from "./ActionButton";
 
 type Props = {
   survey: APISchemas["MyQuestioningDto"];
@@ -17,6 +17,7 @@ export const SurveyCard = ({ survey, t }: Props) => {
   const status = getSurveysStatus({
     openingDate: survey.openingDate,
     closingDate: survey.closingDate,
+    questioningStatus: survey.questioningStatus,
   });
 
   const formattedClosingDate = survey.closingDate
@@ -42,16 +43,13 @@ export const SurveyCard = ({ survey, t }: Props) => {
           </p>
         </div>
       </div>
-      {survey.accessUrl && (
-        <Button
-          size="small"
-          linkProps={{
-            to: survey.accessUrl as any,
-          }}
-        >
-          {t("goToSurvey")}
-        </Button>
-      )}
+      <ActionButton
+        openingDate={survey.openingDate}
+        closingDate={survey.closingDate}
+        questioningStatus={survey.questioningStatus}
+        accessUrl={survey.accessUrl}
+        t={t}
+      />
     </div>
   );
 };
@@ -63,12 +61,13 @@ const useStyles = tss.withName({ SurveyCard }).create({
     gap: fr.spacing("2v"),
     border: "1px solid",
     borderColor: fr.colors.decisions.border.default.grey.default,
-    padding: fr.spacing("3w"),
   },
   body: {
     display: "flex",
     flexDirection: "column",
     gap: fr.spacing("2w"),
+    padding: fr.spacing("3w"),
+    paddingBottom: 0,
   },
   arrowIcon: {
     width: "fit-content",

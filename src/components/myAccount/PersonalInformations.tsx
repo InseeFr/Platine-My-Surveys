@@ -46,6 +46,10 @@ const useStyles = tss.withName({ PersonalInformations }).create({
     flexDirection: "column",
   },
   informationWithLabel: {
+    [fr.breakpoints.down("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+    },
     paddingBottom: fr.spacing("1w"),
     color: fr.colors.decisions.text.active.grey.default,
   },

@@ -6,11 +6,13 @@ import { Status } from "./SurveysDatagrid";
 type SurveyStatusProps = {
   openingDate?: string;
   closingDate?: string;
+  questioningStatus?: string;
 };
 
 export const getSurveysStatus = ({
   openingDate,
   closingDate,
+  questioningStatus,
 }: SurveyStatusProps): Status | undefined => {
   const currentDate = new Date(Date.now());
 
@@ -21,14 +23,21 @@ export const getSurveysStatus = ({
   const formatedOpeningDate = new Date(openingDate);
   const formatedClosingDate = new Date(closingDate);
 
-  if (currentDate < formatedOpeningDate) {
-    return "future";
-  }
-  if (currentDate > formatedClosingDate) {
+  if (questioningStatus === "VALINT" || currentDate > formatedClosingDate) {
     return "closed";
   }
 
-  return "opened";
+  if (questioningStatus !== "PARTIELINT" && currentDate < formatedClosingDate) {
+    return "unstarted";
+  }
+
+  if (
+    questioningStatus === "PARTIELINT" &&
+    currentDate < formatedClosingDate &&
+    currentDate > formatedOpeningDate
+  ) {
+    return "opened";
+  }
 };
 
 export const SurveysStatus = ({
@@ -39,12 +48,11 @@ export const SurveysStatus = ({
   t: TranslationFunction<"MySurveys", ComponentKey>;
 }) => {
   switch (status) {
-    case "future":
+    case "unstarted":
       return <Badge severity="new">{t(status)}</Badge>;
     case "closed":
       return <Badge severity="success">{t(status)}</Badge>;
     case "opened":
-      // return <Badge severity="warning">{t(status)}</Badge>;
       return <Badge severity="info">{t(status)}</Badge>;
     default:
       return;

@@ -1,13 +1,14 @@
 import { DataGrid } from "@mui/x-data-grid/DataGrid";
 import { GridColDef } from "@mui/x-data-grid/models/colDef/gridColDef";
-import { ComponentKey } from "i18n/types";
+import { ComponentKey, Translations } from "i18n/types";
 import { TranslationFunction } from "i18nifty/typeUtils/TranslationFunction";
 import { APISchemas } from "types/api";
 import { SurveysStatus, getSurveysStatus } from "./SurveyStatus";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { GridColumnHeaderParams } from "@mui/x-data-grid";
+import { GridColumnHeaderParams, GridComparatorFn } from "@mui/x-data-grid";
+import { ActionButton } from "./ActionButton";
+import { ComponentKeyToRecord } from "i18nifty/typeUtils/index";
 
-const status = ["future", "closed", "opened"] as const;
+export const status = ["unstarted", "closed", "opened"] as const;
 export type Status = (typeof status)[number];
 
 type Props = {
@@ -71,6 +72,10 @@ const renderHeader = (
 };
 
 export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) => {
+  const statusSorting: GridComparatorFn<any> = (v1, v2) => {
+    return t(v1).localeCompare(t(v2));
+  };
+
   const columns: GridColDef[] = [
     {
       field: "identificationCode",
@@ -95,10 +100,18 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       headerName: t("status"),
       minWidth: 190,
       flex: 0.4,
+      valueGetter: (_, row) =>
+        getSurveysStatus({
+          openingDate: row.openingDate,
+          closingDate: row.closingDate,
+          questioningStatus: row.questioningStatus,
+        }),
+      sortComparator: statusSorting,
       renderCell: params => {
         const status = getSurveysStatus({
           openingDate: params.row.openingDate,
           closingDate: params.row.closingDate,
+          questioningStatus: params.row.questioningStatus,
         });
         return SurveysStatus({ status: status, t });
       },
@@ -129,28 +142,20 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
       field: "actions",
       headerName: t("actions"),
       flex: 0.4,
-      minWidth: 130,
+      minWidth: 150,
       sortable: false,
       renderHeader: params => {
         return renderHeader(params, "actions column", t, false);
       },
       renderCell: params => {
-        const surveyStatus = getSurveysStatus({
-          openingDate: params.row.openingDate,
-          closingDate: params.row.closingDate,
-        });
         return (
-          surveyStatus === status[2] && (
-            <Button
-              key={params.row.identificationCode}
-              size="small"
-              linkProps={{
-                to: params.row.accessUrl,
-              }}
-            >
-              {t("goToSurvey")}
-            </Button>
-          )
+          <ActionButton
+            openingDate={params.row.openingDate}
+            closingDate={params.row.closingDate}
+            questioningStatus={params.row.questioningStatus}
+            accessUrl={params.row.accessUrl}
+            t={t}
+          />
         );
       },
     },

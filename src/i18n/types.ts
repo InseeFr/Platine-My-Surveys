@@ -14,6 +14,7 @@ export type ComponentKey =
   | import("components/Footer").I18n
   | import("components/myAccount/MyAccount").I18n
   | import("components/mySurveys/MySurveys").I18n
+  | import("components/myAccount/PersonalInformationsForm").I18n
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,

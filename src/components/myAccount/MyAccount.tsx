@@ -8,6 +8,8 @@ import { PersonalInformations } from "./PersonalInformations";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PostalAddressInformations } from "./PostalAddressInformations";
 import { useToggle } from "react-use";
+import { PersonalInformationsForm } from "./PersonalInformationsForm";
+import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
 
 type Props = {
   className?: string;
@@ -34,13 +36,19 @@ export function MyAccount({ className, contact }: Props) {
   return (
     <section className={cx(className)}>
       <div className={classes.titleContainer}>
-        <img src={Avatar} alt="" role="presentation" width={"100px"} className={classes.avatar} />
-        <h1>{t("title my account")}</h1>
+        <img
+          src={Avatar}
+          alt=""
+          role="presentation"
+          width={"100px"}
+          className={cx("fr-hidden", "fr-unhidden-sm", classes.avatar)}
+        />
+        <h1>{`${t("title my account")} ${contact.identifier}`}</h1>
       </div>
       <section className={cx(fr.cx("fr-mb-10v"), classes.informationsCard)}>
         <h6 className={classes.cardTitle}>{t("my personal information")}</h6>
         {editPersonnalInfos ? (
-          <>Modify personnal infos</>
+          <PersonalInformationsForm contact={contact} onClose={toggleEditPersonnalInfos} />
         ) : (
           <div className={classes.informationsContainer}>
             <PersonalInformations contact={contact} t={t} />
@@ -53,7 +61,7 @@ export function MyAccount({ className, contact }: Props) {
       <section className={classes.informationsCard}>
         <h6 className={classes.cardTitle}>{t("postal address")}</h6>
         {editPostalAddressInfos ? (
-          <>Modify postal address infos</>
+          <PostalAddressInformationsForm />
         ) : (
           <div className={classes.informationsContainer}>
             <PostalAddressInformations contact={contact} t={t} />
