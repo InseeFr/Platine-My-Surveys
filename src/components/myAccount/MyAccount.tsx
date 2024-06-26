@@ -14,9 +14,10 @@ import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
 type Props = {
   className?: string;
   contact: APISchemas["ContactFirstLoginDto"];
+  onSave: () => void;
 };
 
-export function MyAccount({ className, contact }: Props) {
+export function MyAccount({ className, contact, onSave }: Props) {
   const { classes, cx } = useStyles();
   const { t } = useTranslation("MyAccount");
 
@@ -31,6 +32,11 @@ export function MyAccount({ className, contact }: Props) {
   const onToggleEditPostalAddressInfos = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     toggleEditPostalAddressInfos();
+  };
+
+  const handleSave = () => {
+    editPersonnalInfos ? toggleEditPersonnalInfos() : toggleEditPostalAddressInfos();
+    onSave();
   };
 
   return (
@@ -48,7 +54,11 @@ export function MyAccount({ className, contact }: Props) {
       <section className={cx(fr.cx("fr-mb-10v"), classes.informationsCard)}>
         <h6 className={classes.cardTitle}>{t("my personal information")}</h6>
         {editPersonnalInfos ? (
-          <PersonalInformationsForm contact={contact} onClose={toggleEditPersonnalInfos} />
+          <PersonalInformationsForm
+            contact={contact}
+            onClose={toggleEditPersonnalInfos}
+            onSave={handleSave}
+          />
         ) : (
           <div className={classes.informationsContainer}>
             <PersonalInformations contact={contact} t={t} />

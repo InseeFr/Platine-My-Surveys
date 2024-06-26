@@ -15,7 +15,11 @@ function MyAccountIndex() {
   const { classes } = useStyles();
   const user = useUser();
 
-  const { data: contact, isLoading } = useFetchQuery("/api/contacts/{id}", {
+  const {
+    data: contact,
+    isLoading,
+    refetch,
+  } = useFetchQuery("/api/contacts/{id}", {
     urlParams: {
       id: user.preferred_username.toUpperCase(),
     },
@@ -28,7 +32,7 @@ function MyAccountIndex() {
   return (
     <div className={classes.root}>
       <title>{`${t("my account")} - ${t("service tagline")}`}</title>
-      <MyAccount className={classes.myAccount} contact={contact} />
+      <MyAccount className={classes.myAccount} contact={contact} onSave={refetch} />
     </div>
   );
 }
