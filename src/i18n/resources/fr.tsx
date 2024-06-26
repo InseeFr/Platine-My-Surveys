@@ -87,6 +87,22 @@ export const translations: Translations<"fr"> = {
     "cancel": "Annuler",
     "register": "Enregistrer",
   },
-
+  PostalAddressInformationsForm: {
+    "country name": "Pays",
+    "street number": "Numéro de voie",
+    "repetition index": "Indice de répétition",
+    "street type": "Type de voie",
+    "street name": "Libellé de voie",
+    "address supplement": "Complément(ZI, Bat, Res, ...)",
+    "special distribution": "Mention spéciale",
+    "zip code": "Code postal",
+    "city name": "Libellé commune",
+    "cedex code": "Code cedex",
+    "cedex code hint text": "Exemple: 75675",
+    "cedex name": "Bureau distributeur",
+    "cedex name hint text": "Exemple: PARIS CEDEX 14",
+    "cancel": "Annuler",
+    "register": "Enregistrer",
+  },
   /* spell-checker: enable */
 };

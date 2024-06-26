@@ -71,7 +71,11 @@ export function MyAccount({ className, contact, onSave }: Props) {
       <section className={classes.informationsCard}>
         <h6 className={classes.cardTitle}>{t("postal address")}</h6>
         {editPostalAddressInfos ? (
-          <PostalAddressInformationsForm />
+          <PostalAddressInformationsForm
+            contact={contact}
+            onClose={toggleEditPostalAddressInfos}
+            onSave={handleSave}
+          />
         ) : (
           <div className={classes.informationsContainer}>
             <PostalAddressInformations contact={contact} t={t} />

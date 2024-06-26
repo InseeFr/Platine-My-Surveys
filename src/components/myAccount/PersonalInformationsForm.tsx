@@ -18,14 +18,14 @@ type Props = {
 };
 
 export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) => {
-  const { classes } = useStyles();
+  const { classes } = useStylesContactInformationsForm();
   const { t: translationMyAccount } = useTranslation("MyAccount");
   const { t } = useTranslation("PersonalInformationsForm");
   const [civility, setCivility] = useState<APISchemas["ContactFirstLoginDto"]["civility"]>(
     contact.civility,
   );
 
-  const { register, errors, handleSubmit, reset } = useForm(personnalInformationsSchema, {
+  const { register, errors, handleSubmit, reset, watch } = useForm(personnalInformationsSchema, {
     defaultValues: contact,
   });
 
@@ -43,6 +43,9 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
     reset(contact);
     onClose();
   };
+
+  const isNotSubmittable =
+    isPending || (JSON.stringify(contact) === JSON.stringify(watch()) && civility === contact.civility);
 
   return (
     <form action="#" onSubmit={onSubmit}>
@@ -92,7 +95,10 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
         />
       </div>
       <div className={classes.container}>
-        <Input label={t("function")} nativeInputProps={{ ...register("function") }} />
+        <Input
+          label={t("function")}
+          nativeInputProps={{ autoComplete: "organization", ...register("function") }}
+        />
         <Input label={t("usual company name")} nativeInputProps={{ ...register("usualCompanyName") }} />
       </div>
       <Input
@@ -105,15 +111,35 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
         }
         nativeInputProps={{ autoComplete: "tel", type: "tel", ...register("phone") }}
       />
-      <div className={classes.buttons}>
-        <Button priority="secondary" type="reset" onClick={handleClose} disabled={isPending}>
-          {t("cancel")}
-        </Button>
-        <Button type="submit" disabled={isPending}>
-          {t("register")}
-        </Button>
-      </div>
+      <FormButtons
+        classes={classes}
+        onClose={handleClose}
+        isPending={isPending}
+        isNotSubmittable={isNotSubmittable}
+      />
     </form>
+  );
+};
+
+type FormButtonsProps = {
+  classes: Record<"hintText" | "container" | "buttons", string>;
+  onClose: () => void;
+  isPending: boolean;
+  isNotSubmittable: boolean;
+};
+
+export const FormButtons = ({ classes, onClose, isPending, isNotSubmittable }: FormButtonsProps) => {
+  const { t } = useTranslation("PersonalInformationsForm");
+
+  return (
+    <div className={classes.buttons}>
+      <Button priority="secondary" type="reset" onClick={onClose} disabled={isPending}>
+        {t("cancel")}
+      </Button>
+      <Button type="submit" disabled={isNotSubmittable}>
+        {t("register")}
+      </Button>
+    </div>
   );
 };
 
@@ -133,7 +159,7 @@ const { i18n } = declareComponentKeys<
 
 export type I18n = typeof i18n;
 
-const useStyles = tss.withName({ PersonalInformationsForm }).create({
+export const useStylesContactInformationsForm = tss.withName({ PersonalInformationsForm }).create({
   container: {
     display: "flex",
 

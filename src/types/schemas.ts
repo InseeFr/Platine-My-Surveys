@@ -5,41 +5,37 @@ export const addressSchema = z
     streetNumber: z.string().optional(),
     repetitionIndex: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val))
-      .optional(),
+      .nullish()
+      .transform(val => (val ?? "")),
     streetType: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val))
-      .optional(),
-    streetName: z.string().optional(),
+      .nullish()
+      .transform(val => (val ?? "")),    
+    streetName: z.string().nullish().transform(val => (val ?? "")),
     addressSupplement: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val))
-      .optional(),
+      .nullish()
+      .transform(val => (val ?? "")),
     specialDistribution: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val))
-      .optional(),
+      .nullish()
+      .transform(val => (val ?? "")),
     cedexName: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val)),
+      .nullish()
+      .transform(val => (val ?? "")),
     cedexCode: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val)),
+      .nullish()
+      .transform(val => (val ?? "")),
     cityName: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val)),
+      .nullish()
+      .transform(val => (val ?? "")),
     zipCode: z
       .string()
-      .nullable()
-      .transform(val => (val === null ? "" : val)),
+      .nullish()
+      .transform(val => (val ?? "")),
     countryName: z.string().optional().or(z.literal("")),
   })
   .superRefine(({ cedexCode, zipCode, cityName, cedexName }, refinementContext) => {
@@ -104,10 +100,10 @@ export const personnalInformationsSchema = z.object({
   civility: z.enum(["Female", "Male", "Undefined"]),
   lastName: z.string().min(2, {message : "not valid"} ),
   firstName: z.string().min(3),
-  function: z.string().nullish().transform(val => (val === null ? "" : val)),
+  function: z.string().nullish().transform(val => (val ?? "")),
   email: z.string().email({message : "not valid"}),
   phone: z
-    .string().nullish().transform(val => (val === null ? "" : val)),
+    .string().nullish().transform(val => (val ?? "")),
   secondPhone: z.string().optional().or(z.literal("")),
   identificationName: z.string().optional(),
   usualCompanyName: z.string().optional(),

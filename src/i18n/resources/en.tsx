@@ -87,6 +87,23 @@ export const translations: Translations<"en"> = {
     "cancel": "Cancel",
     "register": "Register",
   },
+  PostalAddressInformationsForm: {
+    "country name": "Country name",
+    "street number": "Street number",
+    "repetition index": "Repetition index",
+    "street type": "Street type",
+    "street name": "Street name",
+    "address supplement": "Address supplement",
+    "special distribution": "Special distribution",
+    "zip code": "Zip code",
+    "city name": "City name",
+    "cedex code": "Cedex code",
+    "cedex code hint text": "Example: 75675",
+    "cedex name": "Cedex name",
+    "cedex name hint text": "Example: PARIS CEDEX 14",
+    "cancel": "Cancel",
+    "register": "Register",
+  },
 
   /* spell-checker: enable */
 };
