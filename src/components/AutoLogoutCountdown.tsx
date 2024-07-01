@@ -1,5 +1,5 @@
+import { useOidc } from "hooks/useAuth";
 import { useState, useEffect } from "react";
-import { useOidc } from "oidc";
 import { useStyles } from "tss";
 
 export function AutoLogoutCountdown() {

@@ -6,10 +6,11 @@
     "@codegouvfr/react-dsfr": "^1.9.14",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.6.0",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.14.18",
     "@mui/system": "^5.13.2",
-    "@mui/x-data-grid": "^6.18.2",
+    "@mui/x-data-grid": "^7.6.2",
     "@mui/x-date-pickers": "^5.0.12",
     "@tanstack/react-query": "^5.37.1",
     "@tanstack/react-router": "^1.33.6",
@@ -19,6 +20,8 @@
     "oidc-spa": "^4.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.0",
+    "react-use": "^17.5.0",
     "tsafe": "^1.6.6",
     "tss-react": "^4.9.10",
     "vite-envs": "^4.3.0",
@@ -36,7 +39,7 @@
     "format:check": "npm run _format -- --list-different",
     "predev": "only-include-used-icons",
     "prebuild": "only-include-used-icons",
-    "openapi": "orval --config ./orval.config.ts"
+    "openapi": "o2ts ./openApi.json src/types/api.ts"
   },
   "browserslist": {
     "production": [
@@ -51,6 +54,9 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@grafikart/o2ts": "^0.1.15",
     "@tanstack/router-devtools": "^1.33.6",
     "@tanstack/router-vite-plugin": "^1.32.17",
     "@types/react": "^18.2.66",
@@ -62,7 +68,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-tss-unused-classes": "^1.0.2",
-    "husky": "^4.3.8",
+    "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "orval": "^6.29.1",
     "prettier": "^3.2.5",

@@ -1,17 +1,15 @@
-import { useOidc } from "oidc";
 import { Header as DsfrHeader } from "@codegouvfr/react-dsfr/Header";
 import logoInsee from "assets/logo-insee.png";
-import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { declareComponentKeys, useTranslation, useLang } from "i18n";
 import { LanguageSelector } from "components/LanguageSelector";
 import { fr } from "@codegouvfr/react-dsfr";
+import { useIsAuthenticated } from "hooks/useAuth";
 
 export function Header() {
-  const { isUserLoggedIn, logout, login } = useOidc();
-
   const { t } = useTranslation("Header");
-
   const { lang, setLang } = useLang();
+
+  const { isAuthenticated } = useIsAuthenticated();
 
   return (
     <DsfrHeader
@@ -26,48 +24,52 @@ export function Header() {
         to: "/",
         title: t("home link title"),
       }}
-      quickAccessItems={[
-        {
-          buttonProps: {
-            "aria-controls": "translate-select",
-            "aria-expanded": false,
-            title: t("select language"),
-            className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
-          },
-          iconId: "fr-icon-translate-2",
-          text: <LanguageSelector lang={lang} setLang={setLang} />,
-        },
-        headerFooterDisplayItem,
-        ...(!isUserLoggedIn
+      quickAccessItems={
+        isAuthenticated
           ? [
               {
-                iconId: "fr-icon-lock-line",
                 buttonProps: {
-                  onClick: () => login({ doesCurrentHrefRequiresAuth: false }),
+                  "aria-controls": "translate-select",
+                  "aria-expanded": false,
+                  title: t("select language"),
+                  className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
                 },
-                text: t("login"),
-              } as const,
+                iconId: "fr-icon-translate-2",
+                text: <LanguageSelector lang={lang} setLang={setLang} />,
+              },
+
+              {
+                iconId: "fr-icon-todo-fill",
+                linkProps: {
+                  to: "/mes-enquetes",
+                },
+                text: t("page title surveys"),
+              },
+              {
+                iconId: "fr-icon-user-fill",
+                linkProps: {
+                  to: "/mon-compte",
+                },
+                text: t("my account"),
+              },
             ]
           : [
               {
-                iconId: "ri-account-box-line",
-                buttonProps: {
-                  onClick: () =>
-                    logout({
-                      redirectTo: "home",
-                    }),
-                },
-                text: t("logout"),
-              } as const,
-              {
-                iconId: "fr-icon-account-fill",
+                iconId: "fr-icon-customer-service-fill",
                 linkProps: {
-                  to: "/account",
+                  to: "/assistance",
                 },
-                text: t("my account"),
-              } as const,
-            ]),
-      ]}
+                text: t("contact support"),
+              },
+              {
+                iconId: "fr-icon-user-fill",
+                linkProps: {
+                  to: "/connexion",
+                },
+                text: t("login"),
+              },
+            ]
+      }
       serviceTagline={t("service tagline")}
       serviceTitle={t("service title")}
       operatorLogo={{
@@ -75,18 +77,6 @@ export function Header() {
         imgUrl: logoInsee,
         orientation: "vertical",
       }}
-      navigation={(() =>
-        (
-          [
-            ["/mes-enquetes", t("page title surveys")],
-            ["/mon-compte", t("my account")],
-          ] as const
-        ).map(([to, label]) => ({
-          text: label,
-          linkProps: {
-            to,
-          },
-        })))()}
     />
   );
 }
@@ -101,6 +91,7 @@ const { i18n } = declareComponentKeys<
   | "service tagline"
   | "operator logo alt"
   | "page title surveys"
+  | "contact support"
 >()("Header");
 
 export type I18n = typeof i18n;

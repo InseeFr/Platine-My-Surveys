@@ -11,11 +11,12 @@ export type Language = (typeof languages)[number];
 
 export type ComponentKey =
   | import("components/Header").I18n
-  | import("components/CardsApp/CardsApp").I18n
   | import("components/Footer").I18n
-  | import("components/TodoApp/Todo").I18n
-  | import("components/TodoApp/AddTodo").I18n
-  | import("routes/index.lazy").I18n;
+  | import("components/homepage/Homepage").I18n
+  | import("components/myAccount/MyAccount").I18n
+  | import("components/mySurveys/MySurveys").I18n
+  | import("components/myAccount/PersonalInformationsForm").I18n
+  | import("components/myAccount/PostalAddressInformationsForm").I18n
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
