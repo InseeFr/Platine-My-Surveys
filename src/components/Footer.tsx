@@ -9,17 +9,35 @@ export function Footer() {
   return (
     <DSFRFooter
       accessibility="non compliant"
-      contentDescription={t("content description")}
       operatorLogo={{
         alt: t("operator logo alt"),
         imgUrl: logoInsee,
         orientation: "vertical",
       }}
-      bottomItems={[headerFooterDisplayItem]}
+      termsLinkProps={{
+        href: "#",
+      }}
+      domains={["insee.fr", "legifrance.gouv.fr", "service-public.fr", "cnil.fr"]}
+      // TODO: change links
+      bottomItems={[
+        {
+          text: t("personal data"),
+          linkProps: {
+            to: "/mon-compte",
+          },
+        },
+        {
+          text: t("cookies"),
+          linkProps: {
+            to: "/mon-compte",
+          },
+        },
+        headerFooterDisplayItem,
+      ]}
     />
   );
 }
 
-const { i18n } = declareComponentKeys<"content description" | "operator logo alt">()("Footer");
+const { i18n } = declareComponentKeys<"operator logo alt" | "personal data" | "cookies">()("Footer");
 
 export type I18n = typeof i18n;

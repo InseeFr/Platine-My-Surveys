@@ -1,13 +1,14 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 import { MyAccount } from "components/myAccount/MyAccount";
-import { useUser } from "hooks/useAuth";
+import { protectedLoader, useUser } from "hooks/useAuth";
 import { useFetchQuery } from "hooks/useFetchQuery";
 import { useTranslation } from "i18n";
 import { tss } from "tss";
 
 export const Route = createFileRoute("/mon-compte")({
   component: MyAccountIndex,
+  beforeLoad: protectedLoader,
 });
 
 function MyAccountIndex() {
@@ -43,6 +44,16 @@ const useStyles = tss.withName({ MyAccountIndex }).create({
     justifyContent: "center",
     [fr.breakpoints.down("sm")]: {
       margin: fr.spacing("2w"),
+      width: `calc(100vw - ${fr.spacing("3v")})`,
+    },
+    [fr.breakpoints.up("sm")]: {
+      ...fr.spacing("padding", { topBottom: "10v" }),
+    },
+    [fr.breakpoints.down("md")]: {
+      width: `calc(100vw - ${fr.spacing("10v")})`,
+    },
+    [fr.breakpoints.down("xl")]: {
+      width: "80vw",
     },
   },
   myAccount: {

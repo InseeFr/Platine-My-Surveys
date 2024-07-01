@@ -36,3 +36,15 @@ export function useIsAuthenticated() {
 }
 
 export const AuthProvider = OidcProvider;
+
+export const protectedLoader = async () => {
+  const oidc = await prOidc;
+
+  if (oidc.isUserLoggedIn) {
+      return null;
+  }
+
+  await oidc.login({
+      doesCurrentHrefRequiresAuth: true
+  });
+};

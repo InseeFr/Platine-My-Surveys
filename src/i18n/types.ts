@@ -12,6 +12,7 @@ export type Language = (typeof languages)[number];
 export type ComponentKey =
   | import("components/Header").I18n
   | import("components/Footer").I18n
+  | import("components/homepage/Homepage").I18n
   | import("components/myAccount/MyAccount").I18n
   | import("components/mySurveys/MySurveys").I18n
   | import("components/myAccount/PersonalInformationsForm").I18n

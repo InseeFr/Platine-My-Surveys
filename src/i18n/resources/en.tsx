@@ -12,13 +12,25 @@ export const translations: Translations<"en"> = {
     "service tagline": "Response portal for official statistics surveys",
     "operator logo alt": "Insee, measure to understand",
     "page title surveys": "My surveys",
+    "contact support": "Contact support",
   },
   Footer: {
     "operator logo alt": "Insee, measure to understand",
-    "content description": `
-      This site is a demonstration of the use of Vite + TypeScript + React + react-dsfr.
-      It is intended to be used as a base for development projects at Insee.
-    `,
+    "personal data": "Personal data",
+    "cookies": "Cookies management",
+  },
+  Homepage: {
+    "survey introduction": "Survey introduction",
+    "in this section": "In this section",
+    "legal framework": "Legal framework",
+    "what are your answers for?": "What are your answers for?",
+    "documents to the surveyed": "Documents to the surveyed",
+    "some results": "Some results",
+    "respond to survey": "Respond to the survey",
+    "respond to survey detail": "Please bring your username and password to complete the survey.",
+    estimatedResponseTime: ({ time }: { time?: number }) => (
+      <>Estimated response time: {time ? `${time} mn` : "-"} </>
+    ),
   },
   MySurveys: {
     "title my surveys": "Welcome on your dashboard",

@@ -12,13 +12,26 @@ export const translations: Translations<"fr"> = {
     "service tagline": "Portail de réponse aux enquêtes de la statistique publique",
     "operator logo alt": "Insee, mesurer pour comprendre",
     "page title surveys": "Mes enquêtes",
+    "contact support": "Contacter l'assistance",
   },
   Footer: {
     "operator logo alt": "Insee, mesurer pour comprendre",
-    "content description": `
-      Ce site est une démonstration de l'utilisation de Vite + TypeScript + React + react-dsfr.
-      Il est destiné à être utilisé comme base pour un les projets de développement a l'Insee.
-    `,
+    "personal data": "Données personnelles",
+    "cookies": "Gestion des cookies",
+  },
+  Homepage: {
+    "survey introduction": "Introduction de l'enquête",
+    "in this section": "Dans cette rubrique",
+    "legal framework": "Cadre juridique",
+    "what are your answers for?": "À quoi servent vos réponses ?",
+    "documents to the surveyed": "Documents aux enquêtés",
+    "some results": "Quelques résultats",
+    "respond to survey": "Répondre à l'enquête",
+    "respond to survey detail":
+      "Munissez vous de votre identifiant et de votre mot de passe pour répondre à l’enquête.",
+    estimatedResponseTime: ({ time }: { time?: number }) => (
+      <>Temps de réponse estimé: {time ? `${time} min` : "-"} </>
+    ),
   },
   MySurveys: {
     "title my surveys": "Bienvenue sur votre tableau de bord",
