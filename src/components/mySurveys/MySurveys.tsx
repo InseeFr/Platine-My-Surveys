@@ -22,12 +22,12 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
   const columns = getColumns(t);
   return (
     <section className={cx(className)}>
-      <div className={classes.titleContainer}>
+      <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
         <img
           src={Search}
           alt=""
           role="presentation"
-          className={cx("fr-hidden", "fr-unhidden-sm", classes.search)}
+          className={cx("fr-hidden", "fr-unhidden-sm", "fr-pb-3w", "fr-mr-3w")}
         />
         <h1>{t("title my surveys")}</h1>
       </div>
@@ -52,7 +52,7 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
             t={t}
             columns={columns}
           />
-          <div className={cx("fr-hidden-sm", classes.cardsContainer)}>
+          <div className={cx("fr-hidden-sm")}>
             {surveys.map(survey => (
               <SurveyCard
                 survey={survey}
@@ -68,19 +68,6 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
 }
 
 const useStyles = tss.withName({ MySurveys }).create({
-  cardsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: fr.spacing("2w"),
-  },
-  titleContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: fr.spacing("4w"),
-  },
-  search: {
-    paddingBottom: fr.spacing("3w"),
-  },
   datagrid: {
     ".MuiDataGrid-columnHeader": {
       backgroundColor: fr.colors.decisions.background.contrast.grey.default,

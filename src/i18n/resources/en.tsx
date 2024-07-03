@@ -63,28 +63,19 @@ export const translations: Translations<"en"> = {
   MyAccount: {
     "title my account": "Welcome on your account",
     "my personal information": "My personal information",
-    "civility": "Civility:",
     "Female": "Female",
     "Male": "Male",
+    "edit": "Edit",
+    "postal address": "Postal address",
+  },
+  PersonalInformations: {
+    "civility": "Civility:",
     "lastName": "Last name:",
     "firstName": "First name:",
     "email": "Email:",
     "function": "Function:",
     "usual company name": "Usual company name:",
     "phone": "Phone:",
-    "edit": "Edit",
-    "postal address": "Postal address",
-    "country name": "Country name:",
-    "street number": "Street number:",
-    "repetition index": "Repetition index:",
-    "street type": "Street type:",
-    "street name": "Street name:",
-    "address supplement": "Address supplement:",
-    "special distribution": "Special distribution:",
-    "zip code": "Zip code:",
-    "city name": "City name:",
-    "cedex code": "Cedex code(example: 75675):",
-    "cedex name": "Cedex name(example: PARIS CEDEX 14):",
   },
   PersonalInformationsForm: {
     "civility": "Civility",
@@ -98,6 +89,19 @@ export const translations: Translations<"en"> = {
     "phone example": "Example: 0102030405",
     "cancel": "Cancel",
     "register": "Register",
+  },
+  PostalAddressInformations: {
+    "country name": "Country name:",
+    "street number": "Street number:",
+    "repetition index": "Repetition index:",
+    "street type": "Street type:",
+    "street name": "Street name:",
+    "address supplement": "Address supplement:",
+    "special distribution": "Special distribution:",
+    "zip code": "Zip code:",
+    "city name": "City name:",
+    "cedex code": "Cedex code(example: 75675):",
+    "cedex name": "Cedex name(example: PARIS CEDEX 14):",
   },
   PostalAddressInformationsForm: {
     "country name": "Country name",
@@ -115,6 +119,20 @@ export const translations: Translations<"en"> = {
     "cedex name hint text": "Example: PARIS CEDEX 14",
     "cancel": "Cancel",
     "register": "Register",
+  },
+  AutoLogout: {
+    "autoLogoutLabel": "Are you still there?",
+    logoutTimer: ({ secondLeft }: { secondLeft: number }) => (
+      <p>You will be logged out in {secondLeft} </p>
+    ),
+  },
+  Logout: {
+    "title": "You have been disconnected.",
+    "answer saved":
+      "Your answers have been saved, so you can complete your questionnaire at a later date.",
+    "send message warning":
+      "Don't forget to send in your questionnaire once it has been fully completed.",
+    "reconnect": "Reconnect",
   },
 
   /* spell-checker: enable */

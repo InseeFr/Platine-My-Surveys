@@ -14,9 +14,18 @@ export const Homepage = () => {
   return (
     <div className={classes.pageContainer}>
       <img src={Banner} alt="" role="presentation" width={"100%"} />
-      <div className={classes.container}>
+      <div
+        className={fr.cx(
+          "fr-grid-row",
+          "fr-grid-row--center",
+          "fr-py-md-7w",
+          "fr-p-2w",
+          "fr-p-md-0",
+          "fr-col-12",
+        )}
+      >
         <LoginSection className={cx("fr-hidden-md")} />
-        <div className={classes.sideMenu}>
+        <div className={fr.cx("fr-col-12", "fr-col-md-3", "fr-p-2w", "fr-p-md-0")}>
           <SideMenu
             align="left"
             burgerMenuButtonText={t("in this section")}
@@ -73,31 +82,29 @@ const LoginSection = ({ className }: { className?: string }) => {
   const { classes, cx } = useStyles();
 
   return (
-    <div className={className}>
-      <section className={cx(classes.loginSection)}>
-        <h4>{t("respond to survey")}</h4>
-        <p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
-        <p className={cx("fr-hidden-md", "fr-text--sm")}>{t("respond to survey detail")}</p>
+    <div className={cx(className, "fr-col-12", "fr-col-md-3")}>
+      <h4>{t("respond to survey")}</h4>
+      <p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
+      <p className={cx("fr-hidden-md", "fr-text--sm")}>{t("respond to survey detail")}</p>
 
-        <div className={classes.estimatedResponseTime}>
-          <span className="fr-icon-time-fill fr-icon--sm" aria-hidden="true" />
-          {/* TODO: add time when get data */}
-          <p className={cx("fr-hidden", "fr-unhidden-md")}>
-            {t("estimatedResponseTime", { time: undefined })}
-          </p>
-          <p className={cx("fr-hidden-md", "fr-text--sm")}>
-            {t("estimatedResponseTime", { time: undefined })}
-          </p>
-        </div>
-        <Button
-          linkProps={{
-            to: "/connexion",
-          }}
-          className={classes.loginButton}
-        >
-          {headerTranslation("login")}
-        </Button>
-      </section>
+      <div className={fr.cx("fr-grid-row")} style={{ "flexWrap": "nowrap" }}>
+        <span className="fr-icon-time-fill fr-icon--sm fr-pr-1w" aria-hidden="true" />
+        {/* TODO: add time when get data */}
+        <p className={cx("fr-hidden", "fr-unhidden-md")}>
+          {t("estimatedResponseTime", { time: undefined })}
+        </p>
+        <p className={cx("fr-hidden-md", "fr-text--sm")}>
+          {t("estimatedResponseTime", { time: undefined })}
+        </p>
+      </div>
+      <Button
+        linkProps={{
+          to: "/connexion",
+        }}
+        className={classes.loginButton}
+      >
+        {headerTranslation("login")}
+      </Button>
     </div>
   );
 };
@@ -106,41 +113,9 @@ const useStyles = tss.withName({ Homepage }).create({
   pageContainer: {
     width: "100vw",
   },
-  loginSection: {
-    [fr.breakpoints.up("md")]: {
-      width: "300px",
-    },
-  },
-  sideMenu: {
-    [fr.breakpoints.up("md")]: {
-      width: "300px",
-    },
-    [fr.breakpoints.down("md")]: {
-      padding: fr.spacing("2w"),
-    },
-  },
-  container: {
-    display: "flex",
-    [fr.breakpoints.up("md")]: {
-      flex: 1,
-      margin: "auto",
-      flexDirection: "row",
-      paddingTop: fr.spacing("7w"),
-      paddingBottom: fr.spacing("7w"),
-      width: "80vw",
-    },
-    [fr.breakpoints.down("md")]: {
-      flexDirection: "column",
-      padding: fr.spacing("2w"),
-    },
-  },
   divider: {
     height: "auto",
     margin: `0 ${fr.spacing("3w")}`,
-  },
-  estimatedResponseTime: {
-    display: "flex",
-    gap: fr.spacing("1w"),
   },
   loginButton: {
     width: "100%",

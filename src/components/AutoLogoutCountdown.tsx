@@ -1,10 +1,12 @@
 import { useOidc } from "hooks/useAuth";
+import { declareComponentKeys, useTranslation } from "i18n";
 import { useState, useEffect } from "react";
 import { useStyles } from "tss";
 
 export function AutoLogoutCountdown() {
   const { isUserLoggedIn, subscribeToAutoLogoutCountdown } = useOidc();
   const [secondsLeft, setSecondsLeft] = useState<number | undefined>(undefined);
+  const { t } = useTranslation("AutoLogout");
 
   useEffect(
     () => {
@@ -52,9 +54,22 @@ export function AutoLogoutCountdown() {
       })}
     >
       <div className={css({ textAlign: "center" })}>
-        <p>Are you still there?</p>
-        <p>You will be logged out in {secondsLeft}</p>
+        <p>{t("autoLogoutLabel")}</p>
+        {t("logoutTimer", { secondLeft: secondsLeft })}
       </div>
     </div>
   );
 }
+
+const { i18n } = declareComponentKeys<
+  | "autoLogoutLabel"
+  | {
+      K: "logoutTimer";
+      P: {
+        secondLeft: number;
+      };
+      R: JSX.Element;
+    }
+>()("AutoLogout");
+
+export type I18n = typeof i18n;

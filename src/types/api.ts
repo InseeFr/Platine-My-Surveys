@@ -294,7 +294,7 @@ export type APISchemas = {
     address?: APISchemas["AddressDto"]
   }
   ParamsDto: { paramId?: string; paramValue?: string }
-  JsonNode: {}
+  JsonNode: object
   UserEventDto: {
     /* Format: int64 */
     id?: number
@@ -1689,7 +1689,7 @@ export type APIEndpoints = {
     }
   }
   "/api/main-contact": {
-    responses: { get: {} }
+    responses: { get: object }
     requests: {
       method?: "get"
       query: { partitioning: string; "survey-unit": string }
@@ -1791,7 +1791,7 @@ export type APIEndpoints = {
     }
   }
   "/api/moog/management-monitoring-infos/{id}": {
-    responses: { delete: {} }
+    responses: { delete: object }
     requests: {
       method: "delete"
       urlParams: {
@@ -1801,7 +1801,7 @@ export type APIEndpoints = {
     }
   }
   "/api/questionings/questioning-events/{id}": {
-    responses: { delete: {} }
+    responses: { delete: object }
     requests: {
       method: "delete"
       urlParams: {

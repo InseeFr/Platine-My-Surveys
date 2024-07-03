@@ -1,16 +1,16 @@
-import { ComponentKey } from "i18n/types";
-import { TranslationFunction } from "i18nifty/typeUtils/TranslationFunction";
 import { tss } from "tss";
 import { APISchemas } from "types/api";
 import { InformationWithLabel } from "./PersonalInformations";
+import { declareComponentKeys, useTranslation } from "i18n";
 
 type Props = {
   contact: APISchemas["ContactFirstLoginDto"];
-  t: TranslationFunction<"MyAccount", ComponentKey>;
 };
 
-export const PostalAddressInformations = ({ contact, t }: Props) => {
+export const PostalAddressInformations = ({ contact }: Props) => {
   const { classes } = useStyles();
+  const { t } = useTranslation("PostalAddressInformations");
+
   return (
     <div className={classes.container}>
       <InformationWithLabel label={t("country name")} information={contact.address?.countryName} />
@@ -45,3 +45,19 @@ const useStyles = tss.withName({ PostalAddressInformations }).create({
     flexDirection: "column",
   },
 });
+
+const { i18n } = declareComponentKeys<
+  | "country name"
+  | "street number"
+  | "repetition index"
+  | "street type"
+  | "street name"
+  | "address supplement"
+  | "special distribution"
+  | "zip code"
+  | "city name"
+  | "cedex code"
+  | "cedex name"
+>()("PostalAddressInformations");
+
+export type I18n = typeof i18n;

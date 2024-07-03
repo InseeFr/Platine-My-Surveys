@@ -1,19 +1,20 @@
-import { ComponentKey } from "i18n/types";
-import { TranslationFunction } from "i18nifty/typeUtils/TranslationFunction";
 import { tss } from "tss";
 import { APISchemas } from "types/api";
 import { fr } from "@codegouvfr/react-dsfr";
+import { declareComponentKeys, useTranslation } from "i18n";
 
 type Props = {
   contact: APISchemas["ContactFirstLoginDto"];
-  t: TranslationFunction<"MyAccount", ComponentKey>;
 };
 
-export const PersonalInformations = ({ contact, t }: Props) => {
-  const { classes } = useStyles();
-  const civility = contact.civility && contact.civility !== "Undefined" ? t(contact.civility) : "";
+export const PersonalInformations = ({ contact }: Props) => {
+  const { t } = useTranslation("PersonalInformations");
+  const { t: myAccountTranslation } = useTranslation("MyAccount");
+
+  const civility =
+    contact.civility && contact.civility !== "Undefined" ? myAccountTranslation(contact.civility) : "";
   return (
-    <div className={classes.container}>
+    <div>
       <InformationWithLabel label={t("civility")} information={civility} />
       <InformationWithLabel label={t("lastName")} information={contact.lastName} />
       <InformationWithLabel label={t("firstName")} information={contact.firstName} />
@@ -34,23 +35,24 @@ export const InformationWithLabel = ({
 }) => {
   const { classes, cx } = useStyles();
   return (
-    <span className={cx(fr.cx("fr-mb-0"), classes.informationWithLabel)}>
+    <p className={cx("fr-mb-1w", classes.informationWithLabel)}>
       {label} <strong>{information && information !== "" ? information : "-"}</strong>
-    </span>
+    </p>
   );
 };
 
 const useStyles = tss.withName({ PersonalInformations }).create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-  },
   informationWithLabel: {
     [fr.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
     },
-    paddingBottom: fr.spacing("1w"),
     color: fr.colors.decisions.text.active.grey.default,
   },
 });
+
+const { i18n } = declareComponentKeys<
+  "civility" | "lastName" | "firstName" | "email" | "function" | "usual company name" | "phone"
+>()("PersonalInformations");
+
+export type I18n = typeof i18n;

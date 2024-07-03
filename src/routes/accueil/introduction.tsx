@@ -1,16 +1,13 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
-import { tss } from "tss-react";
 
 export const Route = createFileRoute("/accueil/introduction")({
   component: IntroductionIndex,
 });
 
 function IntroductionIndex() {
-  const { classes } = useStyles();
-
   return (
-    <section className={classes.container}>
+    <section className={fr.cx("fr-col-12", "fr-col-md-4")}>
       <h3>Introduction à l’enquête MOCK</h3>
       <div>
         <p>
@@ -35,11 +32,3 @@ function IntroductionIndex() {
     </section>
   );
 }
-
-const useStyles = tss.withName({ IntroductionIndex }).create({
-  container: {
-    [fr.breakpoints.up("md")]: {
-      width: "calc(80vw - 650px)",
-    },
-  },
-});

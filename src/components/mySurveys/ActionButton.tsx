@@ -92,7 +92,7 @@ export const ActionButton = ({ openingDate, closingDate, questioningStatus, acce
     return (
       <div className={classes.respondButton}>
         <p
-          className={cx(fr.cx("fr-mb-0"), classes.openingDate)}
+          className={cx("fr-mb-0", classes.openingDate)}
         >{`${t("from")} ${formatedOpeningDate.toLocaleDateString()}`}</p>
         <Button size="small" disabled={true}>
           {t("goToSurvey")}

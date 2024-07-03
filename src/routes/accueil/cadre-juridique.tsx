@@ -1,25 +1,14 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
-import { tss } from "tss-react";
 
 export const Route = createFileRoute("/accueil/cadre-juridique")({
   component: LegalFrameworkIndex,
 });
 
 function LegalFrameworkIndex() {
-  const { classes } = useStyles();
-
   return (
-    <section className={classes.container}>
+    <section className={fr.cx("fr-col-12", "fr-col-md-4")}>
       <h3>Page cadre juridique</h3>
     </section>
   );
 }
-
-const useStyles = tss.withName({ LegalFrameworkIndex }).create({
-  container: {
-    [fr.breakpoints.up("md")]: {
-      width: "calc(80vw - 650px)",
-    },
-  },
-});

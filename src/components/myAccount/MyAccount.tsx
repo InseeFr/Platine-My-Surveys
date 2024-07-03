@@ -12,12 +12,11 @@ import { PersonalInformationsForm } from "./PersonalInformationsForm";
 import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
 
 type Props = {
-  className?: string;
   contact: APISchemas["ContactFirstLoginDto"];
   onSave: () => void;
 };
 
-export function MyAccount({ className, contact, onSave }: Props) {
+export function MyAccount({ contact, onSave }: Props) {
   const { classes, cx } = useStyles();
   const { t } = useTranslation("MyAccount");
 
@@ -40,18 +39,18 @@ export function MyAccount({ className, contact, onSave }: Props) {
   };
 
   return (
-    <section className={cx(className)}>
-      <div className={classes.titleContainer}>
+    <section>
+      <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
         <img
           src={Avatar}
           alt=""
           role="presentation"
           width={"100px"}
-          className={cx("fr-hidden", "fr-unhidden-sm", classes.avatar)}
+          className={cx("fr-hidden", "fr-unhidden-sm", "fr-pb-3w", "fr-mr-3w")}
         />
         <h1>{`${t("title my account")} ${contact.identifier}`}</h1>
       </div>
-      <section className={cx(fr.cx("fr-mb-10v"), classes.informationsCard)}>
+      <section className={cx("fr-mb-10v", "fr-p-3w", classes.informationsCard)}>
         <h6 className={classes.cardTitle}>{t("my personal information")}</h6>
         {editPersonnalInfos ? (
           <PersonalInformationsForm
@@ -61,14 +60,14 @@ export function MyAccount({ className, contact, onSave }: Props) {
           />
         ) : (
           <div className={classes.informationsContainer}>
-            <PersonalInformations contact={contact} t={t} />
+            <PersonalInformations contact={contact} />
             <Button type="button" style={{ alignSelf: "end" }} onClick={onToggleEditPersonnalInfos}>
               {t("edit")}
             </Button>
           </div>
         )}
       </section>
-      <section className={classes.informationsCard}>
+      <section className={cx("fr-p-3w", classes.informationsCard)}>
         <h6 className={classes.cardTitle}>{t("postal address")}</h6>
         {editPostalAddressInfos ? (
           <PostalAddressInformationsForm
@@ -78,7 +77,7 @@ export function MyAccount({ className, contact, onSave }: Props) {
           />
         ) : (
           <div className={classes.informationsContainer}>
-            <PostalAddressInformations contact={contact} t={t} />
+            <PostalAddressInformations contact={contact} />
             <Button type="button" style={{ alignSelf: "end" }} onClick={onToggleEditPostalAddressInfos}>
               {t("edit")}
             </Button>
@@ -90,18 +89,9 @@ export function MyAccount({ className, contact, onSave }: Props) {
 }
 
 const useStyles = tss.withName({ MyAccount }).create({
-  titleContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: fr.spacing("4w"),
-  },
-  avatar: {
-    paddingBottom: fr.spacing("3w"),
-  },
   informationsCard: {
     border: "1px solid",
     borderColor: fr.colors.decisions.border.default.grey.default,
-    padding: fr.spacing("3w"),
   },
   informationsContainer: {
     display: "flex",
@@ -113,30 +103,7 @@ const useStyles = tss.withName({ MyAccount }).create({
 });
 
 const { i18n } = declareComponentKeys<
-  | "title my account"
-  | "my personal information"
-  | "civility"
-  | "Female"
-  | "Male"
-  | "lastName"
-  | "firstName"
-  | "email"
-  | "function"
-  | "usual company name"
-  | "phone"
-  | "edit"
-  | "postal address"
-  | "country name"
-  | "street number"
-  | "repetition index"
-  | "street type"
-  | "street name"
-  | "address supplement"
-  | "special distribution"
-  | "zip code"
-  | "city name"
-  | "cedex code"
-  | "cedex name"
+  "title my account" | "my personal information" | "Female" | "Male" | "edit" | "postal address"
 >()("MyAccount");
 
 export type I18n = typeof i18n;

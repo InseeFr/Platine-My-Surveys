@@ -25,19 +25,19 @@ export const SurveyCard = ({ survey, t }: Props) => {
     : undefined;
 
   return (
-    <div className={classes.card}>
-      <div className={classes.body}>
-        <div className={classes.cardSection}>
+    <div className={cx(classes.card, "fr-my-2w")}>
+      <div className={cx("fr-px-3w", "fr-pt-3w", "fr-pb-0")}>
+        <div className={cx("fr-pb-2w")}>
           {SurveysStatus({ status: status, t })}
-          <div className={classes.information}>
+          <div className={cx(classes.information, "fr-pt-3v", "fr-pt-1w")}>
             <i className={cx("fr-icon-arrow-right-line", classes.arrowIcon)} />
-            <p className={cx(fr.cx("fr-mb-0"), fr.cx("fr-text--xs"))}>
+            <p className={cx("fr-mb-0", "fr-text--xs")}>
               {t("respond before")} {formattedClosingDate ?? "-"}
             </p>
           </div>
         </div>
-        <div className={classes.cardSection}>
-          <h5 className={fr.cx("fr-mb-0")}>{survey.surveyWording}</h5>
+        <div>
+          <h5 className={cx("fr-mb-0", "fr-pb-3v")}>{survey.surveyWording}</h5>
           <p>
             {t("identifier label")} {survey.identificationCode}
           </p>
@@ -56,18 +56,8 @@ export const SurveyCard = ({ survey, t }: Props) => {
 
 const useStyles = tss.withName({ SurveyCard }).create({
   card: {
-    display: "flex",
-    flexDirection: "column",
-    gap: fr.spacing("2v"),
     border: "1px solid",
     borderColor: fr.colors.decisions.border.default.grey.default,
-  },
-  body: {
-    display: "flex",
-    flexDirection: "column",
-    gap: fr.spacing("2w"),
-    padding: fr.spacing("3w"),
-    paddingBottom: 0,
   },
   arrowIcon: {
     width: "fit-content",
@@ -79,14 +69,8 @@ const useStyles = tss.withName({ SurveyCard }).create({
       height: "16px",
     },
   },
-  cardSection: {
-    display: "flex",
-    flexDirection: "column",
-    gap: fr.spacing("3v"),
-  },
   information: {
     display: "flex",
-    gap: fr.spacing("1w"),
     color: fr.colors.decisions.text.mention.grey.default,
   },
 });

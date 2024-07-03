@@ -64,28 +64,19 @@ export const translations: Translations<"fr"> = {
   MyAccount: {
     "title my account": "Bienvenue sur votre compte",
     "my personal information": "Mes informations personnelles",
-    "civility": "Civilité :",
     "Female": "Madame",
     "Male": "Monsieur",
+    "edit": "Modifier",
+    "postal address": "Mes coordonnées postales",
+  },
+  PersonalInformations: {
+    "civility": "Civilité :",
     "lastName": "Nom :",
     "firstName": "Prénom :",
     "email": "Adresse mail :",
     "function": "Fonction :",
     "usual company name": "Entreprise :",
     "phone": "Téléphone :",
-    "edit": "Modifier",
-    "postal address": "Mes coordonnées postales",
-    "country name": "Pays :",
-    "street number": "Numéro de voie :",
-    "repetition index": "Indice de répétition :",
-    "street type": "Type de voie :",
-    "street name": "Libellé de voie :",
-    "address supplement": "Complément(ZI, Bat, Res, ...) :",
-    "special distribution": "Mention spéciale :",
-    "zip code": "Code postal :",
-    "city name": "Libellé commune :",
-    "cedex code": "Code cedex(exemple: 75675) :",
-    "cedex name": "Bureau distributeur(exemple: PARIS CEDEX 14) :",
   },
   PersonalInformationsForm: {
     "civility": "Civilité",
@@ -99,6 +90,19 @@ export const translations: Translations<"fr"> = {
     "phone example": "Exemple : 0102030405",
     "cancel": "Annuler",
     "register": "Enregistrer",
+  },
+  PostalAddressInformations: {
+    "country name": "Pays :",
+    "street number": "Numéro de voie :",
+    "repetition index": "Indice de répétition :",
+    "street type": "Type de voie :",
+    "street name": "Libellé de voie :",
+    "address supplement": "Complément(ZI, Bat, Res, ...) :",
+    "special distribution": "Mention spéciale :",
+    "zip code": "Code postal :",
+    "city name": "Libellé commune :",
+    "cedex code": "Code cedex(exemple: 75675) :",
+    "cedex name": "Bureau distributeur(exemple: PARIS CEDEX 14) :",
   },
   PostalAddressInformationsForm: {
     "country name": "Pays",
@@ -116,6 +120,20 @@ export const translations: Translations<"fr"> = {
     "cedex name hint text": "Exemple: PARIS CEDEX 14",
     "cancel": "Annuler",
     "register": "Enregistrer",
+  },
+  AutoLogout: {
+    "autoLogoutLabel": "Êtes-vous toujours là ?",
+    logoutTimer: ({ secondLeft }: { secondLeft: number }) => (
+      <p>Vous allez être déconnecté dans {secondLeft} </p>
+    ),
+  },
+  Logout: {
+    "title": "Vous avez été déconnecté.",
+    "answer saved":
+      "Vos réponses ont été sauvegardées, vous pourrez ainsi compléter ultérieurement votre questionnaire.",
+    "send message warning":
+      "N’oubliez pas d’envoyer votre questionnaire une fois qu’il sera entièrement complété.",
+    "reconnect": "Se reconnecter",
   },
   /* spell-checker: enable */
 };

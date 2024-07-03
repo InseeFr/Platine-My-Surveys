@@ -17,6 +17,10 @@ export type ComponentKey =
   | import("components/mySurveys/MySurveys").I18n
   | import("components/myAccount/PersonalInformationsForm").I18n
   | import("components/myAccount/PostalAddressInformationsForm").I18n
+  | import("components/AutoLogoutCountdown").I18n
+  | import("components/Logout").I18n
+  | import("components/myAccount/PersonalInformations").I18n
+  | import("components/myAccount/PostalAddressInformations").I18n
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
