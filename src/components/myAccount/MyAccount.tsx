@@ -3,13 +3,13 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { declareComponentKeys } from "i18nifty/declareComponentKeys";
 import { useTranslation } from "i18n";
 import { APISchemas } from "types/api";
-import Avatar from "../../assets/avatar.svg";
 import { PersonalInformations } from "./PersonalInformations";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PostalAddressInformations } from "./PostalAddressInformations";
 import { useToggle } from "react-use";
 import { PersonalInformationsForm } from "./PersonalInformationsForm";
 import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
+import { AvatarIcon } from "assets/Avatar";
 
 type Props = {
   contact: APISchemas["ContactFirstLoginDto"];
@@ -39,16 +39,10 @@ export function MyAccount({ contact, onSave }: Props) {
   };
 
   return (
-    <section>
+    <section id="content">
       <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
-        <img
-          src={Avatar}
-          alt=""
-          role="presentation"
-          width={"100px"}
-          className={cx("fr-hidden", "fr-unhidden-sm", "fr-pb-3w", "fr-mr-3w")}
-        />
-        <h1>{`${t("title my account")} ${contact.identifier}`}</h1>
+        <AvatarIcon />
+        <h1>{t("title my account")}</h1>
       </div>
       <section className={cx("fr-mb-10v", "fr-p-3w", classes.informationsCard)}>
         <h6 className={classes.cardTitle}>{t("my personal information")}</h6>

@@ -51,6 +51,5 @@ export function memoize<T extends SimpleType[], R>(
     cache.set(key, value);
 
     return value;
-   
   }) as any;
 }

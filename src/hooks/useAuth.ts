@@ -41,10 +41,10 @@ export const protectedLoader = async () => {
   const oidc = await prOidc;
 
   if (oidc.isUserLoggedIn) {
-      return null;
+    return null;
   }
 
   await oidc.login({
-      doesCurrentHrefRequiresAuth: true
+    doesCurrentHrefRequiresAuth: true,
   });
 };

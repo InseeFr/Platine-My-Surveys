@@ -3,10 +3,10 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { declareComponentKeys } from "i18nifty/declareComponentKeys";
 import { useTranslation } from "i18n";
 import { APISchemas } from "types/api";
-import Search from "../../assets/search.svg";
 import { SurveysDatagrid, getColumns } from "./SurveysDatagrid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SurveyCard } from "./SurveyCard";
+import { SearchIcon } from "assets/Search";
 
 type Props = {
   className?: string;
@@ -21,14 +21,9 @@ export function MySurveys({ className, surveys, isLoading }: Props) {
 
   const columns = getColumns(t);
   return (
-    <section className={cx(className)}>
+    <section className={cx(className)} id="content">
       <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
-        <img
-          src={Search}
-          alt=""
-          role="presentation"
-          className={cx("fr-hidden", "fr-unhidden-sm", "fr-pb-3w", "fr-mr-3w")}
-        />
+        <SearchIcon />
         <h1>{t("title my surveys")}</h1>
       </div>
       {isLoading ? (

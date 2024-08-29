@@ -121,11 +121,11 @@ export const getColumns = (t: TranslationFunction<"MySurveys", ComponentKey>) =>
     {
       field: "closingDate",
       headerName: t("respond before"),
-      minWidth: 100,
+      minWidth: 160,
       flex: 0.4,
       renderHeader: params => {
         return (
-          <div aria-label={"respond before column"} style={{ width: "min-content" }}>
+          <div aria-label={"respond before column"} style={{ width: "fit-content" }}>
             <p className="fr-sr-only">
               {t("sortable column")} {params.colDef.headerName}
             </p>

@@ -10,11 +10,12 @@ import { useMemo } from "react";
 import { useAccessToken } from "./useAuth.ts";
 import { APIMethods, APIPaths, APIRequest, APIRequests, APIResponse } from "types/api.ts";
 
-type ApiResponseContent<Path extends APIPaths> = APIResponse<Path, "get"> extends {
-  content?: infer Content;
-}
-  ? Content
-  : never;
+type ApiResponseContent<Path extends APIPaths> =
+  APIResponse<Path, "get"> extends {
+    content?: infer Content;
+  }
+    ? Content
+    : never;
 
 export function useFetchQuery<Path extends APIPaths, Options extends APIRequests<Path>>(
   path: Path,

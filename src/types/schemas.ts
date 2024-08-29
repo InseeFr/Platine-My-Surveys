@@ -6,36 +6,39 @@ export const addressSchema = z
     repetitionIndex: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     streetType: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),    
-    streetName: z.string().nullish().transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
+    streetName: z
+      .string()
+      .nullish()
+      .transform(val => val ?? ""),
     addressSupplement: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     specialDistribution: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     cedexName: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     cedexCode: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     cityName: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     zipCode: z
       .string()
       .nullish()
-      .transform(val => (val ?? "")),
+      .transform(val => val ?? ""),
     countryName: z.string().optional().or(z.literal("")),
   })
   .superRefine(({ cedexCode, zipCode, cityName, cedexName }, refinementContext) => {
@@ -95,18 +98,20 @@ export const addressSchema = z
     }
   });
 
-
 export const personnalInformationsSchema = z.object({
   civility: z.enum(["Female", "Male", "Undefined"]),
-  lastName: z.string().min(2, {message : "not valid"} ),
+  lastName: z.string().min(2, { message: "not valid" }),
   firstName: z.string().min(3),
-  function: z.string().nullish().transform(val => (val ?? "")),
-  email: z.string().email({message : "not valid"}),
+  function: z
+    .string()
+    .nullish()
+    .transform(val => val ?? ""),
+  email: z.string().email({ message: "not valid" }),
   phone: z
-    .string().nullish().transform(val => (val ?? "")),
+    .string()
+    .nullish()
+    .transform(val => val ?? ""),
   secondPhone: z.string().optional().or(z.literal("")),
   identificationName: z.string().optional(),
   usualCompanyName: z.string().optional(),
-  
 });
-

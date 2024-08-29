@@ -19,8 +19,11 @@ export const createAppOidc = () => {
       issuerUri: import.meta.env.VITE_OIDC_ISSUER,
       clientId: import.meta.env.VITE_OIDC_CLIENT_ID,
       publicUrl: "/",
-      autoLogoutParams: { redirectTo: "specific url", url: import.meta.env.VITE_PORTAIL_URL },
-     });
+      autoLogoutParams: {
+        redirectTo: "specific url",
+        url: `${import.meta.env.VITE_PORTAIL_URL}/deconnexion`,
+      },
+    });
   }
 
   return createMockReactOidc<TokenInfo>({

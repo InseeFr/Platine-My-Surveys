@@ -23,6 +23,7 @@ export const Homepage = () => {
           "fr-p-md-0",
           "fr-col-12",
         )}
+        id="content"
       >
         <LoginSection className={cx("fr-hidden-md")} />
         <div className={fr.cx("fr-col-12", "fr-col-md-3", "fr-p-2w", "fr-p-md-0")}>
@@ -126,6 +127,7 @@ const useStyles = tss.withName({ Homepage }).create({
 
 const { i18n } = declareComponentKeys<
   | "survey introduction"
+  | "homepage"
   | "in this section"
   | "legal framework"
   | "what are your answers for?"

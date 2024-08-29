@@ -8,11 +8,13 @@ export const translations: Translations<"en"> = {
     login: "Log in",
     logout: "Log out",
     "my account": "My account",
-    "service title": "Public statistics - INSEE",
     "service tagline": "Response portal for official statistics surveys",
     "operator logo alt": "Insee, measure to understand",
     "page title surveys": "My surveys",
     "contact support": "Contact support",
+    "header": "Header",
+    "content": "Content",
+    "footer": "Footer",
   },
   Footer: {
     "operator logo alt": "Insee, measure to understand",
@@ -21,6 +23,7 @@ export const translations: Translations<"en"> = {
   },
   Homepage: {
     "survey introduction": "Survey introduction",
+    "homepage": "Homepage",
     "in this section": "In this section",
     "legal framework": "Legal framework",
     "what are your answers for?": "What are your answers for?",
@@ -61,7 +64,7 @@ export const translations: Translations<"en"> = {
     "from": "from",
   },
   MyAccount: {
-    "title my account": "Welcome on your account",
+    "title my account": "My account",
     "my personal information": "My personal information",
     "Female": "Female",
     "Male": "Male",
@@ -123,11 +126,12 @@ export const translations: Translations<"en"> = {
   AutoLogout: {
     "autoLogoutLabel": "Are you still there?",
     logoutTimer: ({ secondLeft }: { secondLeft: number }) => (
-      <p>You will be logged out in {secondLeft} </p>
+      <p>You will be logged out in {secondLeft} sec. </p>
     ),
   },
   Logout: {
     "title": "You have been disconnected.",
+    "disconnected": "Disconnected",
     "answer saved":
       "Your answers have been saved, so you can complete your questionnaire at a later date.",
     "send message warning":

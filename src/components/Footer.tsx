@@ -9,6 +9,7 @@ export function Footer() {
   return (
     <DSFRFooter
       accessibility="non compliant"
+      id="footer"
       operatorLogo={{
         alt: t("operator logo alt"),
         imgUrl: logoInsee,

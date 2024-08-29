@@ -6,13 +6,15 @@ export const translations: Translations<"fr"> = {
     "select language": "Sélectionner la langue",
     "home link title": "Accueil - Portail de réponse aux enquêtes de la statistique publique",
     login: "Se connecter",
-    logout: "Se déconnecter",
+    logout: "Me déconnecter",
     "my account": "Mon compte",
-    "service title": "STATISTIQUE PUBLIQUE - INSEE",
     "service tagline": "Portail de réponse aux enquêtes de la statistique publique",
     "operator logo alt": "Insee, mesurer pour comprendre",
     "page title surveys": "Mes enquêtes",
     "contact support": "Contacter l'assistance",
+    "header": "Menu",
+    "content": "Contenu",
+    "footer": "Pied de page",
   },
   Footer: {
     "operator logo alt": "Insee, mesurer pour comprendre",
@@ -21,6 +23,7 @@ export const translations: Translations<"fr"> = {
   },
   Homepage: {
     "survey introduction": "Introduction de l'enquête",
+    "homepage": "Accueil",
     "in this section": "Dans cette rubrique",
     "legal framework": "Cadre juridique",
     "what are your answers for?": "À quoi servent vos réponses ?",
@@ -62,7 +65,7 @@ export const translations: Translations<"fr"> = {
     "from": "à partir du",
   },
   MyAccount: {
-    "title my account": "Bienvenue sur votre compte",
+    "title my account": "Mon compte",
     "my personal information": "Mes informations personnelles",
     "Female": "Madame",
     "Male": "Monsieur",
@@ -124,11 +127,12 @@ export const translations: Translations<"fr"> = {
   AutoLogout: {
     "autoLogoutLabel": "Êtes-vous toujours là ?",
     logoutTimer: ({ secondLeft }: { secondLeft: number }) => (
-      <p>Vous allez être déconnecté dans {secondLeft} </p>
+      <p>Vous allez être déconnecté dans {secondLeft} sec. </p>
     ),
   },
   Logout: {
     "title": "Vous avez été déconnecté.",
+    "disconnected": "Déconnexion",
     "answer saved":
       "Vos réponses ont été sauvegardées, vous pourrez ainsi compléter ultérieurement votre questionnaire.",
     "send message warning":

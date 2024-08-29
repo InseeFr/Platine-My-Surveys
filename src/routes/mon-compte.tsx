@@ -29,7 +29,7 @@ function MyAccountIndex() {
   }
 
   return (
-    <div className={fr.cx("fr-col-12", "fr-my-10v", "fr-container")}>
+    <div className={fr.cx("fr-container")}>
       <title>{`${t("my account")} - ${t("service tagline")}`}</title>
       <MyAccount contact={contact} onSave={refetch} />
     </div>

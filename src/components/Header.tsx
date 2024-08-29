@@ -1,15 +1,14 @@
 import { Header as DsfrHeader } from "@codegouvfr/react-dsfr/Header";
 import logoInsee from "assets/logo-insee.png";
-import { declareComponentKeys, useTranslation, useLang } from "i18n";
-import { LanguageSelector } from "components/LanguageSelector";
+import { declareComponentKeys, useTranslation } from "i18n";
 import { fr } from "@codegouvfr/react-dsfr";
-import { useIsAuthenticated } from "hooks/useAuth";
+import { useIsAuthenticated, useLogout } from "hooks/useAuth";
 
 export function Header() {
   const { t } = useTranslation("Header");
-  const { lang, setLang } = useLang();
 
   const { isAuthenticated } = useIsAuthenticated();
+  const logout = useLogout();
 
   return (
     <DsfrHeader
@@ -20,6 +19,7 @@ export function Header() {
           Française
         </>
       }
+      id="header"
       homeLinkProps={{
         to: "/",
         title: t("home link title"),
@@ -28,29 +28,29 @@ export function Header() {
         isAuthenticated
           ? [
               {
-                buttonProps: {
-                  "aria-controls": "translate-select",
-                  "aria-expanded": false,
-                  title: t("select language"),
-                  className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
-                },
-                iconId: "fr-icon-translate-2",
-                text: <LanguageSelector lang={lang} setLang={setLang} />,
-              },
-
-              {
-                iconId: "fr-icon-todo-fill",
+                iconId: "fr-icon-customer-service-fill",
                 linkProps: {
-                  to: "/mes-enquetes",
+                  to: "/assistance",
                 },
-                text: t("page title surveys"),
+                text: t("contact support"),
               },
               {
-                iconId: "fr-icon-user-fill",
+                iconId: "fr-icon-account-circle-fill",
                 linkProps: {
                   to: "/mon-compte",
                 },
                 text: t("my account"),
+              },
+              {
+                iconId: "fr-icon-logout-box-r-line",
+
+                buttonProps: {
+                  className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
+                  onClick: () =>
+                    logout &&
+                    logout({ redirectTo: "specific url", url: `${import.meta.env.VITE_PORTAIL_URL}/` }),
+                },
+                text: t("logout"),
               },
             ]
           : [
@@ -62,16 +62,16 @@ export function Header() {
                 text: t("contact support"),
               },
               {
-                iconId: "fr-icon-user-fill",
+                iconId: "fr-icon-account-circle-fill",
                 linkProps: {
+                  className: fr.cx("fr-btn--tertiary", "fr-translate"),
                   to: "/connexion",
                 },
                 text: t("login"),
               },
             ]
       }
-      serviceTagline={t("service tagline")}
-      serviceTitle={t("service title")}
+      serviceTitle={t("service tagline")}
       operatorLogo={{
         alt: t("operator logo alt"),
         imgUrl: logoInsee,
@@ -87,11 +87,13 @@ const { i18n } = declareComponentKeys<
   | "login"
   | "logout"
   | "my account"
-  | "service title"
   | "service tagline"
   | "operator logo alt"
   | "page title surveys"
   | "contact support"
+  | "header"
+  | "content"
+  | "footer"
 >()("Header");
 
 export type I18n = typeof i18n;

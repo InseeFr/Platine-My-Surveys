@@ -1,6 +1,5 @@
 import { APIPaths, APIRequests, APIResponse } from "types/api";
 
-
 const baseURL = import.meta.env.VITE_API_URL;
 
 export async function fetchAPI<
