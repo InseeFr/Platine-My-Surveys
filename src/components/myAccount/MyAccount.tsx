@@ -10,9 +10,10 @@ import { useToggle } from "react-use";
 import { PersonalInformationsForm } from "./PersonalInformationsForm";
 import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
 import { AvatarIcon } from "assets/Avatar";
+import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 
 type Props = {
-  contact: APISchemas["ContactFirstLoginDto"];
+  contact: APISchemas["ContactDetailsDto"];
   onSave: () => void;
 };
 
@@ -40,6 +41,15 @@ export function MyAccount({ contact, onSave }: Props) {
 
   return (
     <section id="content">
+      <Breadcrumb
+        className="fr-mb-0"
+        currentPageLabel={t("title my account")}
+        homeLinkProps={{
+          to: "/",
+        }}
+        segments={[]}
+      />
+
       <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
         <AvatarIcon />
         <h1>{t("title my account")}</h1>

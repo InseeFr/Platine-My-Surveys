@@ -4,7 +4,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { declareComponentKeys, useTranslation } from "i18n";
 
 type Props = {
-  contact: APISchemas["ContactFirstLoginDto"];
+  contact: APISchemas["ContactDetailsDto"];
 };
 
 export const PersonalInformations = ({ contact }: Props) => {
@@ -21,7 +21,8 @@ export const PersonalInformations = ({ contact }: Props) => {
       <InformationWithLabel label={t("email")} information={contact.email} />
       <InformationWithLabel label={t("function")} information={contact.function} />
       <InformationWithLabel label={t("usual company name")} information={contact.usualCompanyName} />
-      <InformationWithLabel label={t("phone")} information={contact.phone} />
+      <InformationWithLabel label={t("phone")} information={contact.otherPhone} />
+      <InformationWithLabel label={t("mobile phone")} information={contact.phone} />
     </div>
   );
 };
@@ -52,7 +53,14 @@ const useStyles = tss.withName({ PersonalInformations }).create({
 });
 
 const { i18n } = declareComponentKeys<
-  "civility" | "lastName" | "firstName" | "email" | "function" | "usual company name" | "phone"
+  | "civility"
+  | "lastName"
+  | "firstName"
+  | "email"
+  | "function"
+  | "usual company name"
+  | "phone"
+  | "mobile phone"
 >()("PersonalInformations");
 
 export type I18n = typeof i18n;

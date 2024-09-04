@@ -4,7 +4,7 @@ import { InformationWithLabel } from "./PersonalInformations";
 import { declareComponentKeys, useTranslation } from "i18n";
 
 type Props = {
-  contact: APISchemas["ContactFirstLoginDto"];
+  contact: APISchemas["ContactDetailsDto"];
 };
 
 export const PostalAddressInformations = ({ contact }: Props) => {

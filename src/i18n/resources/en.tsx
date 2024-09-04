@@ -15,6 +15,7 @@ export const translations: Translations<"en"> = {
     "header": "Header",
     "content": "Content",
     "footer": "Footer",
+    "my surveys": "My surveys",
   },
   Footer: {
     "operator logo alt": "Insee, measure to understand",
@@ -78,7 +79,8 @@ export const translations: Translations<"en"> = {
     "email": "Email:",
     "function": "Function:",
     "usual company name": "Usual company name:",
-    "phone": "Phone:",
+    "phone": "Landline phone:",
+    "mobile phone": "Mobile phone:",
   },
   PersonalInformationsForm: {
     "civility": "Civility",
@@ -87,7 +89,8 @@ export const translations: Translations<"en"> = {
     "email": "Email",
     "function": "Function",
     "usual company name": "Usual company name",
-    "phone": "Phone",
+    "phone": "Landline phone",
+    "mobile phone": "Mobile phone",
     "phone hint text": "Enter the number without periods or spaces.",
     "phone example": "Example: 0102030405",
     "cancel": "Cancel",

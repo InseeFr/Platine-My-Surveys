@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useFetchMutation } from "hooks/useFetchQuery";
 
 type Props = {
-  contact: APISchemas["ContactFirstLoginDto"];
+  contact: APISchemas["ContactDetailsDto"];
   onClose: () => void;
   onSave: () => void;
 };
@@ -21,7 +21,7 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
   const { classes } = useStylesContactInformationsForm();
   const { t: translationMyAccount } = useTranslation("MyAccount");
   const { t } = useTranslation("PersonalInformationsForm");
-  const [civility, setCivility] = useState<APISchemas["ContactFirstLoginDto"]["civility"]>(
+  const [civility, setCivility] = useState<APISchemas["ContactDetailsDto"]["civility"]>(
     contact.civility,
   );
 
@@ -101,16 +101,28 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
         />
         <Input label={t("usual company name")} nativeInputProps={{ ...register("usualCompanyName") }} />
       </div>
-      <Input
-        label={t("phone")}
-        hintText={
-          <div className={classes.hintText}>
-            <span>{t("phone hint text")}</span>
-            <span>{t("phone example")}</span>
-          </div>
-        }
-        nativeInputProps={{ autoComplete: "tel", type: "tel", ...register("phone") }}
-      />
+      <div className={classes.container}>
+        <Input
+          label={t("phone")}
+          hintText={
+            <div className={classes.hintText}>
+              <span>{t("phone hint text")}</span>
+              <span>{t("phone example")}</span>
+            </div>
+          }
+          nativeInputProps={{ autoComplete: "tel", type: "tel", ...register("otherPhone") }}
+        />
+        <Input
+          label={t("mobile phone")}
+          hintText={
+            <div className={classes.hintText}>
+              <span>{t("phone hint text")}</span>
+              <span>{t("phone example")}</span>
+            </div>
+          }
+          nativeInputProps={{ autoComplete: "tel", type: "tel", ...register("phone") }}
+        />
+      </div>
       <FormButtons
         classes={classes}
         onClose={handleClose}
@@ -151,6 +163,7 @@ const { i18n } = declareComponentKeys<
   | "function"
   | "usual company name"
   | "phone"
+  | "mobile phone"
   | "phone hint text"
   | "phone example"
   | "cancel"

@@ -45,7 +45,7 @@ export function Header() {
                 iconId: "fr-icon-logout-box-r-line",
 
                 buttonProps: {
-                  className: fr.cx("fr-btn--tertiary", "fr-translate", "fr-nav"),
+                  className: fr.cx("fr-btn--tertiary", "fr-nav"),
                   onClick: () =>
                     logout &&
                     logout({ redirectTo: "specific url", url: `${import.meta.env.VITE_PORTAIL_URL}/` }),
@@ -94,6 +94,7 @@ const { i18n } = declareComponentKeys<
   | "header"
   | "content"
   | "footer"
+  | "my surveys"
 >()("Header");
 
 export type I18n = typeof i18n;

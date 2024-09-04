@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const addressSchema = z
   .object({
-    streetNumber: z.string().optional(),
+    streetNumber: z
+      .string()
+      .nullish()
+      .transform(val => (val === null ? "" : val)),
     repetitionIndex: z
       .string()
       .nullish()
@@ -39,7 +42,10 @@ export const addressSchema = z
       .string()
       .nullish()
       .transform(val => val ?? ""),
-    countryName: z.string().optional().or(z.literal("")),
+    countryName: z
+      .string()
+      .nullish()
+      .transform(val => (val === null ? "" : val)),
   })
   .superRefine(({ cedexCode, zipCode, cityName, cedexName }, refinementContext) => {
     if ((cedexCode === undefined || cedexCode === "") && (zipCode === undefined || zipCode === "")) {
@@ -100,18 +106,38 @@ export const addressSchema = z
 
 export const personnalInformationsSchema = z.object({
   civility: z.enum(["Female", "Male", "Undefined"]),
-  lastName: z.string().min(2, { message: "not valid" }),
-  firstName: z.string().min(3),
+  lastName: z
+    .string()
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
+  firstName: z
+    .string()
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
   function: z
     .string()
     .nullish()
     .transform(val => val ?? ""),
-  email: z.string().email({ message: "not valid" }),
+  email: z
+    .string()
+    .email({ message: "Veuillez saisir une adresse mail valide." })
+    .or(z.literal(""))
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
   phone: z
     .string()
     .nullish()
     .transform(val => val ?? ""),
-  secondPhone: z.string().optional().or(z.literal("")),
-  identificationName: z.string().optional(),
-  usualCompanyName: z.string().optional(),
+  otherPhone: z
+    .string()
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
+  identificationName: z
+    .string()
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
+  usualCompanyName: z
+    .string()
+    .nullish()
+    .transform(val => (val === null ? "" : val)),
 });

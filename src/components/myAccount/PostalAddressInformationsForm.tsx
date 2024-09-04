@@ -7,7 +7,7 @@ import { Input } from "@codegouvfr/react-dsfr/Input";
 import { useFetchMutation } from "hooks/useFetchQuery";
 
 type Props = {
-  contact: APISchemas["ContactFirstLoginDto"];
+  contact: APISchemas["ContactDetailsDto"];
   onClose: () => void;
   onSave: () => void;
 };

@@ -2,22 +2,22 @@ import { tss } from "tss";
 import { fr } from "@codegouvfr/react-dsfr";
 import { declareComponentKeys } from "i18nifty/declareComponentKeys";
 import { useTranslation } from "i18n";
-import { APISchemas } from "types/api";
 import { SurveysDatagrid, getColumns } from "./SurveysDatagrid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SurveyCard } from "./SurveyCard";
 import { SearchIcon } from "assets/Search";
+import { useFetchQuery } from "hooks/useFetchQuery";
 
 type Props = {
   className?: string;
-  surveys: APISchemas["MyQuestioningDto"][];
-  isLoading: boolean;
 };
 
-export function MySurveys({ className, surveys, isLoading }: Props) {
+export function MySurveys({ className }: Props) {
   const { classes, cx } = useStyles();
 
   const { t } = useTranslation("MySurveys");
+  const { data, isLoading } = useFetchQuery("/api/contacts/questionings");
+  const surveys = data ?? [];
 
   const columns = getColumns(t);
   return (

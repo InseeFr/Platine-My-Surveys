@@ -1,5 +1,7 @@
-import { Navigate, createFileRoute } from "@tanstack/react-router";
+import { fr } from "@codegouvfr/react-dsfr";
+import { createFileRoute } from "@tanstack/react-router";
 import { Homepage } from "components/homepage/Homepage";
+import { MySurveys } from "components/mySurveys/MySurveys";
 import { useIsAuthenticated } from "hooks/useAuth";
 import { useTranslation } from "i18n";
 
@@ -18,6 +20,9 @@ function HomepageIndex() {
       <Homepage />
     </div>
   ) : (
-    <Navigate to="/mes-enquetes" />
+    <div>
+      <title>{`${headerTranslation("my surveys")} - ${headerTranslation("service tagline")}`}</title>
+      <MySurveys className={fr.cx("fr-container", "fr-pt-md-5v")} />
+    </div>
   );
 }

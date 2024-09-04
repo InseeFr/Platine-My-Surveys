@@ -7,6 +7,7 @@ import { AutoLogoutCountdown } from "components/AutoLogoutCountdown";
 import { fr } from "@codegouvfr/react-dsfr";
 import { SkipLinks } from "@codegouvfr/react-dsfr/SkipLinks";
 import { useTranslation } from "i18n";
+import { useIsAuthenticated } from "hooks/useAuth";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: RootComponent,
@@ -19,6 +20,7 @@ function RootComponent() {
   const router = useRouter();
   const currentPath = router.state.location.pathname;
   const isOnHomepage = currentPath.startsWith("/accueil");
+  const isAuthenticated = useIsAuthenticated();
 
   return (
     <div className={classes.root}>
@@ -51,7 +53,7 @@ function RootComponent() {
         ]}
       />
       <Header />
-      <main className={isOnHomepage ? classes.homepage : classes.main}>
+      <main className={isOnHomepage && !isAuthenticated ? classes.homepage : classes.main}>
         <Outlet />
       </main>
       <AutoLogoutCountdown />
@@ -69,7 +71,7 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
   main: {
     flex: 1,
     margin: "auto",
-    ...fr.spacing("padding", { topBottom: "10v" }),
+    ...fr.spacing("padding", { top: "5v", bottom: "10v" }),
     width: (() => {
       if (windowInnerWidth < breakpointsValues.sm) {
         return `calc(100vw - ${fr.spacing("3v")})`;
