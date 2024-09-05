@@ -50,7 +50,10 @@ export function MyAccount({ contact, onSave }: Props) {
         segments={[]}
       />
 
-      <div className={fr.cx("fr-grid-row", "fr-grid-row--middle")} style={{ "flexWrap": "nowrap" }}>
+      <div
+        className={fr.cx("fr-grid-row", "fr-grid-row--middle", "fr-mt-md-0", "fr-mt-2w")}
+        style={{ "flexWrap": "nowrap" }}
+      >
         <AvatarIcon />
         <h1>{t("title my account")}</h1>
       </div>

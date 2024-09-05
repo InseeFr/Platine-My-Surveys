@@ -1,15 +1,47 @@
 import { declareComponentKeys, useTranslation } from "i18n";
 import Banner from "../../assets/banner.svg";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useRouter } from "@tanstack/react-router";
 import { tss } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import Divider from "@mui/material/Divider";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { useEffect, useState } from "react";
+import { fetchContent } from "functions/fetchContent";
+import { CircularProgress } from "@mui/material";
 
 export const Homepage = () => {
   const { t } = useTranslation("Homepage");
   const { classes, cx } = useStyles();
+
+  const [data, setData] = useState<Record<string, any> | null>(null);
+  const [error, setError] = useState(null);
+
+  const router = useRouter();
+  const currentPath = router.state.location.pathname.split("/")[1];
+
+  useEffect(() => {
+    fetchContent(currentPath)
+      .then(setData)
+      .catch(error => {
+        setError(error.message);
+      });
+  }, [currentPath]);
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (!data) {
+    return (
+      <div
+        style={{ display: "flex", justifyContent: "center", height: "50vh", alignItems: "center" }}
+        aria-label={"loading..."}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className={classes.pageContainer}>

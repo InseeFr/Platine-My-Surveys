@@ -19,7 +19,7 @@ function RootComponent() {
   const { t } = useTranslation("Header");
   const router = useRouter();
   const currentPath = router.state.location.pathname;
-  const isOnHomepage = currentPath.startsWith("/accueil");
+  const isOnHomepage = currentPath.includes("/accueil");
   const isAuthenticated = useIsAuthenticated();
 
   return (

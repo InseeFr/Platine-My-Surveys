@@ -141,6 +141,15 @@ export const translations: Translations<"en"> = {
       "Don't forget to send in your questionnaire once it has been fully completed.",
     "reconnect": "Reconnect",
   },
+  Support: {
+    "contact support": "Contact support",
+    "support title": "Hello, how can we help you?",
+    "FAQ": "FAQ",
+    "FAQ section": "FAQ section",
+    "FAQ form section": "form to contact us",
+    "FAQ form title": "Can't find the answer in the FAQ?",
+    "contact us": "Contact us:",
+  },
 
   /* spell-checker: enable */
 };

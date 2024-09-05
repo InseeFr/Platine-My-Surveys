@@ -142,5 +142,14 @@ export const translations: Translations<"fr"> = {
       "N’oubliez pas d’envoyer votre questionnaire une fois qu’il sera entièrement complété.",
     "reconnect": "Se reconnecter",
   },
+  Support: {
+    "contact support": "Contacter l'assistance",
+    "support title": "Bonjour, comment pouvons-nous vous aider ?",
+    "FAQ": "FAQ",
+    "FAQ section": "section FAQ",
+    "FAQ form section": "formulaire pour nous contacter",
+    "FAQ form title": "Vous ne trouvez pas la réponse dans la FAQ ? ",
+    "contact us": "Contactez-nous :",
+  },
   /* spell-checker: enable */
 };
