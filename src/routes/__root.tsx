@@ -19,7 +19,7 @@ function RootComponent() {
   const { t } = useTranslation("Header");
   const router = useRouter();
   const currentPath = router.state.location.pathname;
-  const isOnHomepage = currentPath.includes("/accueil");
+  const isOnSurveyList = currentPath.includes("/enquetes");
   const isAuthenticated = useIsAuthenticated();
 
   return (
@@ -52,8 +52,8 @@ function RootComponent() {
           },
         ]}
       />
-      <Header />
-      <main className={isOnHomepage && !isAuthenticated ? classes.homepage : classes.main}>
+      <Header className={classes.header} />
+      <main className={isOnSurveyList && isAuthenticated ? classes.homepage : classes.main}>
         <Outlet />
       </main>
       <AutoLogoutCountdown />
@@ -82,11 +82,30 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
       }
 
       if (windowInnerWidth < breakpointsValues.xl) {
-        return "80vw";
+        return "90vw";
       }
 
-      return "80vw";
+      return "90vw";
     })(),
+  },
+  header: {
+    ".fr-container": {
+      maxWidth: (() => {
+        if (windowInnerWidth < breakpointsValues.sm) {
+          return "100vw";
+        }
+
+        if (windowInnerWidth < breakpointsValues.md) {
+          return "100vw";
+        }
+
+        if (windowInnerWidth < breakpointsValues.xl) {
+          return "100vw";
+        }
+
+        return "90vw";
+      })(),
+    },
   },
   homepage: {
     flex: 1,

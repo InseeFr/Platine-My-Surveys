@@ -22,8 +22,9 @@ export const translations: Translations<"fr"> = {
     "personal data": "Données personnelles",
     "cookies": "Gestion des cookies",
   },
-  Homepage: {
-    "survey introduction": "Introduction de l'enquête",
+  SurveyHomepage: {
+    "title": "Sélectionnez votre enquête",
+    "survey introduction": "Introduction à l'enquête",
     "homepage": "Accueil",
     "in this section": "Dans cette rubrique",
     "legal framework": "Cadre juridique",

@@ -1,52 +1,25 @@
 import { declareComponentKeys, useTranslation } from "i18n";
 import Banner from "../../assets/banner.svg";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
-import { Outlet, useRouter } from "@tanstack/react-router";
+import { Outlet } from "@tanstack/react-router";
 import { tss } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import Divider from "@mui/material/Divider";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useEffect, useState } from "react";
-import { fetchContent } from "functions/fetchContent";
-import { CircularProgress } from "@mui/material";
 
-export const Homepage = () => {
-  const { t } = useTranslation("Homepage");
+type Props = {
+  surveyId: string;
+};
+
+export const SurveyHomepage = ({ surveyId }: Props) => {
+  const { t } = useTranslation("SurveyHomepage");
   const { classes, cx } = useStyles();
 
-  const [data, setData] = useState<Record<string, any> | null>(null);
-  const [error, setError] = useState(null);
-
-  const router = useRouter();
-  const currentPath = router.state.location.pathname.split("/")[1];
-
-  useEffect(() => {
-    fetchContent(currentPath)
-      .then(setData)
-      .catch(error => {
-        setError(error.message);
-      });
-  }, [currentPath]);
-
-  if (error) {
-    console.error(error);
-  }
-
-  if (!data) {
-    return (
-      <div
-        style={{ display: "flex", justifyContent: "center", height: "50vh", alignItems: "center" }}
-        aria-label={"loading..."}
-      >
-        <CircularProgress />
-      </div>
-    );
-  }
-
   return (
-    <div className={classes.pageContainer}>
+    <div>
       <img src={Banner} alt="" role="presentation" width={"100%"} />
       <div
+        id="content"
         className={fr.cx(
           "fr-grid-row",
           "fr-grid-row--center",
@@ -55,7 +28,6 @@ export const Homepage = () => {
           "fr-p-md-0",
           "fr-col-12",
         )}
-        id="content"
       >
         <LoginSection className={cx("fr-hidden-md")} />
         <div className={fr.cx("fr-col-12", "fr-col-md-3", "fr-p-2w", "fr-p-md-0")}>
@@ -66,31 +38,44 @@ export const Homepage = () => {
             items={[
               {
                 linkProps: {
-                  to: "/accueil/introduction",
+                  to: "/$survey/introduction",
+                  params: { survey: surveyId },
                 },
                 text: t("survey introduction"),
               },
               {
                 linkProps: {
-                  to: "/accueil/cadre-juridique",
+                  to: "/$survey/cadre-juridique",
+                  params: {
+                    survey: surveyId,
+                  },
                 },
                 text: t("legal framework"),
               },
               {
                 linkProps: {
-                  to: "/accueil/utilisation-reponse",
+                  to: "/$survey/utilisation-reponse",
+                  params: {
+                    survey: surveyId,
+                  },
                 },
                 text: t("what are your answers for?"),
               },
               {
                 linkProps: {
-                  href: "#",
+                  to: "/$survey/utilisation-reponse",
+                  params: {
+                    survey: surveyId,
+                  },
                 },
                 text: t("documents to the surveyed"),
               },
               {
                 linkProps: {
-                  href: "#",
+                  to: "/$survey/utilisation-reponse",
+                  params: {
+                    survey: surveyId,
+                  },
                 },
                 text: t("some results"),
               },
@@ -110,7 +95,7 @@ export const Homepage = () => {
 };
 
 const LoginSection = ({ className }: { className?: string }) => {
-  const { t } = useTranslation("Homepage");
+  const { t } = useTranslation("SurveyHomepage");
   const { t: headerTranslation } = useTranslation("Header");
   const { classes, cx } = useStyles();
 
@@ -142,10 +127,7 @@ const LoginSection = ({ className }: { className?: string }) => {
   );
 };
 
-const useStyles = tss.withName({ Homepage }).create({
-  pageContainer: {
-    width: "100vw",
-  },
+const useStyles = tss.withName({ SurveyHomepage }).create({
   divider: {
     height: "auto",
     margin: `0 ${fr.spacing("3w")}`,
@@ -167,6 +149,7 @@ const { i18n } = declareComponentKeys<
   | "some results"
   | "respond to survey"
   | "respond to survey detail"
+  | "title"
   | {
       K: "estimatedResponseTime";
       P: {
@@ -174,6 +157,6 @@ const { i18n } = declareComponentKeys<
       };
       R: JSX.Element;
     }
->()("Homepage");
+>()("SurveyHomepage");
 
 export type I18n = typeof i18n;

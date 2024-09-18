@@ -1,13 +1,14 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/accueil/introduction")({
-  component: IntroductionIndex,
+export const Route = createFileRoute("/$survey/introduction")({
+  component: Index,
 });
 
-function IntroductionIndex() {
+function Index() {
+  const { survey } = Route.useParams();
   return (
-    <section className={fr.cx("fr-col-12", "fr-col-md-4")}>
+    <section className={fr.cx("fr-col-12", "fr-col-md-5")}>
       <h3>Introduction à l’enquête MOCK</h3>
       <div>
         <p>

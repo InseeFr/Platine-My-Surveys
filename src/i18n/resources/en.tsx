@@ -22,7 +22,8 @@ export const translations: Translations<"en"> = {
     "personal data": "Personal data",
     "cookies": "Cookies management",
   },
-  Homepage: {
+  SurveyHomepage: {
+    "title": "Select your survey",
     "survey introduction": "Survey introduction",
     "homepage": "Homepage",
     "in this section": "In this section",

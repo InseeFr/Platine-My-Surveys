@@ -19,6 +19,6 @@ function LogoutIndex() {
       <Logout />
     </div>
   ) : (
-    <Navigate to="/accueil" />
+    <Navigate to="/enquetes" />
   );
 }

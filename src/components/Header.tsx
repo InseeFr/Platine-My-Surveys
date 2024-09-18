@@ -4,7 +4,7 @@ import { declareComponentKeys, useTranslation } from "i18n";
 import { fr } from "@codegouvfr/react-dsfr";
 import { useIsAuthenticated, useLogout } from "hooks/useAuth";
 
-export function Header() {
+export function Header({ className }: { className?: string }) {
   const { t } = useTranslation("Header");
 
   const { isAuthenticated } = useIsAuthenticated();
@@ -12,6 +12,7 @@ export function Header() {
 
   return (
     <DsfrHeader
+      className={className}
       brandTop={
         <>
           République
