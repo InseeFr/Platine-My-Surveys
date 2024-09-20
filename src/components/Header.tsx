@@ -26,7 +26,7 @@ export function Header({ className }: { className?: string }) {
         title: t("home link title"),
       }}
       quickAccessItems={
-        isAuthenticated
+        !isAuthenticated
           ? [
               {
                 iconId: "fr-icon-customer-service-fill",
@@ -54,23 +54,7 @@ export function Header({ className }: { className?: string }) {
                 text: t("logout"),
               },
             ]
-          : [
-              {
-                iconId: "fr-icon-customer-service-fill",
-                linkProps: {
-                  to: "/assistance",
-                },
-                text: t("contact support"),
-              },
-              {
-                iconId: "fr-icon-account-circle-fill",
-                linkProps: {
-                  className: fr.cx("fr-btn--tertiary", "fr-translate"),
-                  to: "/connexion",
-                },
-                text: t("login"),
-              },
-            ]
+          : []
       }
       serviceTitle={t("service tagline")}
       operatorLogo={{

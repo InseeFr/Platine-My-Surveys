@@ -52,12 +52,12 @@ function RootComponent() {
           },
         ]}
       />
-      <Header className={classes.header} />
+      <Header className={classes.common} />
       <main className={isOnSurveyList && isAuthenticated ? classes.homepage : classes.main}>
         <Outlet />
       </main>
       <AutoLogoutCountdown />
-      <Footer />
+      <Footer className={classes.common} />
     </div>
   );
 }
@@ -88,7 +88,7 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
       return "90vw";
     })(),
   },
-  header: {
+  common: {
     ".fr-container": {
       maxWidth: (() => {
         if (windowInnerWidth < breakpointsValues.sm) {
@@ -105,6 +105,12 @@ const useStyles = tss.withName({ RootComponent }).create(({ breakpointsValues, w
 
         return "90vw";
       })(),
+      ".fr-header__brand-top": {
+        overflow: "initial",
+      },
+      ".fr-footer__partners-logos": {
+        paddingLeft: fr.spacing("3w"),
+      },
     },
   },
   homepage: {

@@ -6,18 +6,53 @@ import { tss } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import Divider from "@mui/material/Divider";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
+import { ContentSurvey } from "types/ContentSurvey";
 
 type Props = {
-  surveyId: string;
+  survey: ContentSurvey;
 };
 
-export const SurveyHomepage = ({ surveyId }: Props) => {
+export const SurveyHomepage = ({ survey }: Props) => {
   const { t } = useTranslation("SurveyHomepage");
+  const { t: supportTranslation } = useTranslation("Support");
   const { classes, cx } = useStyles();
 
   return (
     <div>
-      <img src={Banner} alt="" role="presentation" width={"100%"} />
+      <Breadcrumb
+        currentPageLabel={survey?.titleShort}
+        homeLinkProps={{
+          to: "/",
+        }}
+        className="fr-mb-1w"
+        segments={[]}
+      />
+      <h2 className="fr-mb-2w">{survey?.title}</h2>
+      <a
+        className="fr-link"
+        title={`${t("surveyLink")} - ${t("openNewWindow")}`}
+        href={survey.content["enquete-en-detail"]["menu-link"]}
+        target="_blank"
+      >
+        {t("surveyLink")}
+      </a>
+      <img
+        src={Banner}
+        alt=""
+        role="presentation"
+        width={"100%"}
+        className={cx("fr-unhidden-md", "fr-hidden")}
+      />
+
+      <img
+        src={Banner}
+        alt=""
+        role="presentation"
+        style={{ width: "100vw", transform: "translateX(-3.5%)" }}
+        className={cx("fr-hidden-md")}
+      />
+
       <div
         id="content"
         className={fr.cx(
@@ -39,7 +74,7 @@ export const SurveyHomepage = ({ surveyId }: Props) => {
               {
                 linkProps: {
                   to: "/$survey/introduction",
-                  params: { survey: surveyId },
+                  params: { survey: survey.id },
                 },
                 text: t("survey introduction"),
               },
@@ -47,7 +82,7 @@ export const SurveyHomepage = ({ surveyId }: Props) => {
                 linkProps: {
                   to: "/$survey/cadre-juridique",
                   params: {
-                    survey: surveyId,
+                    survey: survey.id,
                   },
                 },
                 text: t("legal framework"),
@@ -56,28 +91,46 @@ export const SurveyHomepage = ({ surveyId }: Props) => {
                 linkProps: {
                   to: "/$survey/utilisation-reponse",
                   params: {
-                    survey: surveyId,
+                    survey: survey.id,
                   },
                 },
                 text: t("what are your answers for?"),
               },
               {
                 linkProps: {
-                  to: "/$survey/utilisation-reponse",
+                  to: "/$survey/documents",
                   params: {
-                    survey: surveyId,
+                    survey: survey.id,
                   },
                 },
                 text: t("documents to the surveyed"),
               },
               {
                 linkProps: {
-                  to: "/$survey/utilisation-reponse",
+                  to: "/$survey/resultats",
                   params: {
-                    survey: surveyId,
+                    survey: survey.id,
                   },
                 },
                 text: t("some results"),
+              },
+              {
+                linkProps: {
+                  to: "/$survey/faq",
+                  params: {
+                    survey: survey.id,
+                  },
+                },
+                text: supportTranslation("FAQ"),
+              },
+              {
+                linkProps: {
+                  to: "/$survey/assistance",
+                  params: {
+                    survey: survey.id,
+                  },
+                },
+                text: supportTranslation("contact support"),
               },
             ]}
           />
@@ -141,6 +194,8 @@ const useStyles = tss.withName({ SurveyHomepage }).create({
 
 const { i18n } = declareComponentKeys<
   | "survey introduction"
+  | "surveyLink"
+  | "openNewWindow"
   | "homepage"
   | "in this section"
   | "legal framework"
