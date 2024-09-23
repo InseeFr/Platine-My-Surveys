@@ -156,6 +156,15 @@ export const translations: Translations<"en"> = {
     "FAQ form title": "Can't find the answer in the FAQ?",
     "contact us": "Contact us:",
   },
-
+  Documents: {
+    "downloadEMail": "Download the email",
+    "downloadEMailDescription": "View the details of an email",
+    "downloadInstructions": "Download the instructions",
+    "downloadInstructionsDescription": "View the instructions for the questionnaire",
+    "downloadQuestioning": "PDF Questionnaire",
+    "downloadQuestioningDescription": "View the details of a PDF questionnaire",
+    "downloadMail": "Download the mail",
+    "downloadMailDescription": "View the details of a letter",
+  },
   /* spell-checker: enable */
 };

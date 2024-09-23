@@ -21,7 +21,8 @@ export type ComponentKey =
   | import("components/Logout").I18n
   | import("components/myAccount/PersonalInformations").I18n
   | import("components/myAccount/PostalAddressInformations").I18n
-  | import("components/surveyHomepage/Faq").I18n;
+  | import("components/surveyHomepage/Faq").I18n
+  | import("../routes/$survey/documents").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,

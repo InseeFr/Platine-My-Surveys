@@ -22,7 +22,7 @@ function Results() {
     <section className={fr.cx("fr-col-12", "fr-col-md-5")}>
       <h3>{t("some results")}</h3>
       <h4>{results.title}</h4>
-      <img src={results["picture-url"]} alt={results.legende} width={"100%"} />
+      <img src={`/${results["picture-url"]}`} alt={results.legende} width={"100%"} />
       <p className="fr-text--sm">{results.legende}</p>
     </section>
   );

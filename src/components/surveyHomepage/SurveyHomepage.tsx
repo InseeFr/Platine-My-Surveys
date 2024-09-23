@@ -58,7 +58,7 @@ export const SurveyHomepage = ({ survey }: Props) => {
         className={fr.cx(
           "fr-grid-row",
           "fr-grid-row--center",
-          "fr-py-md-7w",
+          "fr-pt-md-7w",
           "fr-p-2w",
           "fr-p-md-0",
           "fr-col-12",
@@ -69,7 +69,8 @@ export const SurveyHomepage = ({ survey }: Props) => {
           <SideMenu
             align="left"
             burgerMenuButtonText={t("in this section")}
-            fullHeight={true}
+            fullHeight
+            className={classes.menu}
             items={[
               {
                 linkProps: {
@@ -189,6 +190,12 @@ const useStyles = tss.withName({ SurveyHomepage }).create({
     width: "100%",
     display: "flex",
     justifyContent: "center",
+  },
+  menu: {
+    height: "100%",
+    ".fr-sidemenu__inner": {
+      height: "100%",
+    },
   },
 });
 

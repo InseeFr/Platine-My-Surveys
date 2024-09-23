@@ -24,7 +24,7 @@ export const Faq = ({ faqData, generalFaqData }: Props) => {
       </div>
 
       <h4>{t("surveyQuestions")}</h4>
-      <div className={fr.cx("fr-accordions-group")}>
+      <div className={fr.cx("fr-accordions-group", "fr-mb-4w", "fr-mb-md-0")}>
         {faqData.map(data => (
           <Accordion key={data.title} label={data.title}>
             {data.body}

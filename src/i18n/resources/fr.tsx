@@ -157,5 +157,15 @@ export const translations: Translations<"fr"> = {
     "FAQ form title": "Vous ne trouvez pas la réponse dans la FAQ ? ",
     "contact us": "Contactez-nous :",
   },
+  Documents: {
+    "downloadEMail": "Télécharger le mail",
+    "downloadEMailDescription": "Voir le détail d’un mail",
+    "downloadInstructions": "Télécharger la notice",
+    "downloadInstructionsDescription": "Voir la notice pour le questionnaire",
+    "downloadQuestioning": "Questionnaire PDF",
+    "downloadQuestioningDescription": "Voir le détail d’un questionnaire PDF",
+    "downloadMail": "Télécharger le courrier",
+    "downloadMailDescription": "Voir le détail d’un courrier",
+  },
   /* spell-checker: enable */
 };
