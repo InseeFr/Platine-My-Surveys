@@ -2,7 +2,7 @@ import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 import { MyAccount } from "components/myAccount/MyAccount";
 import { protectedLoader, useUser } from "hooks/useAuth";
-import { useFetchQuery } from "hooks/useFetchQuery";
+import { useFetchQueryPilotage } from "hooks/useFetchQuery";
 import { useTranslation } from "i18n";
 
 export const Route = createFileRoute("/mon-compte")({
@@ -18,7 +18,7 @@ function MyAccountIndex() {
     data: contact,
     isLoading,
     refetch,
-  } = useFetchQuery("/api/contacts/{id}", {
+  } = useFetchQueryPilotage("/api/contacts/{id}", {
     urlParams: {
       id: user.preferred_username.toUpperCase(),
     },

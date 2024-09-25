@@ -56,8 +56,6 @@ export function Footer({ className }: { className?: string }) {
         partnersLogos={{
           main: {
             alt: t("ssp logo alt"),
-            // TODO: change link
-            href: "#",
             imgUrl: sspLogo,
           },
         }}

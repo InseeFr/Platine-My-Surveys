@@ -1,4 +1,5 @@
 import type { Translations } from "../types";
+import { Button } from "@codegouvfr/react-dsfr/Button";
 
 export const translations: Translations<"en"> = {
   /* spell-checker: disable */
@@ -26,6 +27,7 @@ export const translations: Translations<"en"> = {
   SurveyHomepage: {
     "title": "Select your survey",
     "openNewWindow": "open in a new window",
+    "sideMenuTitle": "Side menu to access survey information",
     "surveyLink": "See the survey in detail",
     "survey introduction": "Survey introduction",
     "homepage": "Homepage",
@@ -36,9 +38,6 @@ export const translations: Translations<"en"> = {
     "some results": "Some results",
     "respond to survey": "Respond to the survey",
     "respond to survey detail": "Please bring your username and password to complete the survey.",
-    estimatedResponseTime: ({ time }: { time?: number }) => (
-      <>Estimated response time: {time ? `${time} mn` : "-"} </>
-    ),
   },
   MySurveys: {
     "title my surveys": "Welcome on your dashboard",
@@ -156,6 +155,50 @@ export const translations: Translations<"en"> = {
     "FAQ form title": "Can't find the answer in the FAQ?",
     "contact us": "Contact us:",
   },
+  SupportForm: {
+    FaqSupport: ({ surveyId }: { surveyId: string }) => {
+      return (
+        <p className="fr-text--sm">
+          Before submitting a support request, please check if the answer to your question can be found
+          in the
+          <Button
+            className="fr-pl-1v fr-text--sm"
+            style={{ padding: 0, display: "inline", textDecoration: "underline", fontWeight: "400" }}
+            priority="tertiary no outline"
+            linkProps={{
+              to: "/$survey/faq",
+              params: {
+                survey: surveyId,
+              },
+            }}
+          >
+            FAQ
+          </Button>
+        </p>
+      );
+    },
+    "address usage":
+      "The address you provide remains strictly confidential. We commit to using your address only for sending messages related to your request.",
+    "mandatory fields": "All fields marked with an asterisk (*) are mandatory.",
+    "invalidEmail": "Please enter a valid email address",
+    "emailRequired": "Please enter an email address",
+    "emailConfirmationFailed": "The email addresses do not match",
+    "lastName": "Last Name",
+    "firstName": "First Name",
+    "object": "Subject*",
+    "objectPlaceholder": "Select an option",
+    "phone": "Phone",
+    "email": "Email Address*",
+    "confirmEmail": "Confirm Email Address*",
+    "idec": "Identifier",
+    "idecHintText": "Format: between 7 and 8 characters",
+    "message": "Message*",
+    "messageRequired": "Please enter a message",
+    "messageInfo": "4000 characters remaining",
+    "submit": "Submit",
+    "successAlert":
+      "Your support request has been successfully submitted. You will receive a response by email soon.",
+  },
   Documents: {
     "downloadEMail": "Download the email",
     "downloadEMailDescription": "View the details of an email",
@@ -166,5 +209,6 @@ export const translations: Translations<"en"> = {
     "downloadMail": "Download the mail",
     "downloadMailDescription": "View the details of a letter",
   },
+
   /* spell-checker: enable */
 };

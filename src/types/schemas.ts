@@ -141,3 +141,39 @@ export const personnalInformationsSchema = z.object({
     .nullish()
     .transform(val => (val === null ? "" : val)),
 });
+
+export const supportSchema = z
+  .object({
+    mailObjet: z.string(),
+    lastName: z
+      .string()
+      .nullish()
+      .transform(val => (val === null ? "" : val)),
+    firstName: z
+      .string()
+      .nullish()
+      .transform(val => (val === null ? "" : val)),
+    phonenumber: z
+      .string()
+      .nullish()
+      .transform(val => val ?? ""),
+    mailaddress: z.string().min(1, { message: "emailRequired" }).email({ message: "invalidEmail" }),
+    mailaddressConfirmation: z
+      .string()
+      .min(1, { message: "emailRequired" })
+      .email({ message: "invalidEmail" }),
+    idec: z
+      .string()
+      .nullish()
+      .transform(val => (val === null ? "" : val)),
+    message: z.string().max(4000).min(1, { message: "messageRequired" }),
+  })
+  .superRefine(({ mailaddress, mailaddressConfirmation }, refinementContext) => {
+    if (mailaddress !== mailaddressConfirmation) {
+      refinementContext.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "emailConfirmationFailed",
+        path: ["mailaddressConfirmation"],
+      });
+    }
+  });

@@ -1,6 +1,6 @@
 import { declareComponentKeys, useTranslation } from "i18n";
 import Banner from "../../assets/banner.svg";
-import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
+import { SideMenu, SideMenuProps } from "@codegouvfr/react-dsfr/SideMenu";
 import { Outlet } from "@tanstack/react-router";
 import { tss } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
@@ -8,6 +8,9 @@ import Divider from "@mui/material/Divider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { ContentSurvey } from "types/ContentSurvey";
+import { useFetchQueryPortail } from "hooks/useFetchQuery";
+import { Loading } from "./Loading";
+import { APISchemas } from "types/apiPortail";
 
 type Props = {
   survey: ContentSurvey;
@@ -17,6 +20,71 @@ export const SurveyHomepage = ({ survey }: Props) => {
   const { t } = useTranslation("SurveyHomepage");
   const { t: supportTranslation } = useTranslation("Support");
   const { classes, cx } = useStyles();
+
+  const { data, isLoading } = useFetchQueryPortail("/is-survey-online/{id}", {
+    urlParams: {
+      id: survey.id,
+    },
+  });
+
+  if (!data || isLoading) {
+    return <Loading />;
+  }
+
+  const sideMenuItems: SideMenuProps.Item[] = [
+    {
+      linkProps: {
+        to: "/$survey/introduction",
+        params: { survey: survey.id },
+      },
+      text: t("survey introduction"),
+    },
+    {
+      linkProps: {
+        to: "/$survey/cadre-juridique",
+        params: {
+          survey: survey.id,
+        },
+      },
+      text: t("legal framework"),
+    },
+    {
+      linkProps: {
+        to: "/$survey/utilisation-reponse",
+        params: {
+          survey: survey.id,
+        },
+      },
+      text: t("what are your answers for?"),
+    },
+    {
+      linkProps: {
+        to: "/$survey/documents",
+        params: {
+          survey: survey.id,
+        },
+      },
+      text: t("documents to the surveyed"),
+    },
+    {
+      linkProps: {
+        to: "/$survey/resultats",
+        params: {
+          survey: survey.id,
+        },
+      },
+      text: t("some results"),
+    },
+    {
+      linkProps: {
+        to: "/$survey/faq",
+        params: {
+          survey: survey.id,
+        },
+      },
+      text: supportTranslation("FAQ"),
+    },
+  ];
 
   return (
     <div>
@@ -64,76 +132,34 @@ export const SurveyHomepage = ({ survey }: Props) => {
           "fr-col-12",
         )}
       >
-        <LoginSection className={cx("fr-hidden-md")} />
+        <LoginSection className={cx("fr-hidden-md")} data={data} />
         <div className={fr.cx("fr-col-12", "fr-col-md-3", "fr-p-2w", "fr-p-md-0")}>
+          <label className="fr-sr-only" id={"sideMenu-title"}>
+            {" "}
+            {t("sideMenuTitle")}
+          </label>
           <SideMenu
             align="left"
+            id="sideMenu"
             burgerMenuButtonText={t("in this section")}
             fullHeight
             className={classes.menu}
-            items={[
-              {
-                linkProps: {
-                  to: "/$survey/introduction",
-                  params: { survey: survey.id },
-                },
-                text: t("survey introduction"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/cadre-juridique",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: t("legal framework"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/utilisation-reponse",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: t("what are your answers for?"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/documents",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: t("documents to the surveyed"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/resultats",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: t("some results"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/faq",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: supportTranslation("FAQ"),
-              },
-              {
-                linkProps: {
-                  to: "/$survey/assistance",
-                  params: {
-                    survey: survey.id,
-                  },
-                },
-                text: supportTranslation("contact support"),
-              },
-            ]}
+            items={
+              data.opened
+                ? [
+                    ...sideMenuItems,
+                    {
+                      linkProps: {
+                        to: "/$survey/assistance",
+                        params: {
+                          survey: survey.id,
+                        },
+                      },
+                      text: supportTranslation("contact support"),
+                    },
+                  ]
+                : sideMenuItems
+            }
           />
         </div>
         <Outlet />
@@ -142,13 +168,13 @@ export const SurveyHomepage = ({ survey }: Props) => {
           variant="fullWidth"
           className={cx("fr-hidden", "fr-unhidden-md", classes.divider)}
         />
-        <LoginSection />
+        <LoginSection data={data} />
       </div>
     </div>
   );
 };
 
-const LoginSection = ({ className }: { className?: string }) => {
+const LoginSection = ({ className, data }: { className?: string; data: APISchemas["SurveyStatus"] }) => {
   const { t } = useTranslation("SurveyHomepage");
   const { t: headerTranslation } = useTranslation("Header");
   const { classes, cx } = useStyles();
@@ -156,27 +182,30 @@ const LoginSection = ({ className }: { className?: string }) => {
   return (
     <div className={cx(className, "fr-col-12", "fr-col-md-3")}>
       <h4>{t("respond to survey")}</h4>
-      <p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
-      <p className={cx("fr-hidden-md", "fr-text--sm")}>{t("respond to survey detail")}</p>
-
-      <div className={fr.cx("fr-grid-row")} style={{ "flexWrap": "nowrap" }}>
-        <span className="fr-icon-time-fill fr-icon--sm fr-pr-1w" aria-hidden="true" />
-        {/* TODO: add time when get data */}
-        <p className={cx("fr-hidden", "fr-unhidden-md")}>
-          {t("estimatedResponseTime", { time: undefined })}
-        </p>
-        <p className={cx("fr-hidden-md", "fr-text--sm")}>
-          {t("estimatedResponseTime", { time: undefined })}
-        </p>
-      </div>
-      <Button
-        linkProps={{
-          to: "/connexion",
-        }}
-        className={classes.loginButton}
-      >
-        {headerTranslation("login")}
-      </Button>
+      {data.opened ? (
+        <>
+          (<p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
+          <p className={cx("fr-hidden-md", "fr-text--sm")}>{t("respond to survey detail")}</p>
+          <Button
+            linkProps={{
+              to: "/connexion",
+            }}
+            className={classes.loginButton}
+          >
+            {headerTranslation("login")}
+          </Button>
+          )
+        </>
+      ) : (
+        <>
+          <p className={cx("fr-hidden", "fr-unhidden-md")}>
+            {data.messageSurveyOffline} <br /> {data.messageInfoSurveyOffline}
+          </p>
+          <p className={cx("fr-hidden-md", "fr-text--sm")}>
+            {data.messageSurveyOffline} <br /> {data.messageInfoSurveyOffline}
+          </p>
+        </>
+      )}
     </div>
   );
 };
@@ -204,6 +233,7 @@ const { i18n } = declareComponentKeys<
   | "surveyLink"
   | "openNewWindow"
   | "homepage"
+  | "sideMenuTitle"
   | "in this section"
   | "legal framework"
   | "what are your answers for?"
@@ -212,13 +242,6 @@ const { i18n } = declareComponentKeys<
   | "respond to survey"
   | "respond to survey detail"
   | "title"
-  | {
-      K: "estimatedResponseTime";
-      P: {
-        time: number | undefined;
-      };
-      R: JSX.Element;
-    }
 >()("SurveyHomepage");
 
 export type I18n = typeof i18n;

@@ -7,7 +7,6 @@ import { AutoLogoutCountdown } from "components/AutoLogoutCountdown";
 import { fr } from "@codegouvfr/react-dsfr";
 import { SkipLinks } from "@codegouvfr/react-dsfr/SkipLinks";
 import { useTranslation } from "i18n";
-import { useIsAuthenticated } from "hooks/useAuth";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: RootComponent,
@@ -19,8 +18,7 @@ function RootComponent() {
   const { t } = useTranslation("Header");
   const router = useRouter();
   const currentPath = router.state.location.pathname;
-  const isOnSurveyList = currentPath.includes("/enquetes");
-  const isAuthenticated = useIsAuthenticated();
+  const isOnSurveyList = currentPath === "/";
 
   return (
     <div className={classes.root}>
@@ -53,7 +51,7 @@ function RootComponent() {
         ]}
       />
       <Header className={classes.common} />
-      <main className={isOnSurveyList && isAuthenticated ? classes.homepage : classes.main}>
+      <main className={isOnSurveyList ? classes.homepage : classes.main}>
         <Outlet />
       </main>
       <AutoLogoutCountdown />

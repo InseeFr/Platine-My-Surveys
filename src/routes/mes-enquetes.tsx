@@ -1,10 +1,12 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 import { MySurveys } from "components/mySurveys/MySurveys";
+import { protectedLoader } from "hooks/useAuth";
 import { useTranslation } from "i18n";
 
 export const Route = createFileRoute("/mes-enquetes")({
   component: HomepageIndex,
+  beforeLoad: protectedLoader,
 });
 
 function HomepageIndex() {

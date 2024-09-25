@@ -1,6 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
-import { Loading } from "components/surveyHomepage/Loading";
 import { useTranslation } from "i18n";
 import content from "resources/content.json";
 
@@ -15,7 +14,7 @@ function Results() {
   const results = content.specifique.find(s => s.id === survey)?.content.resultats;
 
   if (!results) {
-    return <Loading />;
+    return <></>;
   }
 
   return (

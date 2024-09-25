@@ -1,6 +1,5 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
-import { Loading } from "components/surveyHomepage/Loading";
 import { useTranslation } from "i18n";
 import content from "resources/content.json";
 
@@ -17,7 +16,7 @@ function AnswersUtilizationIndex() {
   ];
 
   if (!responses) {
-    return <Loading />;
+    return <></>;
   }
 
   return (

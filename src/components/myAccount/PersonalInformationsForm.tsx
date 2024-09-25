@@ -9,7 +9,7 @@ import { APISchemas } from "types/api";
 import { useForm } from "hooks/useForm";
 import { personnalInformationsSchema } from "types/schemas";
 import { useState } from "react";
-import { useFetchMutation } from "hooks/useFetchQuery";
+import { useFetchMutationPilotage } from "hooks/useFetchQuery";
 
 type Props = {
   contact: APISchemas["ContactDetailsDto"];
@@ -29,7 +29,7 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
     defaultValues: contact,
   });
 
-  const { mutateAsync, isPending } = useFetchMutation("/api/contacts/{id}", "put");
+  const { mutateAsync, isPending } = useFetchMutationPilotage("/api/contacts/{id}", "put");
 
   const onSubmit = handleSubmit(async data => {
     await mutateAsync({

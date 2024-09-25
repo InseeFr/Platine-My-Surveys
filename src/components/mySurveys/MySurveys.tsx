@@ -6,7 +6,7 @@ import { SurveysDatagrid, getColumns } from "./SurveysDatagrid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SurveyCard } from "./SurveyCard";
 import { SearchIcon } from "assets/Search";
-import { useFetchQuery } from "hooks/useFetchQuery";
+import { useFetchQueryPilotage } from "hooks/useFetchQuery";
 
 type Props = {
   className?: string;
@@ -16,7 +16,7 @@ export function MySurveys({ className }: Props) {
   const { classes, cx } = useStyles();
 
   const { t } = useTranslation("MySurveys");
-  const { data, isLoading } = useFetchQuery("/api/contacts/questionings");
+  const { data, isLoading } = useFetchQueryPilotage("/api/contacts/questionings");
   const surveys = data ?? [];
 
   const columns = getColumns(t);

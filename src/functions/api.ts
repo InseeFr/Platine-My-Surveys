@@ -1,11 +1,14 @@
 import { APIPaths, APIRequests, APIResponse } from "types/api";
+import {
+  APIPaths as APIPathsPortail,
+  APIRequests as APIRequestsPortail,
+  APIResponse as APIResponsePortail,
+} from "types/apiPortail";
 
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURLPortail = import.meta.env.VITE_PORTAIL_URL;
+const baseURLPilotage = import.meta.env.VITE_API_URL;
 
-export async function fetchAPI<
-  Path extends APIPaths,
-  Options extends APIRequests<Path> & { signal?: AbortSignal; headers?: Record<string, string> },
->(path: Path, options: Options): Promise<APIResponse<Path, Options["method"]>> {
+async function fetchWrapper<Response>(path: string, options: any, baseURL: string): Promise<Response> {
   const fetchOptions: RequestInit = {
     signal: options?.signal,
     method: options?.method?.toUpperCase() ?? "GET",
@@ -14,7 +17,7 @@ export async function fetchAPI<
       ...options.headers,
     } as Record<string, string>,
   };
-  options = (options ?? {}) as Options;
+  options = options ?? {};
 
   // Request body
   const body = "body" in options ? options["body"] : null;
@@ -29,7 +32,7 @@ export async function fetchAPI<
   let urlPath: string = path;
   if ("urlParams" in options) {
     for (const [name, value] of Object.entries(options.urlParams)) {
-      urlPath = urlPath.replace(`{${name}}`, value.toString());
+      urlPath = urlPath.replace(`{${name}}`, (value as any).toString());
     }
   }
 
@@ -64,6 +67,21 @@ export async function fetchAPI<
   }
   throw new APIError(data, response.status);
 }
+
+export async function fetchPilotageAPI<
+  Path extends APIPaths,
+  Options extends APIRequests<Path> & { signal?: AbortSignal; headers?: Record<string, string> },
+>(path: Path, options: Options) {
+  return fetchWrapper<APIResponse<Path, Options["method"]>>(path, options, baseURLPilotage);
+}
+
+export async function fetchPortailAPI<
+  Path extends APIPathsPortail,
+  Options extends APIRequestsPortail<Path> & { signal?: AbortSignal; headers?: Record<string, string> },
+>(path: Path, options: Options) {
+  return fetchWrapper<APIResponsePortail<Path, Options["method"]>>(path, options, baseURLPortail);
+}
+
 export class APIError extends Error {
   constructor(
     public data: Record<string, unknown>,

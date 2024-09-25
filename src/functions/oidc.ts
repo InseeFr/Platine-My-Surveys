@@ -21,7 +21,7 @@ export const createAppOidc = () => {
       publicUrl: "/",
       autoLogoutParams: {
         redirectTo: "specific url",
-        url: `${import.meta.env.VITE_PORTAIL_URL}/deconnexion`,
+        url: `${import.meta.env.VITE_APP_URL}/deconnexion`,
       },
     });
   }

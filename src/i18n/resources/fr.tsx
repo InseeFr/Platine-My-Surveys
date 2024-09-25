@@ -1,4 +1,5 @@
 import type { Translations } from "../types";
+import { Button } from "@codegouvfr/react-dsfr/Button";
 
 export const translations: Translations<"fr"> = {
   /* spell-checker: disable */
@@ -25,6 +26,7 @@ export const translations: Translations<"fr"> = {
   },
   SurveyHomepage: {
     "title": "Sélectionnez votre enquête",
+    "sideMenuTitle": "Menu latéral pour accéder aux informations de l'enquêtes",
     "surveyLink": "Voir l'enquête en détail",
     "openNewWindow": "ouvre une nouvelle fenêtre",
     "survey introduction": "Introduction à l'enquête",
@@ -37,9 +39,6 @@ export const translations: Translations<"fr"> = {
     "respond to survey": "Répondre à l'enquête",
     "respond to survey detail":
       "Munissez vous de votre identifiant et de votre mot de passe pour répondre à l’enquête.",
-    estimatedResponseTime: ({ time }: { time?: number }) => (
-      <>Temps de réponse estimé: {time ? `${time} min` : "-"} </>
-    ),
   },
   MySurveys: {
     "title my surveys": "Bienvenue sur votre tableau de bord",
@@ -156,6 +155,51 @@ export const translations: Translations<"fr"> = {
     "FAQ form section": "formulaire pour nous contacter",
     "FAQ form title": "Vous ne trouvez pas la réponse dans la FAQ ? ",
     "contact us": "Contactez-nous :",
+  },
+  SupportForm: {
+    FaqSupport: ({ surveyId }: { surveyId: string }) => {
+      return (
+        <p className="fr-text--sm">
+          Avant de faire une demande d'assistance, pensez à regarder si la réponse à votre question
+          figure dans la
+          <Button
+            className="fr-pl-1v fr-text--sm"
+            style={{ padding: 0, display: "inline", textDecoration: "underline", fontWeight: "400" }}
+            priority="tertiary no outline"
+            linkProps={{
+              to: "/$survey/faq",
+              params: {
+                survey: surveyId,
+              },
+            }}
+          >
+            FAQ
+          </Button>
+        </p>
+      );
+    },
+    "address usage":
+      "L'adresse que vous nous communiquez reste strictement confidentielle. Nous nous engageons à utiliser votre adresse uniquement  pour envoyer des messages relatifs à votre demande.",
+    "mandatory fields": "Tous les champs suivis d’un astérisque (*) sont obligatoires.",
+    "invalidEmail": "Veuillez renseigner une adresse de messagerie valide",
+    "emailRequired": "Veuillez renseigner une adresse de messagerie",
+    "emailConfirmationFailed": "Les adresses de messagerie ne correspondent pas",
+    "lastName": "Nom",
+    "firstName": "Prénom",
+    "object": "Objet*",
+    "objectPlaceholder": "Sélectionner une option",
+    "phone": "Téléphone",
+    "email": "Adresse de messagerie*",
+    "confirmEmail": "Confirmation de l’adresse de messagerie*",
+    "idec": "Identifiant",
+    "idecHintText": "Format : entre 7 et 8 caractères",
+    "message": "Message*",
+    "messageRequired": "Veuillez renseigner un message",
+    "messageInfo": "4000 caractères restants",
+    "submit": "Envoyer",
+
+    "successAlert":
+      "Votre demande d'assistance a bien été prise en compte. Vous recevrez une réponse par mail prochainement.",
   },
   Documents: {
     "downloadEMail": "Télécharger le mail",
