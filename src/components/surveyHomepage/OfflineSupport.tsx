@@ -1,31 +1,28 @@
 import { useForm } from "hooks/useForm";
-import { useState } from "react";
 import { supportSchema } from "types/schemas";
 import { SupportForm } from "./SupportForm";
+import { useFetchMutationPortail } from "hooks/useFetchQuery";
 
 export const OfflineSupport = ({ surveyId }: { surveyId: string }) => {
   const { register, handleSubmit, errors } = useForm(supportSchema);
 
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { mutateAsync, isSuccess } = useFetchMutationPortail("/e-mail", "post");
 
-  // TODO: call api
   const onSubmit = handleSubmit(async data => {
-    const formattedData = {
-      auth: false,
-      idec: data.idec,
-      idue: undefined,
-      questioningId: undefined,
-      mailaddress: data.mailaddress,
-      message: data.message,
-      name: `${data.firstName} ${data.lastName}`,
-      phonenumber: data.phonenumber,
-      survey: surveyId,
-      mailobjet: data.mailObjet,
-    };
-    console.log("formattedData", formattedData);
-
-    //   TODO: use mutation isSucess instead
-    setIsSuccess(true);
+    await mutateAsync({
+      body: {
+        auth: false,
+        idec: data.idec,
+        idue: undefined,
+        questioningId: undefined,
+        mailaddress: data.mailaddress,
+        message: data.message,
+        name: `${data.firstName} ${data.lastName}`,
+        phonenumber: data.phonenumber,
+        survey: surveyId,
+        mailobjet: data.mailObjet,
+      },
+    });
   });
 
   return (

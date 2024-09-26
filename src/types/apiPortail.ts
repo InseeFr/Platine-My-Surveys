@@ -83,12 +83,7 @@ export type APISchemas = {
     name?: string;
     phonenumber?: string;
     survey?: string;
-    mailobjet?:
-      | "Affichage du questionnaire"
-      | "Comprehension du questionnaire"
-      | "Autre"
-      | "Perte d'identifiant"
-      | "Perte de mot de passe";
+    mailobjet?: string
   };
   MailAssistanceStatusDto: {
     message?: string;
