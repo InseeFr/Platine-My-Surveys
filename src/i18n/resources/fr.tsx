@@ -188,6 +188,7 @@ export const translations: Translations<"fr"> = {
     "firstName": "Prénom",
     "object": "Objet*",
     "objectPlaceholder": "Sélectionner une option",
+    "mailObjetRequired": "Veuillez renseigner un objet",
     "phone": "Téléphone",
     "email": "Adresse de messagerie*",
     "confirmEmail": "Confirmation de l’adresse de messagerie*",
@@ -197,7 +198,11 @@ export const translations: Translations<"fr"> = {
     "messageRequired": "Veuillez renseigner un message",
     "messageInfo": "4000 caractères restants",
     "submit": "Envoyer",
-
+    "affichageQuestionnaire": "Affichage du questionnaire",
+    "comprehensionQuestionnaire": "Compréhension du questionnaire",
+    "autre": "Autre",
+    "perteIdentifiant": "Perte d'identifiant",
+    "perteMotDePasse": "Perte de mot de passe",
     "successAlert":
       "Votre demande d'assistance a bien été prise en compte. Vous recevrez une réponse par mail prochainement.",
   },

@@ -201,7 +201,7 @@ export type APIEndpoints = {
     requests: { method: "post"; body: APISchemas["MailAssistanceInputDto"] };
   };
   "/questionnaires-url": {
-    responses: { get: null };
+    responses: { get: APISchemas["Ligne"][] };
     requests: { method?: "get" };
   };
   "/is-survey-online/{id}": {

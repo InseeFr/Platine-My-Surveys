@@ -10,12 +10,39 @@ export const Route = createFileRoute("/$survey/faq")({
 function Index() {
   const { survey } = Route.useParams();
 
-  const faqData = content.specifique.find(s => s.id === survey)?.content["faq-data"];
+  const specificContent = content.specifique.find(s => s.id === survey);
 
+  const faqData = specificContent?.content["faq-data"];
+
+  const generalFaqDataForCompany = specificContent?.content["faq-data-general"];
   const generalFaqData = content.generique.content["faq-data"];
   if (!faqData) {
     return <Loading />;
   }
 
-  return <Faq faqData={faqData} generalFaqData={generalFaqData} />;
+  return (
+    <Faq
+      faqData={faqData}
+      generalFaqData={
+        generalFaqDataForCompany && isNotEmptyObjectArray(generalFaqDataForCompany)
+          ? generalFaqDataForCompany
+          : generalFaqData
+      }
+    />
+  );
+}
+
+function isNotEmptyObjectArray(data: any[]): data is { title: string; body: string }[] {
+  return (
+    Array.isArray(data) &&
+    data.every(
+      item =>
+        typeof item === "object" &&
+        item !== null &&
+        "title" in item &&
+        typeof item.title === "string" &&
+        "body" in item &&
+        typeof item.body === "string",
+    )
+  );
 }

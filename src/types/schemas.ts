@@ -144,7 +144,7 @@ export const personnalInformationsSchema = z.object({
 
 export const supportSchema = z
   .object({
-    mailObjet: z.string(),
+    mailObjet: z.string().min(1, { message: "mailObjetRequired" }),
     lastName: z
       .string()
       .nullish()

@@ -11,6 +11,7 @@ import { ContentSurvey } from "types/ContentSurvey";
 import { useFetchQueryPortail } from "hooks/useFetchQuery";
 import { Loading } from "./Loading";
 import { APISchemas } from "types/apiPortail";
+import { useOidc } from "hooks/useAuth";
 
 type Props = {
   survey: ContentSurvey;
@@ -178,23 +179,21 @@ const LoginSection = ({ className, data }: { className?: string; data: APISchema
   const { t } = useTranslation("SurveyHomepage");
   const { t: headerTranslation } = useTranslation("Header");
   const { classes, cx } = useStyles();
+  const { login } = useOidc();
 
   return (
     <div className={cx(className, "fr-col-12", "fr-col-md-3")}>
       <h4>{t("respond to survey")}</h4>
       {data.opened ? (
         <>
-          (<p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
+          <p className={cx("fr-hidden", "fr-unhidden-md")}>{t("respond to survey detail")}</p>
           <p className={cx("fr-hidden-md", "fr-text--sm")}>{t("respond to survey detail")}</p>
           <Button
-            linkProps={{
-              to: "/connexion",
-            }}
+            onClick={() => login && login({ doesCurrentHrefRequiresAuth: false })}
             className={classes.loginButton}
           >
             {headerTranslation("login")}
           </Button>
-          )
         </>
       ) : (
         <>

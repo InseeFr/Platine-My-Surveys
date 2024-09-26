@@ -1,25 +1,31 @@
-import { useForm } from "hooks/useForm";
 import { declareComponentKeys, useTranslation } from "i18n";
-import { supportSchema } from "types/schemas";
-import { Input } from "@codegouvfr/react-dsfr/Input";
 import { tss } from "tss-react/dsfr";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { useState } from "react";
+import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Select } from "@codegouvfr/react-dsfr/SelectNext";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { Schema, z } from "zod";
+import { UseFormRegister } from "react-hook-form";
 
-export const Support = ({ surveyId }: { surveyId: string }) => {
+type Props = {
+  surveyId: string;
+  isSuccess: boolean;
+  errors: any;
+  register: UseFormRegister<z.TypeOf<Schema>>;
+  onSubmit: () => void;
+};
+
+const objectOptions = [
+  "affichageQuestionnaire",
+  "comprehensionQuestionnaire",
+  "autre",
+  "perteIdentifiant",
+  "perteMotDePasse",
+];
+
+export const SupportForm = ({ surveyId, isSuccess, errors, register, onSubmit }: Props) => {
   const { t } = useTranslation("SupportForm");
+
   const { classes, cx } = useStyles();
-  const { register, handleSubmit, errors } = useForm(supportSchema);
-
-  //   TODO: use mutation isSucess instead
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const onSubmit = handleSubmit(async data => {
-    // TODO: call api
-    setIsSuccess(true);
-    console.log(data);
-  });
 
   if (isSuccess) {
     return (
@@ -39,23 +45,16 @@ export const Support = ({ surveyId }: { surveyId: string }) => {
           nativeSelectProps={{
             ...register("mailObjet"),
             id: "object",
-            ...(errors.phonenumber ? { "aria-invalid": true, "aria-errormessage": `object-desc` } : {}),
+            ...(errors.mailObjet ? { "aria-invalid": true, "aria-errormessage": `object-desc` } : {}),
           }}
-          options={[
-            {
-              value: "1",
-              label: "Option 1",
-            },
-            {
-              value: "2",
-              label: "Option 2",
-            },
-            {
-              value: "3",
-              label: "Option 3",
-            },
-          ]}
+          options={objectOptions.map(option => {
+            return { value: option, label: t(option as keyof typeof t) };
+          })}
           placeholder={t("objectPlaceholder")}
+          state={errors.mailObjet ? "error" : "default"}
+          stateRelatedMessage={
+            errors.mailObjet?.message && t(errors.mailObjet?.message as keyof typeof t)
+          }
         />
         {!errors.mailObjet && <p className="fr-hidden" id={"object-desc"} />}
         <Input
@@ -163,7 +162,7 @@ export const Support = ({ surveyId }: { surveyId: string }) => {
   );
 };
 
-const useStyles = tss.withName({ Support }).create({
+const useStyles = tss.withName({ SupportForm }).create({
   inputTextArea: {
     textArea: {
       height: "200px",
@@ -181,6 +180,7 @@ const { i18n } = declareComponentKeys<
   | "firstName"
   | "object"
   | "objectPlaceholder"
+  | "mailObjetRequired"
   | "email"
   | "confirmEmail"
   | "message"
@@ -190,6 +190,11 @@ const { i18n } = declareComponentKeys<
   | "emailConfirmationFailed"
   | "invalidEmail"
   | "submit"
+  | "affichageQuestionnaire"
+  | "comprehensionQuestionnaire"
+  | "autre"
+  | "perteIdentifiant"
+  | "perteMotDePasse"
   | "successAlert"
   | { K: "FaqSupport"; P: { surveyId: string }; R: JSX.Element }
 >()("SupportForm");

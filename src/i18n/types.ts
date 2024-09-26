@@ -23,7 +23,7 @@ export type ComponentKey =
   | import("components/myAccount/PostalAddressInformations").I18n
   | import("components/surveyHomepage/Faq").I18n
   | import("../routes/$survey/documents").I18n
-  | import("components/surveyHomepage/Support").I18n;
+  | import("components/surveyHomepage/SupportForm").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
