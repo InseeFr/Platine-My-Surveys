@@ -13,12 +13,14 @@ function LogoutIndex() {
   const { t } = useTranslation("Logout");
   const { t: headerTranslation } = useTranslation("Header");
 
-  return !isAuthenticated ? (
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  return (
     <div>
       <title>{`${t("disconnected")} - ${headerTranslation("service tagline")}`}</title>
       <Logout />
     </div>
-  ) : (
-    <Navigate to="/" />
   );
 }

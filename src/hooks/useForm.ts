@@ -35,7 +35,7 @@ export function useForm<V extends ZodType<any, any, any>>(
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, isDirty },
     control,
     setError,
     getValues,
@@ -71,6 +71,7 @@ export function useForm<V extends ZodType<any, any, any>>(
     clearErrors,
     isSubmitting,
     isValid,
+    isDirty,
     setErrorFromAPI,
     setValue,
   };

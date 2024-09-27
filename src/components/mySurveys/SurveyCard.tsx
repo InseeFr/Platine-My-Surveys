@@ -26,18 +26,18 @@ export const SurveyCard = ({ survey, t }: Props) => {
 
   return (
     <div className={cx(classes.card, "fr-my-2w")}>
-      <div className={cx("fr-px-3w", "fr-pt-3w", "fr-pb-0")}>
-        <div className={cx("fr-pb-2w")}>
+      <div className={"fr-px-3w fr-pt-3w fr-pb-0"}>
+        <div className={"fr-pb-2w"}>
           {SurveysStatus({ status: status, t })}
           <div className={cx(classes.information, "fr-pt-3v", "fr-pt-1w")}>
             <i className={cx("fr-icon-arrow-right-line", classes.arrowIcon)} />
-            <p className={cx("fr-mb-0", "fr-text--xs")}>
+            <p className={"fr-mb-0 fr-text--xs"}>
               {t("respond before")} {formattedClosingDate ?? "-"}
             </p>
           </div>
         </div>
         <div>
-          <h5 className={cx("fr-mb-0", "fr-pb-3v")}>{survey.surveyWording}</h5>
+          <h5 className={"fr-mb-0 fr-pb-3v"}>{survey.surveyWording}</h5>
           <p>
             {t("identifier label")} {survey.identificationCode}
           </p>

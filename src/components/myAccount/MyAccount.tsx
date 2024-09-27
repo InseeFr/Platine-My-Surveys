@@ -11,6 +11,7 @@ import { PersonalInformationsForm } from "./PersonalInformationsForm";
 import { PostalAddressInformationsForm } from "./PostalAddressInformationsForm";
 import { AvatarIcon } from "assets/Avatar";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
+import { MouseEventHandler } from "react";
 
 type Props = {
   contact: APISchemas["ContactDetailsDto"];
@@ -24,12 +25,12 @@ export function MyAccount({ contact, onSave }: Props) {
   const [editPersonnalInfos, toggleEditPersonnalInfos] = useToggle(false);
   const [editPostalAddressInfos, toggleEditPostalAddressInfos] = useToggle(false);
 
-  const onToggleEditPersonnalInfos = (event: React.MouseEvent<HTMLElement>) => {
+  const onToggleEditPersonnalInfos: MouseEventHandler = event => {
     event.preventDefault();
     toggleEditPersonnalInfos();
   };
 
-  const onToggleEditPostalAddressInfos = (event: React.MouseEvent<HTMLElement>) => {
+  const onToggleEditPostalAddressInfos: MouseEventHandler = event => {
     event.preventDefault();
     toggleEditPostalAddressInfos();
   };

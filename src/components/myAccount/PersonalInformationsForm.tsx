@@ -25,7 +25,7 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
     contact.civility,
   );
 
-  const { register, errors, handleSubmit, reset, watch } = useForm(personnalInformationsSchema, {
+  const { register, errors, handleSubmit, reset, isDirty } = useForm(personnalInformationsSchema, {
     defaultValues: contact,
   });
 
@@ -43,9 +43,6 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
     reset(contact);
     onClose();
   };
-
-  const isNotSubmittable =
-    isPending || (JSON.stringify(contact) === JSON.stringify(watch()) && civility === contact.civility);
 
   return (
     <form action="#" onSubmit={onSubmit}>
@@ -127,7 +124,7 @@ export const PersonalInformationsForm = ({ contact, onClose, onSave }: Props) =>
         classes={classes}
         onClose={handleClose}
         isPending={isPending}
-        isNotSubmittable={isNotSubmittable}
+        isNotSubmittable={!isDirty}
       />
     </form>
   );

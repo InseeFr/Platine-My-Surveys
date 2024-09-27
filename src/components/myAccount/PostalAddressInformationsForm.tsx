@@ -16,7 +16,7 @@ export const PostalAddressInformationsForm = ({ contact, onClose, onSave }: Prop
   const { classes } = useStylesContactInformationsForm();
   const { t } = useTranslation("PostalAddressInformationsForm");
 
-  const { register, handleSubmit, reset, watch } = useForm(addressSchema, {
+  const { register, handleSubmit, reset, isDirty } = useForm(addressSchema, {
     defaultValues: contact.address,
   });
 
@@ -34,8 +34,6 @@ export const PostalAddressInformationsForm = ({ contact, onClose, onSave }: Prop
     reset(contact.address);
     onClose();
   };
-
-  const isNotSubmittable = isPending || JSON.stringify(contact.address) === JSON.stringify(watch());
 
   return (
     <form action="#" onSubmit={onSubmit}>
@@ -89,7 +87,7 @@ export const PostalAddressInformationsForm = ({ contact, onClose, onSave }: Prop
         classes={classes}
         onClose={handleClose}
         isPending={isPending}
-        isNotSubmittable={isNotSubmittable}
+        isNotSubmittable={!isDirty}
       />
     </form>
   );

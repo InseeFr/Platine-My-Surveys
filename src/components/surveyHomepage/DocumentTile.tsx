@@ -20,25 +20,25 @@ export const DocumentTile = ({ title, description, url, pictogramUrl }: Props) =
     isDownloadable: false,
   });
 
-  const fetchFileInfo = async () => {
-    try {
-      const response = await fetch(url, { method: "HEAD" });
-
-      if (response.ok) {
-        const size = response.headers.get("Content-Length");
-        const extension = url.split(".").pop();
-
-        setFile({ extension: extension, size: size ? parseInt(size) : null, isDownloadable: true });
-      } else {
-        console.error("Error retrieving file information");
-        setFile({ ...file, isDownloadable: false });
-      }
-    } catch (error) {
-      console.error("Error : ", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchFileInfo = async () => {
+      try {
+        const response = await fetch(url, { method: "HEAD" });
+
+        if (response.ok) {
+          const size = response.headers.get("Content-Length");
+          const extension = url.split(".").pop();
+
+          setFile({ extension: extension, size: size ? parseInt(size) : null, isDownloadable: true });
+        } else {
+          console.error("Error retrieving file information");
+          setFile({ ...file, isDownloadable: false });
+        }
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    };
+
     fetchFileInfo();
   }, []);
 

@@ -21,8 +21,8 @@ export const AuthenticatedSupport = ({
     return <Loading />;
   }
 
-  const onSubmit = handleSubmit(async data => {
-    await mutateAsync({
+  const onSubmit = handleSubmit(data =>
+    mutateAsync({
       body: {
         auth: true,
         idec: data.idec,
@@ -35,8 +35,8 @@ export const AuthenticatedSupport = ({
         survey: surveyId,
         mailobjet: data.mailObjet,
       },
-    });
-  });
+    }),
+  );
 
   return (
     <SupportForm

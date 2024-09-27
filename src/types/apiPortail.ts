@@ -83,7 +83,7 @@ export type APISchemas = {
     name?: string;
     phonenumber?: string;
     survey?: string;
-    mailobjet?: string
+    mailobjet?: string;
   };
   MailAssistanceStatusDto: {
     message?: string;

@@ -8,8 +8,8 @@ export const OfflineSupport = ({ surveyId }: { surveyId: string }) => {
 
   const { mutateAsync, isSuccess } = useFetchMutationPortail("/e-mail", "post");
 
-  const onSubmit = handleSubmit(async data => {
-    await mutateAsync({
+  const onSubmit = handleSubmit(data =>
+    mutateAsync({
       body: {
         auth: false,
         idec: data.idec,
@@ -22,8 +22,8 @@ export const OfflineSupport = ({ surveyId }: { surveyId: string }) => {
         survey: surveyId,
         mailobjet: data.mailObjet,
       },
-    });
-  });
+    }),
+  );
 
   return (
     <SupportForm
