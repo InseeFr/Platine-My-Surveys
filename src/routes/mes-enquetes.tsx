@@ -1,28 +1,21 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 import { MySurveys } from "components/mySurveys/MySurveys";
-import { tss } from "tss";
+import { protectedLoader } from "hooks/useAuth";
+import { useTranslation } from "i18n";
 
 export const Route = createFileRoute("/mes-enquetes")({
-  component: MySurveysIndex,
+  component: HomepageIndex,
+  beforeLoad: protectedLoader,
 });
 
-function MySurveysIndex() {
-  const { classes } = useStyles();
+function HomepageIndex() {
+  const { t: headerTranslation } = useTranslation("Header");
 
   return (
-    <div className={classes.root}>
-      <MySurveys className={classes.cardsApp} />
+    <div>
+      <title>{`${headerTranslation("my surveys")} - ${headerTranslation("service tagline")}`}</title>
+      <MySurveys className={fr.cx("fr-container", "fr-pt-md-5v")} />
     </div>
   );
 }
-
-const useStyles = tss.withName({ MySurveysIndex }).create({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  cardsApp: {
-    width: `min(100%, ${fr.breakpoints.emValues.lg}em)`,
-  },
-});

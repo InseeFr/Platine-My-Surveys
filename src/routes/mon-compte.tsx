@@ -1,28 +1,37 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { createFileRoute } from "@tanstack/react-router";
 import { MyAccount } from "components/myAccount/MyAccount";
-import { tss } from "tss";
+import { protectedLoader, useUser } from "hooks/useAuth";
+import { useFetchQueryPilotage } from "hooks/useFetchQuery";
+import { useTranslation } from "i18n";
 
 export const Route = createFileRoute("/mon-compte")({
   component: MyAccountIndex,
+  beforeLoad: protectedLoader,
 });
 
 function MyAccountIndex() {
-  const { classes } = useStyles();
+  const { t } = useTranslation("Header");
+  const user = useUser();
+
+  const {
+    data: contact,
+    isLoading,
+    refetch,
+  } = useFetchQueryPilotage("/api/contacts/{id}", {
+    urlParams: {
+      id: user.preferred_username.toUpperCase(),
+    },
+  });
+
+  if (!contact || isLoading) {
+    return;
+  }
 
   return (
-    <div className={classes.root}>
-      <MyAccount className={classes.cardsApp} />
+    <div className={fr.cx("fr-container")}>
+      <title>{`${t("my account")} - ${t("service tagline")}`}</title>
+      <MyAccount contact={contact} onSave={refetch} />
     </div>
   );
 }
-
-const useStyles = tss.withName({ MyAccountIndex }).create({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  cardsApp: {
-    width: `min(100%, ${fr.breakpoints.emValues.lg}em)`,
-  },
-});

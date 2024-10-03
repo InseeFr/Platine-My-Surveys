@@ -11,11 +11,19 @@ export type Language = (typeof languages)[number];
 
 export type ComponentKey =
   | import("components/Header").I18n
-  | import("components/CardsApp/CardsApp").I18n
   | import("components/Footer").I18n
-  | import("components/TodoApp/Todo").I18n
-  | import("components/TodoApp/AddTodo").I18n
-  | import("routes/index.lazy").I18n;
+  | import("components/surveyHomepage/SurveyHomepage").I18n
+  | import("components/myAccount/MyAccount").I18n
+  | import("components/mySurveys/MySurveys").I18n
+  | import("components/myAccount/PersonalInformationsForm").I18n
+  | import("components/myAccount/PostalAddressInformationsForm").I18n
+  | import("components/AutoLogoutCountdown").I18n
+  | import("components/Logout").I18n
+  | import("components/myAccount/PersonalInformations").I18n
+  | import("components/myAccount/PostalAddressInformations").I18n
+  | import("components/surveyHomepage/Faq").I18n
+  | import("../routes/$survey/documents").I18n
+  | import("components/surveyHomepage/SupportForm").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
