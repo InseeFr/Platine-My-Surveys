@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { I18nFetchingSuspense } from "i18n";
 import { MuiDsfrThemeProvider } from "@codegouvfr/react-dsfr/mui";
 import { AuthProvider } from "hooks/useAuth";
+import { HelmetProvider } from "react-helmet-async";
 
 export const queryClient = new QueryClient();
 
@@ -28,14 +29,16 @@ startReactDsfr({ defaultColorScheme: "system", Link });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <MuiDsfrThemeProvider>
-        <AuthProvider>
-          <I18nFetchingSuspense>
-            <RouterProvider router={router} />
-          </I18nFetchingSuspense>
-        </AuthProvider>
-      </MuiDsfrThemeProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <MuiDsfrThemeProvider>
+          <AuthProvider>
+            <I18nFetchingSuspense>
+              <RouterProvider router={router} />
+            </I18nFetchingSuspense>
+          </AuthProvider>
+        </MuiDsfrThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 );

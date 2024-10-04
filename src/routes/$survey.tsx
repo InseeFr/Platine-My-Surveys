@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Loading } from "components/surveyHomepage/Loading";
 import { SurveyHomepage } from "components/surveyHomepage/SurveyHomepage";
 import { useTranslation } from "i18n";
+import { Helmet } from "react-helmet-async";
 import content from "resources/content.json";
 
 export const Route = createFileRoute("/$survey")({
@@ -20,7 +21,9 @@ function Index() {
 
   return (
     <div>
-      <title>{`${surveyData?.titleShort} - ${headerTranslation("service tagline")}`}</title>
+      <Helmet>
+        <title>{`${surveyData?.titleShort} - ${headerTranslation("service tagline")}`}</title>
+      </Helmet>
       <SurveyHomepage survey={surveyData} />
     </div>
   );

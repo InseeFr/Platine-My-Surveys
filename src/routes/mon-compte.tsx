@@ -4,6 +4,7 @@ import { MyAccount } from "components/myAccount/MyAccount";
 import { useUser } from "hooks/useAuth";
 import { useFetchQueryPilotage } from "hooks/useFetchQuery";
 import { useTranslation } from "i18n";
+import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/mon-compte")({
   component: MyAccountIndex,
@@ -33,7 +34,9 @@ function MyAccountIndex() {
 
   return (
     <div className={fr.cx("fr-container")}>
-      <title>{`${t("my account")} - ${t("service tagline")}`}</title>
+      <Helmet>
+        <title>{`${t("my account")} - ${t("service tagline")}`}</title>
+      </Helmet>
       <MyAccount contact={contact} onSave={refetch} />
     </div>
   );
