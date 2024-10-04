@@ -216,5 +216,24 @@ export const translations: Translations<"fr"> = {
     "downloadMail": "Télécharger le courrier",
     "downloadMailDescription": "Voir le détail d’un courrier",
   },
+  LegalInformation: {
+    "pageTitle": "Mentions légales",
+    "servicePresentationTitle": "Présentation du service",
+    "servicePresentationText":
+      "Le service d'accès au site de réponse en ligne est destiné aux ménages et entreprises qui sont interrogées dans le cadre d'une enquête de la statistique publique. Ces usagers peuvent saisir leurs questionnaires directement en ligne par Internet. Pour accéder au service de réponse en ligne, l'utilisateur doit s'identifier en fournissant son code d'accès et son mot de passe figurant sur le courrier qui lui a été adressé. L'utilisateur du service dispose également d'informations concernant l'enquête et d'un systéme d'assistance en ligne en cas de difficulté rencontrée.",
+    "legalFrameworkTitle": "Cadre juridique de l'enquête",
+    "legalFrameworkText": "Il figure sur le portail de promotion de cette enquête.",
+    "cookiesTitle": "Gestion des cookies",
+    "cookiesText":
+      "Ce portail n’utilise aucun cookie nécessitant un consentement des usagers. C’est pourquoi vous n’avez pas à accepter leur utilisation avant de poursuivre votre navigation.",
+    "copyrightTitle": "Copyright",
+    "copyrightText":
+      "Toute reproduction pour un usage autre que strictement privé des marques et logos affichés sur le présent site est rigoureusement interdite.",
+    "publisherInformationTitle": "Informations éditeurs",
+    "address": "Institut National de la Statistique et des Études Économiques CS 70058",
+    "streetInformation": "88 avenue Verdier",
+    "cityInformation": "92541 MONTROUGE CEDEX FRANCE",
+    "phone": "Tél. :",
+  },
   /* spell-checker: enable */
 };

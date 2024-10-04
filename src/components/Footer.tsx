@@ -32,9 +32,8 @@ export function Footer({ className }: { className?: string }) {
           imgUrl: logoInsee,
           orientation: "vertical",
         }}
-        // TODO change link
         termsLinkProps={{
-          href: "/",
+          to: "/mentions-legales",
         }}
         domains={["insee.fr", "legifrance.gouv.fr", "service-public.fr", "cnil.fr"]}
         // TODO: change links
