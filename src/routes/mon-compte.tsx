@@ -1,13 +1,16 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { MyAccount } from "components/myAccount/MyAccount";
-import { protectedLoader, useUser } from "hooks/useAuth";
+import { useUser } from "hooks/useAuth";
 import { useFetchQueryPilotage } from "hooks/useFetchQuery";
 import { useTranslation } from "i18n";
 
 export const Route = createFileRoute("/mon-compte")({
   component: MyAccountIndex,
-  beforeLoad: protectedLoader,
+  // TODO: use protectedLoader later
+  beforeLoad: async () => {
+    throw redirect({ to: "/" });
+  },
 });
 
 function MyAccountIndex() {

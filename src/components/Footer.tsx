@@ -42,13 +42,13 @@ export function Footer({ className }: { className?: string }) {
           {
             text: t("personal data"),
             linkProps: {
-              to: "/mon-compte",
+              to: "/",
             },
           },
           {
             text: t("cookies"),
             linkProps: {
-              to: "/mon-compte",
+              to: "/",
             },
           },
           headerFooterDisplayItem,

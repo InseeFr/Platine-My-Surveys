@@ -5,6 +5,7 @@ import { Select } from "@codegouvfr/react-dsfr/SelectNext";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Schema, z } from "zod";
 import { UseFormRegister } from "react-hook-form";
+import { useIsAuthenticated } from "hooks/useAuth";
 
 type Props = {
   surveyId: string;
@@ -14,16 +15,13 @@ type Props = {
   onSubmit: () => void;
 };
 
-const objectOptions = [
-  "affichageQuestionnaire",
-  "comprehensionQuestionnaire",
-  "autre",
-  "perteIdentifiant",
-  "perteMotDePasse",
-];
-
 export const SupportForm = ({ surveyId, isSuccess, errors, register, onSubmit }: Props) => {
   const { t } = useTranslation("SupportForm");
+  const { isAuthenticated } = useIsAuthenticated();
+
+  const objectOptions = isAuthenticated
+    ? ["affichageQuestionnaire", "comprehensionQuestionnaire", "autre"]
+    : ["perteIdentifiant", "perteMotDePasse"];
 
   const { classes, cx } = useStyles();
 
