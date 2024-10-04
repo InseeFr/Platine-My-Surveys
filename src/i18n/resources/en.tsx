@@ -215,6 +215,24 @@ export const translations: Translations<"en"> = {
     "downloadMail": "Download the mail",
     "downloadMailDescription": "View the details of a letter",
   },
-
+  LegalInformation: {
+    "pageTitle": "Legal Notice",
+    "servicePresentationTitle": "Service Presentation",
+    "servicePresentationText":
+      "The online response service is intended for households and businesses surveyed as part of a public statistics survey. These users can complete their questionnaires directly online via the Internet. To access the online response service, the user must log in by providing the access code and password listed on the letter sent to them. The service also provides users with information about the survey and an online assistance system in case of any issues encountered.",
+    "legalFrameworkTitle": "Legal Framework of the Survey",
+    "legalFrameworkText": "It is available on the promotional portal for this survey.",
+    "cookiesTitle": "Cookie Management",
+    "cookiesText":
+      "This portal does not use any cookies that require user consent. Therefore, you do not need to accept their use before continuing your browsing.",
+    "copyrightTitle": "Copyright",
+    "copyrightText":
+      "Any reproduction of trademarks and logos displayed on this site for purposes other than strictly private is strictly prohibited.",
+    "publisherInformationTitle": "Publisher Information",
+    "address": "Institut National de la Statistique et des Études Économiques CS 70058",
+    "streetInformation": "88 avenue Verdier",
+    "cityInformation": "92541 MONTROUGE CEDEX FRANCE",
+    "phone": "Phone:",
+  },
   /* spell-checker: enable */
 };
